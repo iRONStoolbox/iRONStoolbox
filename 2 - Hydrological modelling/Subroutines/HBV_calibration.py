@@ -28,7 +28,7 @@ def HBV_calibration(P,E,Case,area, Q_obs, objective):
         Q_obs_high = Q_obs[high_flow_indexes]
     elif objective == 'double':
         num_objectives = 2
-        population_size = 100
+        population_size = 50
         low_flow_indexes = [Q_obs < np.percentile(Q_obs,50)]
         Q_obs_low = Q_obs[low_flow_indexes]
         high_flow_indexes = [Q_obs > np.percentile(Q_obs,50)]
@@ -91,7 +91,7 @@ def HBV_calibration(P,E,Case,area, Q_obs, objective):
     problem.function = auto_calibration
     
     algorithm = NSGAII(problem,population_size)
-    algorithm.run(1000) # Number of iterations
+    algorithm.run(2000) # Number of iterations
     
     if objective == 'double':
         results_low = np.array([algorithm.result[i].objectives[0] for i in range(population_size)])
