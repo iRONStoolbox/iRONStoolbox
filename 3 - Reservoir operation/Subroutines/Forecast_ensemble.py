@@ -22,11 +22,11 @@ def Ensemble_member_sel(simtime,members_num,I_for,T_for,E_for,d_for):
         line_opacities[click_elem_id] = 1
         inflow_forecast.opacities = line_opacities
         line_colors = ['blue']*members_num
-        line_colors[click_elem_id] = 'black'
+        line_colors[click_elem_id] = 'red'
         inflow_forecast.colors = line_colors
         for t in range(simtime):
             I_sel[0,t] = I_for[click_elem_id][t]
-        fig_1a.title = 'Inflow forecast  - Chosen forecast member = '+str(click_elem_id)
+        fig_1a.title = 'Inflow forecast  - Chosen ensemble member = '+str(click_elem_id)
         fig_1a.title_style = {'fill': 'black','stroke': 'black', 'font-size': '20px'}
         
     def on_element_click_event_1b(self, target):
@@ -35,7 +35,7 @@ def Ensemble_member_sel(simtime,members_num,I_for,T_for,E_for,d_for):
         line_opacities[click_elem_id] = 1
         demand_forecast.opacities = line_opacities
         line_colors = ['gray']*members_num
-        line_colors[click_elem_id] = 'black'
+        line_colors[click_elem_id] = 'red'
         demand_forecast.colors = line_colors
     #    line_styles = ['solid']*members_num
     #    line_styles[click_elem_id] = 'dash_dotted'
@@ -44,7 +44,7 @@ def Ensemble_member_sel(simtime,members_num,I_for,T_for,E_for,d_for):
             d_sel[0,t] = d_for[click_elem_id][t]
             E_sel[0,t] = E_for[click_elem_id][t]
             T_sel[0,t] = T_for[click_elem_id][t]
-        fig_1b.title = 'Demand forecast  - Chosen forecast member = '+str(click_elem_id)
+        fig_1b.title = 'Demand forecast  - Chosen ensemble member = '+str(click_elem_id)
         fig_1b.title_style = {'fill': 'black','stroke': 'black', 'font-size': '20px'}
     
     def on_hover_1a(self, target):
@@ -69,7 +69,7 @@ def Ensemble_member_sel(simtime,members_num,I_for,T_for,E_for,d_for):
                                tooltip=def_tt, display_legend=False,scales={'x': x_sc_1, 'y': y_sc_1})
     inflow_forecast.on_element_click(on_element_click_event_1a)
     inflow_forecast.on_hover(on_hover_1a)
-    fig_1a = plt.Figure(marks = [inflow_forecast],title = 'Inflow forecast  - Choose a forecast member:',
+    fig_1a = plt.Figure(marks = [inflow_forecast],title = 'Inflow forecast',
                         title_style={'fill': 'blue', 'font-size': '20px'},axes=[x_ax_1, y_ax_1],
                         layout={'min_width': '1000px', 'max_height': '300px'},scales={'x': x_sc_1, 'y': y_sc_1})
     
@@ -77,7 +77,7 @@ def Ensemble_member_sel(simtime,members_num,I_for,T_for,E_for,d_for):
                                tooltip=def_tt,scales={'x': x_sc_1, 'y': y_sc_1})
     demand_forecast.on_element_click(on_element_click_event_1b)
     demand_forecast.on_hover(on_hover_1b)
-    fig_1b = plt.Figure(marks = [demand_forecast],title = 'Demand forecast - Choose a forecast member:', 
+    fig_1b = plt.Figure(marks = [demand_forecast],title = 'Demand forecast', 
                         title_style={'fill': 'gray', 'font-size': '20px'},axes=[x_ax_1, y_ax_1],
                         layout={'min_width': '1000px', 'max_height': '300px'},scales={'x': x_sc_1, 'y': y_sc_1})
     

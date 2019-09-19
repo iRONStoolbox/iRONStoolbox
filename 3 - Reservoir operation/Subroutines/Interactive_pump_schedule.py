@@ -20,9 +20,9 @@ def Interactive_Pareto_front_det(simtime,I_sel,E_sel,d_sel,S0,Smax,Smin,env_min,
         u            = solutions_optim_relea_2[i]
         S,env,w,r    = syst_sim(simtime,I_sel+u,E_sel,d_sel,S0,Smax,env_min)
         sdpen        = (np.sum((np.maximum(d_sel-r,[0]*simtime))**2)).astype('int')
-        fig_2b.title = 'Supply vs Demand - Deficit penalty = '+str(sdpen)
+        fig_2b.title = 'Release and Demand - Total Squared Deficit = '+str(sdpen)
         pcost        = (np.sum(np.array(u)*c)).astype('int')
-        fig_2d.title = 'Inflows - Pumping energy cost = £'+str(pcost)
+        fig_2d.title = 'Reservoir inflows - Total Pumping Cost = £'+str(pcost)
         return       S,u,r,i
     
     def solution_selected_2(change):
@@ -33,8 +33,8 @@ def Interactive_Pareto_front_det(simtime,I_sel,E_sel,d_sel,S0,Smax,Smin,env_min,
         inflows_2.y = [I_sel[0],update_operation_2(pareto_front_2.selected[0])[1]]
     
     x_sc_2pf = LinearScale();y_sc_2pf = LinearScale()
-    x_ax_2pf = Axis(label='Supply deficit penalty [ML^2]', scale=x_sc_2pf)
-    y_ax_2pf = Axis(label='Pumping energy cost [£]', scale=y_sc_2pf, orientation='vertical')
+    x_ax_2pf = Axis(label='Total Squared Deficit [ML^2]', scale=x_sc_2pf)
+    y_ax_2pf = Axis(label='Total Pumping Cost [£]', scale=y_sc_2pf, orientation='vertical')
     pareto_front_2                  = plt.scatter(results1_optim_relea_2[:],results2_optim_relea_2[:],scales={'x': x_sc_2pf, 'y': y_sc_2pf},
                                                 colors=['deepskyblue'], interactions={'hover':'tooltip','click': 'select'})
     pareto_front_2.unselected_style = {'opacity': 0.4}
@@ -53,9 +53,9 @@ def Interactive_Pareto_front_det(simtime,I_sel,E_sel,d_sel,S0,Smax,Smin,env_min,
     x_sc_2b    = OrdinalScale(min=1,max=simtime);y_sc_2b = LinearScale(min=0,max=40)
     x_ax_2b = Axis(label='week', scale=x_sc_2b)
     y_ax_2b = Axis(label='ML/week', scale=y_sc_2b, orientation='vertical')
-    demand_2   = plt.bar(x=np.arange(1,simtime+1),y=d_sel,colors=['gray'],opacities = [0.7]*simtime, labels = ['demand'], display_legend = True,
+    demand_2   = plt.bar(x=np.arange(1,simtime+1),y=d_sel,colors=['gray'],opacities = [0.7]*simtime, labels = ['demand (d)'], display_legend = True,
                           scales={'x': x_sc_2b, 'y': y_sc_2b},marker = None,marker_size = 20, stroke = 'lightgray')
-    releases_2 = plt.bar(x=np.arange(1,simtime+1),y=r,colors=['green'],opacities = [0.7]*simtime, labels = ['release'], display_legend = True,
+    releases_2 = plt.bar(x=np.arange(1,simtime+1),y=r,colors=['green'],opacities = [0.7]*simtime, labels = ['release (r)'], display_legend = True,
                           scales={'x': x_sc_2b, 'y': y_sc_2b}, stroke = 'lightgray')
     fig_2b     = plt.Figure(marks = [demand_2,releases_2],axes=[x_ax_2b, y_ax_2b],layout={'width': '480px', 'height': '250px'},
                                       scales={'x': x_sc_2b, 'y': y_sc_2b}, animation_duration=1000,
@@ -67,15 +67,15 @@ def Interactive_Pareto_front_det(simtime,I_sel,E_sel,d_sel,S0,Smax,Smin,env_min,
     storage_2           = Lines(x=np.arange(0,simtime+1),y=S,colors=['blue'],scales={'x': x_sc_2c, 'y': y_sc_2c},fill = 'bottom',fill_opacities = [0.8],fill_colors = ['blue'])
     max_storage_2       = plt.plot(x=np.arange(0,simtime+1),y=[Smax]*(simtime+1),colors=['red'],scales={'x': x_sc_2c, 'y': y_sc_2c})
     max_storage_label_2 = plt.label(text = ['Max storage'], x=[0],y=[Smax+15],colors=['red'])
-    fig_2c              = plt.Figure(marks = [storage_2,max_storage_2,max_storage_label_2],title = 'Reservoir storage volume',
+    fig_2c              = plt.Figure(marks = [storage_2,max_storage_2,max_storage_label_2],title = 'Reservoir storage (s)',
                                      axes=[x_ax_2c, y_ax_2c],layout={'width': '1000px', 'height': '350px'}, 
                                        animation_duration=1000,scales={'x': x_sc_2c, 'y': y_sc_2c})
     
     x_sc_2d    = OrdinalScale(min=1,max=simtime);y_sc_2d = LinearScale(min=0,max=60);x_ax_2d = Axis(label='week', scale=x_sc_2d);y_ax_2d = Axis(label='ML/week', scale=y_sc_2d, orientation='vertical')
     inflows_2  = plt.bar(x=np.arange(1,simtime+1),y=[I_sel[0],solutions_optim_relea_2[pareto_front_2.selected[0]]],
                          colors=['blue','orange','blue','blue','blue','blue'],opacities = [0.7]*(simtime+3), stroke = 'lightgray', 
-                         labels = ['natural', 'pumped'], display_legend = True,scales={'x': x_sc_2d, 'y': y_sc_2d})
-    fig_2d     = plt.Figure(marks = [inflows_2],title = 'Inflows', axes=[x_ax_2d, y_ax_2d],layout={'width': '480px', 'height': '250px'},
+                         labels = ['natural (I)', 'pumped (u)'], display_legend = True,scales={'x': x_sc_2d, 'y': y_sc_2d})
+    fig_2d     = plt.Figure(marks = [inflows_2],title = 'Reservoir inflows', axes=[x_ax_2d, y_ax_2d],layout={'width': '480px', 'height': '250px'},
                                       scales={'x': x_sc_2d, 'y': y_sc_2d}, animation_duration=1000,
                                       legend_location = 'top-right', legend_style = {'fill': 'white', 'opacity': 0.5})
     
@@ -106,9 +106,9 @@ def Interactive_Pareto_front_act(simtime,I_act,E_act,d_act,S0,Smax,Smin,env_min,
         u            = solutions_optim_relea_2[i]
         S,env,w,r    = syst_sim(simtime,I_act+u,E_act,d_act,S0,Smax,env_min)
         sdpen        = (np.sum((np.maximum(d_act-r,[0]*simtime))**2)).astype('int')
-        fig_4b.title = 'Supply vs Demand - Deficit penalty = '+str(sdpen)
+        fig_4b.title = 'Release and Demand - Total Squared Deficit = '+str(sdpen)
         pcost        = (np.sum(np.array(u)*c)).astype('int')
-        fig_4d.title = 'Inflows - Pumping energy cost = £'+str(pcost)
+        fig_4d.title = 'Reservoir inflows - Total Pumping Cost = £'+str(pcost)
         return       S,u,r,i
     
     def solution_selected_act_4(change):
@@ -129,8 +129,8 @@ def Interactive_Pareto_front_act(simtime,I_act,E_act,d_act,S0,Smax,Smin,env_min,
     
 
     x_sc_2pf = LinearScale();y_sc_2pf = LinearScale()
-    x_ax_2pf = Axis(label='Supply deficit penalty [ML^2]', scale=x_sc_2pf)
-    y_ax_2pf = Axis(label='Pumping energy cost [£]', scale=y_sc_2pf, orientation='vertical')
+    x_ax_2pf = Axis(label='Total Squared Deficit [ML^2]', scale=x_sc_2pf)
+    y_ax_2pf = Axis(label='Total Pumping Cost [£]', scale=y_sc_2pf, orientation='vertical')
     
     pareto_front_4                  = plt.scatter(results1_optim_relea_2[:],results2_optim_relea_2[:],scales={'x': x_sc_2pf, 'y': y_sc_2pf},
                                                 colors=['deepskyblue'], opacity = [0.11]*population_size,
@@ -138,10 +138,10 @@ def Interactive_Pareto_front_act(simtime,I_act,E_act,d_act,S0,Smax,Smin,env_min,
     pareto_front_4.tooltip          = None
     pareto_front_act_4                  = plt.scatter(sdpen_act_4[:],pcost_act_4[:],scales={'x': x_sc_2pf, 'y': y_sc_2pf},
                                                 colors=['green'], interactions={'hover':'tooltip'})
-    
+
     pareto_front_act_4.unselected_style = {'opacity': 0}
-    pareto_front_act_4.selected_style   = {'fill': 'red', 'stroke': 'black', 'width': '1125px', 'height': '125px'}
-    pareto_front_4.selected_style   = {'opacity': 1}
+    pareto_front_act_4.selected_style   = {'fill': 'black', 'stroke': 'black', 'width': '1125px', 'height': '125px'}
+    pareto_front_4.selected_style   = {'fill': 'red', 'stroke': 'yellow', 'width': '1125px', 'height': '125px'}
     pareto_front_act_4.tooltip          = None
 
     fig_4pf                         = plt.Figure(marks = [pareto_front_4,pareto_front_act_4 ],title = 'Pareto front', axes=[x_ax_2pf, y_ax_2pf],
@@ -157,9 +157,9 @@ def Interactive_Pareto_front_act(simtime,I_act,E_act,d_act,S0,Smax,Smin,env_min,
     x_sc_2b    = OrdinalScale(min=1,max=simtime);y_sc_2b = LinearScale(min=0,max=40)
     x_ax_2b = Axis(label='week', scale=x_sc_2b)
     y_ax_2b = Axis(label='ML/week', scale=y_sc_2b, orientation='vertical')
-    demand_4   = plt.bar(x=np.arange(1,simtime+1),y=d_act,colors=['gray'],opacities = [0.7]*simtime, labels = ['demand'], display_legend = True,
+    demand_4   = plt.bar(x=np.arange(1,simtime+1),y=d_act,colors=['gray'],opacities = [0.7]*simtime, labels = ['demand (d)'], display_legend = True,
                           scales={'x': x_sc_2b, 'y': y_sc_2b},marker = None,marker_size = 20, stroke = 'lightgray')
-    releases_4 = plt.bar(x=np.arange(1,simtime+1),y=r_act_4,colors=['green'],opacities = [0.7]*simtime, labels = ['release'], display_legend = True,
+    releases_4 = plt.bar(x=np.arange(1,simtime+1),y=r_act_4,colors=['green'],opacities = [0.7]*simtime, labels = ['release (r)'], display_legend = True,
                           scales={'x': x_sc_2b, 'y': y_sc_2b}, stroke = 'lightgray')
     fig_4b     = plt.Figure(marks = [demand_4,releases_4],axes=[x_ax_2b, y_ax_2b],layout={'width': '480px', 'height': '250px'},
                                       scales={'x': x_sc_2b, 'y': y_sc_2b}, animation_duration=1000,
@@ -171,15 +171,15 @@ def Interactive_Pareto_front_act(simtime,I_act,E_act,d_act,S0,Smax,Smin,env_min,
     max_storage_2       = plt.plot(x=np.arange(0,simtime+1),y=[Smax]*(simtime+1),colors=['red'],scales={'x': x_sc_2c, 'y': y_sc_2c})
     max_storage_label_2 = plt.label(text = ['Max storage'], x=[0],y=[Smax+15],colors=['red'])
     storage_4           = Lines(x=np.arange(0,simtime+1),y=S_act_4,colors=['blue'],scales={'x': x_sc_2c, 'y': y_sc_2c},fill = 'bottom',fill_opacities = [0.8],fill_colors = ['blue'])
-    fig_4c              = plt.Figure(marks = [storage_4,max_storage_2,max_storage_label_2],title = 'Reservoir storage volume',
+    fig_4c              = plt.Figure(marks = [storage_4,max_storage_2,max_storage_label_2],title = 'Reservoir storage (s)',
                                      axes=[x_ax_2c, y_ax_2c],layout={'width': '1000px', 'height': '350px'}, 
                                        animation_duration=1000,scales={'x': x_sc_2c, 'y': y_sc_2c})
 
     x_sc_2d    = OrdinalScale(min=1,max=simtime);y_sc_2d = LinearScale(min=0,max=60);x_ax_2d = Axis(label='week', scale=x_sc_2d);y_ax_2d = Axis(label='ML/week', scale=y_sc_2d, orientation='vertical')    
     inflows_4  = plt.bar(x=np.arange(1,simtime+1),y=[I_act[0],pinfl_policy_4],
                          colors=['blue','orange','blue','blue','blue','blue'],opacities = [0.7]*(simtime+3), stroke = 'lightgray', 
-                         labels = ['natural', 'pumped'], display_legend = True,scales={'x': x_sc_2d, 'y': y_sc_2d})
-    fig_4d     = plt.Figure(marks = [inflows_4],title = 'Inflows', axes=[x_ax_2d, y_ax_2d],layout={'width': '480px', 'height': '250px'},
+                         labels = ['natural (I)', 'pumped (u)'], display_legend = True,scales={'x': x_sc_2d, 'y': y_sc_2d})
+    fig_4d     = plt.Figure(marks = [inflows_4],title = 'Reservoir inflows', axes=[x_ax_2d, y_ax_2d],layout={'width': '480px', 'height': '250px'},
                                       scales={'x': x_sc_2d, 'y': y_sc_2d}, animation_duration=1000,
                                       legend_location = 'top-right', legend_style = {'fill': 'white', 'opacity': 0.5})
     
@@ -212,8 +212,8 @@ def Interactive_Pareto_front(simtime,I_for,E_for,d_for,S0,Smax,Smin,env_min,c,so
     # Interactive Pareto front
     def update_operation(i):
         S,env,w,r    = syst_sim(simtime,I_for+solutions_optim_relea[i],E_for,d_for,S0,Smax,env_min)
-        fig_wd.title = 'Supply deficit - Probability = {:.0f}'.format(np.max(np.count_nonzero(d_for-r,axis =0)))+' / '+str(members_num)
-        fig_pi.title = 'Pumped inflow - Energy cost = £{:.0f}'.format(results2_optim_relea[i])
+        fig_wd.title = 'Supply deficit (max(0,d-r)) - Probability = {:.0f}'.format(np.max(np.count_nonzero(d_for-r,axis =0)))+' / '+str(members_num)
+        fig_pi.title = 'Pumped inflows (u) - Total Pumping Cost = £{:.0f}'.format(results2_optim_relea[i])
         return       S,solutions_optim_relea[i],r,results1_optim_relea[i],results2_optim_relea[i],i
     
     def solution_selected(change):
@@ -231,7 +231,7 @@ def Interactive_Pareto_front(simtime,I_for,E_for,d_for,S0,Smax,Smin,env_min,c,so
     x_sc_pf = LinearScale()
     y_sc_pf = LinearScale(min = 0,max = 4000)
     
-    x_ax_pf = Axis(label='Pumping energy cost [£]', scale=x_sc_pf)
+    x_ax_pf = Axis(label='Total Pumping Cost [£]', scale=x_sc_pf)
     y_ax_pf = Axis(label='Supply deficit [ML]', scale=y_sc_pf, orientation='vertical')
     
     pareto_front = plt.scatter(results2_optim_relea[:],results1_optim_relea[:],scales={'x': x_sc_pf, 'y': y_sc_pf},colors=['deepskyblue'], interactions={'hover':'tooltip','click': 'select'})
@@ -277,7 +277,7 @@ def Interactive_Pareto_front(simtime,I_for,E_for,d_for,S0,Smax,Smin,env_min,c,so
     
     deficit = plt.bar(np.arange(1,simtime+1),np.maximum(d_for-r,np.zeros(np.shape(r))),scales={'x': x_sc_wd, 'y': y_sc_wd},
                                     colors=['red'],opacities = [0.7]*members_num*simtime,stroke = 'lightgray',
-                                    labels = ['release'], display_legend = False,type = 'grouped',base=0,align='center')
+                                    labels = ['release (r)'], display_legend = False,type = 'grouped',base=0,align='center')
     fig_wd = plt.Figure(marks = [deficit,vertical_lines_wd],axes=[x_ax_wd, y_ax_wd],layout={'max_width': '480px', 'max_height': '250px'},
                         scales={'x': x_sc_wd, 'y': y_sc_wd}, animation_duration=1000,legend_location = 'bottom-right')
     
