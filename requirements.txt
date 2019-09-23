@@ -1,0 +1,5 @@
+numpy
+ipywidgets
+nbinteract
+bqplot
+platypus-opt
