@@ -9,26 +9,21 @@ from platypus import NSGAII, Problem, Real
 
 from Subroutines.HBV_sim import HBV_sim
 
-def HBV_calibration(P,E,Case,area, Q_obs, objective):
+def HBV_calibration(P,E,Case,area, Q_obs, objective, iterations,population_size = 1):
 
-    if objective == 'all':
+    if objective == 'all': # the objective is to minimize RMSE considering all the hydrograph 
         num_objectives = 1
-        population_size = 1
-        # Consider the entire hydrograph
         pass
-    elif objective == 'low':
+    elif objective == 'low':# the objective is to minimize RMSE considering only low flows 
         num_objectives = 1
-        population_size = 1
         low_flow_indexes = [Q_obs < np.percentile(Q_obs,50)]
         Q_obs_low = Q_obs[low_flow_indexes]
-    elif objective == 'high':
+    elif objective == 'high': # the objective is to minimize RMSE considering only high flows 
         num_objectives = 1
-        population_size = 1
         high_flow_indexes = [Q_obs > np.percentile(Q_obs,50)]
         Q_obs_high = Q_obs[high_flow_indexes]
-    elif objective == 'double':
+    elif objective == 'double': # two objectives (RMSE of low and high flows)
         num_objectives = 2
-        population_size = 50
         low_flow_indexes = [Q_obs < np.percentile(Q_obs,50)]
         Q_obs_low = Q_obs[low_flow_indexes]
         high_flow_indexes = [Q_obs > np.percentile(Q_obs,50)]
@@ -91,7 +86,7 @@ def HBV_calibration(P,E,Case,area, Q_obs, objective):
     problem.function = auto_calibration
     
     algorithm = NSGAII(problem,population_size)
-    algorithm.run(2000) # Number of iterations
+    algorithm.run(iterations) # Number of iterations
     
     if objective == 'double':
         results_low = np.array([algorithm.result[i].objectives[0] for i in range(population_size)])

@@ -49,7 +49,7 @@ def Interactive_policy_single(simtime,I,E,d,S0,Smax,env_min, demand_plot):
     def update_operation_2(u):
         S,env,w,u1 = syst_sim(simtime,I,E,d,S0,Smax,env_min,u)
         sdpen = (np.sum((np.maximum(d-u1,[0]*simtime))**2)).astype('int')
-        fig_2b.title = 'Supply vs Demand - Deficit penalty = '+str(sdpen)
+        fig_2b.title = 'Supply vs Demand - Total squared deficit = '+str(sdpen)+' ML^2'
         return S,u1
     
     def policy_changed_2a(change):
@@ -153,9 +153,9 @@ def Interactive_policy_double(simtime,I,E,d,S0,Smax,ms,env_min, demand_plot):
     def update_operation_3(u):
         S,env,w,u1 = syst_sim(simtime,I,E,d,S0,Smax,env_min,u)
         lspen = np.sum((np.maximum(ms-S,[0]*(simtime+1)))).astype('int')
-        fig_3a.title = 'Reservoir storage - Low storage penalty = '+str(lspen)
+        fig_3a.title = 'Reservoir storage - Minimum storage violation = '+str(lspen)+' ML'
         sdpen = (np.sum((np.maximum(d-u1,[0]*simtime))**2)).astype('int')
-        fig_3b.title = 'Supply vs Demand - Deficit penalty = '+str(sdpen)
+        fig_3b.title = 'Supply vs Demand - Total squared deficit = '+str(sdpen)+' ML^2'
         return S,u1
     
     def policy_changed_3a(change):
@@ -264,9 +264,9 @@ def Interactive_Pareto_front(simtime,I,E,d,S0,Smax,ms,env_min, demand_plot,solut
         u = solutions_optim_relea[i]
         S,env,w,u1 = syst_sim(simtime,I,E,d,S0,Smax,env_min,u)
         lspen = np.sum((np.maximum(ms-S,[0]*(simtime+1)))).astype('int')
-        fig_4a.title = 'Reservoir storage - Low level penalty = '+str(lspen)
+        fig_4a.title = 'Reservoir storage - Minimum storage violation = '+str(lspen)+' ML'
         sdpen = (np.sum((np.maximum(d-u1,[0]*simtime))**2)).astype('int')
-        fig_4b.title = 'Supply vs Demand - Deficit penalty = '+str(sdpen)
+        fig_4b.title = 'Supply vs Demand - Total squared deficit = '+str(sdpen)+' ML^2'
         return S,env,w,u1
     
     def solution_selected(change):
@@ -278,8 +278,8 @@ def Interactive_Pareto_front(simtime,I,E,d,S0,Smax,ms,env_min, demand_plot,solut
         releases_4.y = y_vals_4b
     
     x_sc_pf = LinearScale();y_sc_pf = LinearScale()
-    x_ax_pf = Axis(label='Demand deficit penalty [ML]', scale=x_sc_pf)
-    y_ax_pf = Axis(label='Low storage penalty [ML]', scale=y_sc_pf, orientation='vertical')
+    x_ax_pf = Axis(label='Total squared deficit [ML^2]', scale=x_sc_pf)
+    y_ax_pf = Axis(label='Minimum storage violation [ML]', scale=y_sc_pf, orientation='vertical')
     pareto_front = plt.scatter(results1_optim_relea[:],results2_optim_relea[:],scales={'x': x_sc_pf, 'y': y_sc_pf},
                                colors=['deepskyblue'], interactions={'hover':'tooltip','click': 'select'})
     pareto_front.unselected_style={'opacity': 0.4}
