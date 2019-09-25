@@ -17,17 +17,17 @@ def HBV_calibration(P,E,Case,area, Q_obs, objective, iterations,population_size 
     elif objective == 'low':# the objective is to minimize RMSE considering only low flows 
         num_objectives = 1
         low_flow_indexes = [Q_obs < np.percentile(Q_obs,50)]
-        Q_obs_low = Q_obs[low_flow_indexes]
+        Q_obs_low = Q_obs[tuple(low_flow_indexes)]
     elif objective == 'high': # the objective is to minimize RMSE considering only high flows 
         num_objectives = 1
         high_flow_indexes = [Q_obs > np.percentile(Q_obs,50)]
-        Q_obs_high = Q_obs[high_flow_indexes]
+        Q_obs_high = Q_obs[tuple(high_flow_indexes)]
     elif objective == 'double': # two objectives (RMSE of low and high flows)
         num_objectives = 2
         low_flow_indexes = [Q_obs < np.percentile(Q_obs,50)]
-        Q_obs_low = Q_obs[low_flow_indexes]
+        Q_obs_low = Q_obs[tuple(low_flow_indexes)]
         high_flow_indexes = [Q_obs > np.percentile(Q_obs,50)]
-        Q_obs_high = Q_obs[high_flow_indexes]
+        Q_obs_high = Q_obs[tuple(high_flow_indexes)]
     
     def auto_calibration(vars):
             
@@ -55,16 +55,16 @@ def HBV_calibration(P,E,Case,area, Q_obs, objective, iterations,population_size 
             value = np.sqrt(((Q_sim - Q_obs) ** 2).mean())
             return [value]
         elif objective == 'low':
-            Q_sim_low = Q_sim[low_flow_indexes]
+            Q_sim_low = Q_sim[tuple(low_flow_indexes)]
             value = np.sqrt(((Q_sim_low - Q_obs_low) ** 2).mean())
             return [value]
         elif objective == 'high':
-            Q_sim_high = Q_sim[high_flow_indexes]
+            Q_sim_high = Q_sim[tuple(high_flow_indexes)]
             value = np.sqrt(((Q_sim_high - Q_obs_high) ** 2).mean())
             return [value]
         elif objective == 'double':
-            Q_sim_low = Q_sim[low_flow_indexes]
-            Q_sim_high = Q_sim[high_flow_indexes]
+            Q_sim_low = Q_sim[tuple(low_flow_indexes)]
+            Q_sim_high = Q_sim[tuple(high_flow_indexes)]
             value = [np.sqrt(((Q_sim_low - Q_obs_low) ** 2).mean()),np.sqrt(((Q_sim_high - Q_obs_high) ** 2).mean())]
             return value
         
