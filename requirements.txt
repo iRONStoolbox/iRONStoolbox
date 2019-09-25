@@ -3,3 +3,4 @@ ipywidgets
 nbinteract
 bqplot
 platypus-opt
+netcdf4
