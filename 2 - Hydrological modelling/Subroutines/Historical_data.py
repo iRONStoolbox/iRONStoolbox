@@ -29,6 +29,9 @@ def Climate_data(year):
     P = Rain[day_ini_idx:day_end_idx]
     T = Temp[day_ini_idx:day_end_idx]
     
+    if year == 2000:
+        P = P*1.5 # Artificially modified to have a wetter calibration year than the evaluation year (2001)
+    
     return date,ept, P, T
 
 def Flow_data(year):
@@ -46,5 +49,8 @@ def Flow_data(year):
     
     date = convert_to_date(Q_obs_date[day_ini_idx:day_end_idx])
     Q_obs = Q_obs[day_ini_idx:day_end_idx]
+    
+    if year == 2000:
+        Q_obs = Q_obs*1.5 # Artificially modified to have a wetter calibration year than the evaluation year (2001)
     
     return date, Q_obs
