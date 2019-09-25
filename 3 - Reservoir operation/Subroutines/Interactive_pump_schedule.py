@@ -20,7 +20,7 @@ def Interactive_Pareto_front_det(N,I_sel,E,d_sel,S0,Smax,Smin,env_min,c,solution
         u            = solutions_optim_relea_2[i]
         S,env,w,r    = syst_sim(N,I_sel+u,E,d_sel,S0,Smax,env_min)
 #        sdpen        = (np.sum((np.maximum(d_sel-r,[0]*N))**2)).astype('int')
-        fig_2b.title = 'Supply deficit (max(0,d-r)) - Total = '+str((np.sum((np.maximum(d_sel-r,[0]*N))**2)).astype('int'))+' ML'
+        fig_2b.title = 'Supply deficit (max(0,d-r)) - Total = '+str((np.sum((np.maximum(d_sel-r,[0]*N)))).astype('int'))+' ML'
 #        pcost        = (np.sum(np.array(u)*c)).astype('int')
         fig_2d.title = 'Natural + pumped inflows - Total pumped vol = '+str((np.sum(np.array(u))).astype('int'))+' ML'
         return       S,u,r,i
@@ -42,7 +42,7 @@ def Interactive_Pareto_front_det(N,I_sel,E,d_sel,S0,Smax,Smin,env_min,c,solution
                                                 colors=['deepskyblue'], interactions={'hover':'tooltip','click': 'select'})
     pareto_front_2.unselected_style = {'opacity': 0.4}
     pareto_front_2.selected_style   = {'fill': 'red', 'stroke': 'yellow', 'width': '1125px', 'height': '125px'}
-    def_tt                          = Tooltip(fields=['x', 'y','index'],labels=['Squared deficit', 'Pumping cost','sol index'], 
+    def_tt                          = Tooltip(fields=['x', 'y','index'],labels=['Pumping cost','Squared deficit', 'sol index'], 
                                             formats=['.1f', '.1f', '.0f'])
     pareto_front_2.tooltip          = def_tt
     fig_2pf                         = plt.Figure(marks = [pareto_front_2],title = 'Pareto front', axes=[x_ax_2pf, y_ax_2pf],
@@ -125,7 +125,7 @@ def Interactive_Pareto_front_act(N,I_act,E_act,d_act,S0,Smax,Smin,env_min,c,solu
         u            = solutions_optim_relea_2[i]
         S,env,w,r    = syst_sim(N,I_act+u,E_act,d_act,S0,Smax,env_min)
 #        sdpen        = (np.sum((np.maximum(d_act-r,[0]*N))**2)).astype('int')
-        fig_4b.title = 'Supply deficit (max(0,d-r)) - Total = '+str((np.sum((np.maximum(d_act-r,[0]*N))**2)).astype('int'))+' ML'
+        fig_4b.title = 'Supply deficit (max(0,d-r)) - Total = '+str((np.sum((np.maximum(d_act-r,[0]*N)))).astype('int'))+' ML'
 #        pcost        = (np.sum(np.array(u)*c)).astype('int')
         fig_4d.title = 'Natural + pumped inflows - Total pumped vol = '+str((np.sum(np.array(u))).astype('int'))+' ML'
         return       S,u,r,i
