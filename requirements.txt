@@ -1,4 +1,5 @@
 numpy
+matplotlib
 ipywidgets
 nbinteract
 bqplot
