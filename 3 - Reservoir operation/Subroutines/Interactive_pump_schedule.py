@@ -160,8 +160,8 @@ def Interactive_Pareto_front_act(N,I_act,E_act,d_act,S0,Smax,Smin,env_min,c,solu
                                                 colors=['green'], interactions={'hover':'tooltip'})
 
     pareto_front_act_4.unselected_style = {'opacity': 0}
-    pareto_front_act_4.selected_style   = {'fill': 'red', 'stroke': 'red', 'width': '1125px', 'height': '125px'}
-    pareto_front_4.selected_style   = {'fill': 'red', 'stroke': 'yellow', 'width': '1125px', 'height': '125px'}
+    pareto_front_act_4.selected_style   = {'fill': 'black', 'stroke': 'black', 'width': '1125px', 'height': '125px'}
+    pareto_front_4.selected_style   = {'fill': 'red', 'stroke': 'red', 'width': '1125px', 'height': '125px'}
     pareto_front_act_4.tooltip          = None
 
     fig_4pf                         = plt.Figure(marks = [pareto_front_4,pareto_front_act_4 ],title = 'Pareto front', axes=[x_ax_2pf, y_ax_2pf],
