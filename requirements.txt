@@ -1,7 +1,7 @@
 numpy
 matplotlib
-ipywidgets
+ipywidgets==7.2.1
 nbinteract
-bqplot
+bqplot==0.11.6
 platypus-opt
 netcdf4
