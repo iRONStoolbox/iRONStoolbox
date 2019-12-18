@@ -5,3 +5,5 @@ nbinteract
 bqplot==0.11.6
 platypus-opt
 netcdf4
+numba
+plotly
