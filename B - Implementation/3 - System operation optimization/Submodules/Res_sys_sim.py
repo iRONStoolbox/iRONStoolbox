@@ -41,12 +41,12 @@ def Res_sys_sim(I, e, s_0, s_min, s_max, Qreq_env, Qreq_dem, Qreg):
         Qreg_inf = np.zeros(T)
    
     # Regulated water release
-    if Qreg['releases'] == None: 
-        Qreg_rel = Qreq_dem # releases = demand
-    elif isinstance(Qreg['releases'],(np.ndarray)): # a release scheduling is provided as an input
+    if isinstance(Qreg['releases'],(np.ndarray)): # a release scheduling is provided as an input
         Qreg_rel = Qreg['releases'] + np.zeros(T)
     elif isinstance(Qreg['releases'],(dict)):
         exec('from Submodules.'+Qreg['releases']['file_name']+' import '+Qreg['releases']['function'])
+    elif Qreg['releases'] == None: 
+        Qreg_rel = Qreq_dem # releases = demand
         
     # Regulated inflows 
     if Qreg['inflows'] == None: 

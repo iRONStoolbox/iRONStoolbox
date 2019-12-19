@@ -32,29 +32,29 @@ def Res_sys_sim(I, e, s_0, s_min, s_max, Qreq_env, Qreq_dem, Qreg):
     Qenv = np.zeros(T)
 
     # Regulated releases + inflows
-    if Qreg['rel_inf'] == None:
-        Qreg_rel = np.zeros(T)
-        Qreg_inf = np.zeros(T)
-    elif isinstance(Qreg['rel_inf'],(dict)):
+    if isinstance(Qreg['rel_inf'],(dict)):
         exec('from Submodules.'+Qreg['rel_inf']['file_name']+' import '+Qreg['rel_inf']['function'])
         Qreg_rel = np.zeros(T)
         Qreg_inf = np.zeros(T)
-   
+    elif Qreg['rel_inf'] == None:
+        Qreg_rel = np.zeros(T)
+        Qreg_inf = np.zeros(T)
+        
     # Regulated water release
-    if Qreg['releases'] == None: 
-        Qreg_rel = Qreq_dem # releases = demand
-    elif isinstance(Qreg['releases'],(np.ndarray)): # a release scheduling is provided as an input
+    if isinstance(Qreg['releases'],(np.ndarray)): # a release scheduling is provided as an input
         Qreg_rel = Qreg['releases'] + np.zeros(T)
     elif isinstance(Qreg['releases'],(dict)):
         exec('from Submodules.'+Qreg['releases']['file_name']+' import '+Qreg['releases']['function'])
+    elif Qreg['releases'] == None: 
+        Qreg_rel = Qreq_dem # releases = demand
         
     # Regulated inflows 
-    if Qreg['inflows'] == None: 
-        Qreg_inf = np.zeros(T)  # No regulated inflows
-    elif isinstance(Qreg['inflows'],(np.ndarray)): # a regulated inflows scheduling is provided as an input
+    if isinstance(Qreg['inflows'],(np.ndarray)): # a regulated inflows scheduling is provided as an input
         Qreg_inf = Qreg['inflows'] + np.zeros(T)
     elif isinstance(Qreg['releases'],(dict)):
         exec('from Submodules.'+Qreg['inflows']['file_name']+' import '+Qreg['inflows']['function'])
+    elif Qreg['inflows'] == None: 
+        Qreg_inf = np.zeros(T)  # No regulated inflows
         
     # Spillage
     Qspill = np.zeros(T)
