@@ -1,4 +1,4 @@
-Date,dailyPET.wimbPET,dailyRainfall.wimbRainfall,dailyTemperature.wimbTemperature
+Date,PET,Rain,Temp
 01/01/1980,0.16639786,0,-0.809512701
 02/01/1980,0.365613061,1.859602235,-0.680378434
 03/01/1980,0,11.53485287,2.177371695
