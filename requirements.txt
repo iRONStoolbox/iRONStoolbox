@@ -7,3 +7,4 @@ platypus-opt
 netcdf4
 numba
 plotly
+cdsapi
