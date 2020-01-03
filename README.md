@@ -54,11 +54,17 @@ Click on the button below to open iRONs on MyBinder.org so you can run, modify a
 
 ## References
 BROWN, C. M., LUND, J. R., CAI, X., REED, P. M., ZAGONA, E. A., OSTFELD, A., HALL, J., CHARACKLIS, G. W., YU, W. & BREKKE, L. 2015. The future of water resources systems analysis: Toward a scientific framework for sustainable water management. Water Resources Research, 51, 6110-6124.
+
 FALCONI, S. M. & PALMER, R. N. 2017. An interdisciplinary framework for participatory modeling design and evaluation—What makes models effective participatory decision tools? 53, 1625-1645.
 JAHANPOUR, M., SANDOVAL-SOLIS, S. & AFSHAR, A. 2014. A web-based application for optimization of single reservoir operation. 106, E509-E517.
+
 LAM, S. K., PITROU, A. & SEIBERT, S. 2015. Numba: a LLVM-based Python JIT compiler. Proceedings of the Second Workshop on the LLVM Compiler Infrastructure in HPC. Austin, Texas: ACM.
+
 MAROWKA, A. J. T. J. O. S. 2018. Python accelerators for high-performance computing. 74, 1449-1460.
+
 PERKEL, J. M. 2018. Why Jupyter is data scientists' computational notebook of choice. Nature, 563, 145-147.
+
 ROSENBERG, D. E., BABBAR-SEBENS, M., ROOT, E., HERMAN, J., MIRCHI, A., GIACOMONI, M., KASPRZYK, J., MADANI, K., FORD, D. & BASDEKAS, L. 2017. More Integrated Formal Education and Practice in Water Resources Systems Analysis. 143, 02517001.
+
 TURNER, S. W. D. & GALELLI, S. 2016. Water supply sensitivity to climate change: An R package for implementing reservoir storage analysis in global and regional impact studies. Environmental Modelling & Software, 76, 13-19.
 
