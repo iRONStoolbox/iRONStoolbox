@@ -1,8 +1,3 @@
-# iRONs
-Click on the button below to open iRONs on MyBinder.org so you can run, modify and interact with the Notebooks online.
-
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AndresPenuela/iRONs.git/master)
-
 The iRONs toolbox is designed to facilitate a) the communication of complex modelling and optimisation concepts, such as recursive decision-making, decision-making under uncertainty and multi-objective optimisation; b) the application of these concepts to real-world reservoir systems. Compared to other available packages such as web-based application ResOS (Jahanpour et al., 2014) and the R package reservoir (Turner and Galelli, 2016), iRONs combines both the user-friendliness of web-based applications and the transparency and adaptability of open-source packages. These are the main design principles followed in developing iRONs:
 
 -	It must be well documented and easy to share and maintain
@@ -51,3 +46,8 @@ B -	Implementation: computationally efficient Jupyter Notebooks to implement mod
     3.b	Multi-objective optimisation of reservoir operating policy
     
 We anticipate to update iRONs regularly with new Notebooks and be open to contributions and improvements from other researchers and users in industry and across research communities.
+
+# iRONs
+Click on the button below to open iRONs on MyBinder.org so you can run, modify and interact with the Notebooks online.
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AndresPenuela/iRONs.git/master)
