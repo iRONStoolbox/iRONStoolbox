@@ -7,7 +7,7 @@ Created on Fri Aug  9 10:45:43 2019
 import numpy as np
 from platypus import NSGAII, Problem, Real
 
-from Subroutines.HBV_sim import HBV_sim
+from HBV_sim import HBV_sim
 
 def HBV_calibration(P,E,Case,area, Q_obs, objective, iterations,population_size = 1):
 
