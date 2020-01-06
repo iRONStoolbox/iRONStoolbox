@@ -11,7 +11,7 @@ iRONs is based on the use of interactive Jupyter Notebooks (http://jupyter.org/)
 iRONs is divided in two sections:
 
 A.	Knowledge transfer: interactive Jupyter Notebooks to communicate modelling and optimisation concepts relevant for reservoir operation. This is the list of currently available Notebooks:\
-&nbsp;&nbsp;&nbsp;&nbsp;1.	Jupyter Notebooks introduction:\
+    1.	Jupyter Notebooks introduction:\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.a.	Simple example of how to use Jupyter Notebooks\
 + 2.	Hydrological modelling
 2.a.	Calibration and evaluation of a rainfall-runoff model
@@ -47,9 +47,3 @@ MAROWKA, A. J. T. J. O. S. 2018. Python accelerators for high-performance comput
 PERKEL, J. M. 2018. Why Jupyter is data scientists' computational notebook of choice. Nature, 563, 145-147.
 
 TURNER, S. W. D. & GALELLI, S. 2016. Water supply sensitivity to climate change: An R package for implementing reservoir storage analysis in global and regional impact studies. Environmental Modelling & Software, 76, 13-19.
-
-+ One
-+ Two
-+ Three
-    - Nested One
-     Nested Two
