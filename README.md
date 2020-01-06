@@ -18,7 +18,7 @@ A.	Knowledge transfer: interactive Jupyter Notebooks to communicate modelling an
 &nbsp;&nbsp;&nbsp;&nbsp;3.	Reservoir operation\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.a.	Recursive decisions and multi-objective optimisation: optimising reservoir release scheduling under conflicting objectives\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.b.	Decision making under uncertainty: optimising reservoir release scheduling under uncertain hydrological forecasts\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.c.	Rule curves: optimising the reservoir operating policy\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.c.	Rule curves: optimising the reservoir operating policy
 
 B.	Implementation: computationally efficient Jupyter Notebooks to implement modelling and optimisation concepts in reservoir operation. This is the list of currently available Notebooks:\
 &nbsp;&nbsp;&nbsp;&nbsp;1.	Seasonal weather forecast\
