@@ -11,23 +11,23 @@ iRONs is based on the use of interactive Jupyter Notebooks (http://jupyter.org/)
 iRONs is divided in two sections:
 
 A.	Knowledge transfer: interactive Jupyter Notebooks to communicate modelling and optimisation concepts relevant for reservoir operation. This is the list of currently available Notebooks:\
-     1.	Jupyter Notebooks introduction:\
+&nbsp;&nbsp;&nbsp;&nbsp;1.	Jupyter Notebooks introduction:\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.a.	Simple example of how to use Jupyter Notebooks\
-+ 2.	Hydrological modelling
-2.a.	Calibration and evaluation of a rainfall-runoff model
-3.	Reservoir operation
-3.a.	Recursive decisions and multi-objective optimisation: optimising reservoir release scheduling under conflicting objectives
-3.b.	Decision making under uncertainty: optimising reservoir release scheduling under uncertain hydrological forecasts
-3.c.	Rule curves: optimising the reservoir operating policy
+&nbsp;&nbsp;&nbsp;&nbsp;2.	Hydrological modelling
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.a.	Calibration and evaluation of a rainfall-runoff model
+&nbsp;&nbsp;&nbsp;&nbsp;3.	Reservoir operation
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.a.	Recursive decisions and multi-objective optimisation: optimising reservoir release scheduling under conflicting objectives
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.b.	Decision making under uncertainty: optimising reservoir release scheduling under uncertain hydrological forecasts
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.c.	Rule curves: optimising the reservoir operating policy
 B.	Implementation: computationally efficient Jupyter Notebooks to implement modelling and optimisation concepts in reservoir operation. This is the list of currently available Notebooks:
-1.	Seasonal weather forecast
-1.a.	Downloading ensemble weather forecasts 
-1.b.	Bias-correction of weather forecasts 
-2.	Inflow forecast
-2.a.	Generation of reservoir inflow ensemble forecasts from weather forecasts
-3.	System operation optimization
-3.a.	Multi-objective optimisation of reservoir release scheduling 
-3.b.	Multi-objective optimisation of reservoir operating policy
+&nbsp;&nbsp;&nbsp;&nbsp;1.	Seasonal weather forecast
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.a.	Downloading ensemble weather forecasts 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.b.	Bias-correction of weather forecasts 
+&nbsp;&nbsp;&nbsp;&nbsp;2.	Inflow forecast
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.a.	Generation of reservoir inflow ensemble forecasts from weather forecasts
+&nbsp;&nbsp;&nbsp;&nbsp;3.	System operation optimization
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.a.	Multi-objective optimisation of reservoir release scheduling 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.b.	Multi-objective optimisation of reservoir operating policy
 
     
 We anticipate to update iRONs regularly with new Notebooks and be open to contributions and improvements from other researchers and users in industry and across research communities.
