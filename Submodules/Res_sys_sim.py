@@ -32,7 +32,7 @@ def Res_sys_sim(I, e, s_0, s_min, s_max, Qreq_env, Qreq_dem, Qreg):
     Qenv = np.zeros(T)
 
     # Regulated releases + inflows
-    if Qreg['rel_inf'] == None:
+    if Qreg['rel_inf'] == []:
         Qreg_rel = np.zeros(T)
         Qreg_inf = np.zeros(T)
     elif isinstance(Qreg['rel_inf'],(dict)):
@@ -41,7 +41,7 @@ def Res_sys_sim(I, e, s_0, s_min, s_max, Qreq_env, Qreq_dem, Qreg):
         Qreg_inf = np.zeros(T)
         
     # Regulated water release
-    if Qreg['releases'] == None: 
+    if Qreg['releases'] == []: 
         Qreg_rel = Qreq_dem # releases = demand
     elif isinstance(Qreg['releases'],(np.ndarray)): # a release scheduling is provided as an input
         Qreg_rel = Qreg['releases'] + np.zeros(T)
@@ -49,7 +49,7 @@ def Res_sys_sim(I, e, s_0, s_min, s_max, Qreq_env, Qreq_dem, Qreg):
         exec('from '+Qreg['releases']['file_name']+' import '+Qreg['releases']['function'])
         
     # Regulated inflows 
-    if Qreg['inflows'] == None: 
+    if Qreg['inflows'] == []: 
         Qreg_inf = np.zeros(T)  # No regulated inflows
     elif isinstance(Qreg['inflows'],(np.ndarray)): # a regulated inflows scheduling is provided as an input
         Qreg_inf = Qreg['inflows'] + np.zeros(T)
@@ -65,15 +65,15 @@ def Res_sys_sim(I, e, s_0, s_min, s_max, Qreq_env, Qreq_dem, Qreg):
         
         if isinstance(Qreg['rel_inf'],(dict)): # a dictionary with: the name of the function,  
             # file name where it is contained and the parameters of the function
-            exec('Qreg_rel[t], Qreg_inf[t] = '+Qreg['rel_inf']['function']+'('+str(Qreg['rel_inf']['param'])+','+str(s[t-1]/s_max)+')')
+            exec('Qreg_rel[t], Qreg_inf[t] = '+Qreg['rel_inf']['function']+'('+str(Qreg['rel_inf']['param'])+','+str(s[t]/s_max)+')')
             
         if isinstance(Qreg['releases'],(dict)): # a dictionary with: the name of the function,  
             # file name where it is contained and the parameters of the function
-            exec('Qreg_rel[t] = '+Qreg['releases']['function']+'('+str(Qreg['releases']['param'])+','+str(s[t-1]/s_max)+')')
+            exec('Qreg_rel[t] = '+Qreg['releases']['function']+'('+str(Qreg['releases']['param'])+','+str(s[t]/s_max)+')')
             
         if isinstance(Qreg['inflows'],(dict)): # a dictionary with: the name of the function,  
             # file name where it is contained and the parameters of the function
-            exec('Qreg_inf[t] = '+Qreg['inflows']['function']+'('+str(Qreg['inflows']['param'])+','+str(s[t-1]/s_max)+')')
+            exec('Qreg_inf[t] = '+Qreg['inflows']['function']+'('+str(Qreg['inflows']['param'])+','+str(s[t]/s_max)+')')
             
         # If at week t the inflow (I) is lower than the required environmental compensation (Qreq_env), 
         # then the environmental compensation (Qenv) = inflow (I). Otherwise Qenv = Qreq_env.
