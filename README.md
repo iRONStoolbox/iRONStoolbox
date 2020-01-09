@@ -11,6 +11,9 @@ iRONs is based on the use of interactive Jupyter Notebooks (http://jupyter.org/)
 iRONs is divided in two sections:
 
 **A.	Knowledge transfer:** interactive Jupyter Notebooks to communicate modelling and optimisation concepts relevant for reservoir operation. This is the list of currently available Notebooks:\
+&nbsp;&nbsp;&nbsp;&nbsp;0.	Tutorials:\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.a.	Getting started with Jupyter Notebooks\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.b.	How to install libraries\
 &nbsp;&nbsp;&nbsp;&nbsp;1.	Jupyter Notebooks introduction:\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.a.	Simple example of how to use Jupyter Notebooks\
 &nbsp;&nbsp;&nbsp;&nbsp;2.	Hydrological modelling:\
