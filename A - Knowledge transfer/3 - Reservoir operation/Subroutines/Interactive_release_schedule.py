@@ -9,7 +9,6 @@ import numpy as np
 from bqplot import pyplot as plt
 from bqplot import *
 from bqplot.traits import *
-from IPython.display import display
 
 def Interactive_release_single(simtime,I,E,d,S0,Smax,env_min, demand_plot):
     def syst_sim(simtime,I,E,d,S0,Smax,env_min,u):
