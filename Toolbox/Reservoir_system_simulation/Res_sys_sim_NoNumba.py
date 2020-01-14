@@ -99,48 +99,48 @@ def Res_sys_sim(I, e, s_0, s_min, s_max, env_min, d, Qreg):
     outputs = (Qenv, Qspill, Qreg_rel, Qreg_inf, s)
     return outputs
 
-#N = 100000
-#I = np.abs(np.random.normal(loc=20,scale=10,size=N))
-#e = np.abs(np.random.normal(loc=4,scale=1,size=N))
-#d = np.abs(np.random.normal(loc=20,scale=5,size=N))
-#u = np.abs(np.random.normal(loc=20,scale=1,size=N))
-## System constraints
-#u_min = 2 # ML/week
-#u_max = 80 # ML/week
-## Mean long term release
-#u_mean = 20 # ML/week
-## Policy function parameters
-#u_ref = 20/u_mean
-#s_ref_1 = 0.2
-#s_ref_2 = 0.8
-#
-#### Constraints ###
-#s_max = 150 #  (ML) Maximum storage (=reservoir capacity)
-#s_min = 0 # (ML) Minimum storage (set to zero for now)
-#u_max = 60 # (ML/week) Maximum release capacity
-#env_min = 2 # (ML/week)   # Environmental compensation flow
-#
-#### Initial conditions ###
-#s_0 = 80 # (ML) # Storage volume at the beginning of the simulation period
-#### Policy function constrains ###
-#u_0 = u_min/u_mean # release at storage fraction = 0
-#u_1 = u_max/u_mean # release at storage fraction = 1
-#
-#### Policy function defining points ###
-#x0 = [0,       u_0]
-#x1 = [s_ref_1, u_ref]
-#x2 = [s_ref_2, u_ref]
-#x3 = [1,       u_1]
-#
-#param = [x0, x1, x2, x3, u_mean]
-#from Operating_policy_functions import four_points_policy
-#u_frac = four_points_policy(param)/u_mean
-#
-#Qreg = {'releases' : {'file_name' : 'Operating_policy_functions',
-#                     'function' : 'four_points_policy',
-#                     'param': param},
-#        'inflows' : [],
-#        'rel_inf' : []}
+N = 100000
+I = np.abs(np.random.normal(loc=20,scale=10,size=N))
+e = np.abs(np.random.normal(loc=4,scale=1,size=N))
+d = np.abs(np.random.normal(loc=20,scale=5,size=N))
+u = np.abs(np.random.normal(loc=20,scale=1,size=N))
+# System constraints
+u_min = 2 # ML/week
+u_max = 80 # ML/week
+# Mean long term release
+u_mean = 20 # ML/week
+# Policy function parameters
+u_ref = 20/u_mean
+s_ref_1 = 0.2
+s_ref_2 = 0.8
+
+### Constraints ###
+s_max = 150 #  (ML) Maximum storage (=reservoir capacity)
+s_min = 0 # (ML) Minimum storage (set to zero for now)
+u_max = 60 # (ML/week) Maximum release capacity
+env_min = 2 # (ML/week)   # Environmental compensation flow
+
+### Initial conditions ###
+s_0 = 80 # (ML) # Storage volume at the beginning of the simulation period
+### Policy function constrains ###
+u_0 = u_min/u_mean # release at storage fraction = 0
+u_1 = u_max/u_mean # release at storage fraction = 1
+
+### Policy function defining points ###
+x0 = [0,       u_0]
+x1 = [s_ref_1, u_ref]
+x2 = [s_ref_2, u_ref]
+x3 = [1,       u_1]
+
+param = [x0, x1, x2, x3, u_mean]
+from Reservoir_operating_policy.Operating_policy_functions import four_points_policy
+u_frac = four_points_policy(param)/u_mean
+
+Qreg = {'releases' : {'file_name' : 'Operating_policy_functions',
+                     'function' : 'four_points_policy',
+                     'param': param},
+        'inflows' : [],
+        'rel_inf' : []}
 #
 #time_start = time.clock()
 #Qenv, Qspill, Qreg_rel, Qreg_inf, s = Res_sys_sim(I, e, s_0, s_min, s_max, env_min, d, Qreg)
