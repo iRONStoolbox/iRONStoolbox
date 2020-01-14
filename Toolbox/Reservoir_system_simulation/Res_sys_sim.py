@@ -9,7 +9,7 @@ from numba import njit
 
 # Mass balance function
 @njit(parallel = False) # Set "nopython" mode for best performance, equivalent to @njit
-def Mass_bal_func(I, e, s_0, s_min, s_max, env_min, d, Qreg_inf, Qreg_rel, s_frac, Policy_inf, Policy_rel):
+def Mass_bal_func(I, e, s_0, s_min, s_max, env_min, Qreg_inf, Qreg_rel, s_frac, Policy_inf, Policy_rel):
     
     T = I.shape[0]
     ### Declare output variables ###
@@ -44,7 +44,7 @@ def Mass_bal_func(I, e, s_0, s_min, s_max, env_min, d, Qreg_inf, Qreg_rel, s_fra
         E[t] = e[t] * A # in ML (= mm * km2) 
         
         # If at week t the inflow (I) is lower than the required environmental compensation (env_min), 
-        # then the environmental compensation (Qenv) = inflow (I). Otherwise Qenv = env_min.
+        # then the environmental compensation (Qenv) = total inflows (natural + regulated). Otherwise Qenv = env_min.
         if env_min[t] >= I[t] + Qreg_inf[t] :
             env[t] = I[t] + Qreg_inf[t]
         else:
@@ -52,14 +52,13 @@ def Mass_bal_func(I, e, s_0, s_min, s_max, env_min, d, Qreg_inf, Qreg_rel, s_fra
         # If the required environmental compensation is higher than the water resource available (s + I - E)
         # then the environmental compensation is equal to the higher value between 0 and the resource available  
         if env_min[t] >= s[t] - s_min + I[t] + Qreg_inf[t] - E[t]:
-            env[t] = s[t] - s_min + I[t] + Qreg_inf[t] - E[t]
+            env[t] = np.array([0,s[t] - s_min + I[t] + Qreg_inf[t] - E[t]]).max()
         else:
             env[t] = env_min[t]
-        # If the demand (d) is higher than the water resource available (s + I - E - Qenv)
-        # then the release for water supply is equal to the higher value between 0 and the resource available 
-        # and the lower value between the latter and the pre-defined release (u)
-        if d[t] >= s[t] - s_min + I[t] + Qreg_inf[t] - E[t] - env[t]:
-            Qreg_rel[t] = np.array([Qreg_rel[t],np.array([0,s[t] - s_min + I[t] + Qreg_inf[t] - E[t] - env[t]]).max()]).min()
+        # If the regulated release (Qreg_rel) is higher than the water resource available (s + I - E - Qenv)
+        # then the release is equal to the higher value between 0 and the resource available 
+        # and the lower value between the latter and the pre-defined release (Qreg_rel)
+        Qreg_rel[t] = np.array([Qreg_rel[t], s[t] - s_min + I[t] + Qreg_inf[t] - E[t] - env[t]]).max()
         # The spillage is equal to the higher value between 0 and the resource available exceeding the reservoir capacity
         spill[t] = np.array([0,s[t] + I[t] + Qreg_inf[t] - Qreg_rel[t] - env[t] - E[t] - s_max]).max()
         # The final storage (initial storage in the next step) is equal to the storage + inflow - outflows
