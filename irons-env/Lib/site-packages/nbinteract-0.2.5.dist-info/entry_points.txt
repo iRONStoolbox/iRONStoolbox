@@ -1,0 +1,6 @@
+[console_scripts]
+nbinteract = nbinteract.cli:main
+
+[nbconvert.exporters]
+interact = nbinteract:InteractExporter
+
