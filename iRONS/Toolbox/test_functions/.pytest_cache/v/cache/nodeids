@@ -1,14 +1,14 @@
 [
+  "test_Bias_correction.py::test_Rain_fore_corr",
+  "test_Bias_correction.py::test_Temp_fore_corr",
   "test_HBV_sim.py::test_Q",
   "test_HBV_sim.py::test_STATES",
   "test_HBV_sim.py::test_FLUXES",
-  "test_day2week2month.py::test_dates_week",
-  "test_day2week2month.py::test_data_week",
-  "test_day2week2month.py::test_data_cum_week",
   "test_Res_sys_sim.py::test_Qreg_rel",
   "test_Res_sys_sim.py::test_s",
   "test_Res_sys_sim.py::test_spill",
   "test_cum2inst.py::test_cum2inst",
-  "test_Bias_correction.py::test_Rain_fore_corr",
-  "test_Bias_correction.py::test_Temp_fore_corr"
+  "test_day2week2month.py::test_dates_week",
+  "test_day2week2month.py::test_data_week",
+  "test_day2week2month.py::test_data_cum_week"
 ]
