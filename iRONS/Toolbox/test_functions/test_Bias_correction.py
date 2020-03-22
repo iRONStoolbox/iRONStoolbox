@@ -18,7 +18,7 @@ from Weather_forecast.Bias_correction import linear_scaling
 
 ### Observed data ###
 # File path
-path_obs_data = '..Notebooks/B - Implementation/Inputs'
+path_obs_data = '../../Notebooks/B - Implementation/Inputs'
 #path_obs_data = ''
 name_obs_file = 'hist_clim_data.csv'
 # Read files
