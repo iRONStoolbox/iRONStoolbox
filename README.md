@@ -8,7 +8,7 @@ iRONS is a python package that enables the simulation, forecasting and optimisat
 
 **The core functions** *(you can find them in the Toolbox folder)*
 
-The iRONS package provides a set of functions implementing typical reservoir modelling tasks, such as: estimating inflows to a reservoir, simulating operator decisions, closing the reservoir mass balance equation – in the context of both short-term forecasting and long-term predictions.
+The iRONS package provides a set of Python functions implementing typical reservoir modelling tasks, such as: estimating inflows to a reservoir, simulating operator decisions, closing the reservoir mass balance equation – in the context of both short-term forecasting and long-term predictions.
 
 **The notebooks** *(you can find them in the Notebooks folder)*
 
