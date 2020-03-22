@@ -27,11 +27,24 @@ Click on the button below to open iRONs on MyBinder.org so you can run, modify a
 
 In the section **A - Knowledge transfer** you can start with the Notebook **1.a. Simple example of how to use Jupyter Notebooks.ipynb**.
 
-In the section **B - Implementation** you can start with the Notebook **1.a. Downloading ensemble weather forecasts.ipynb**
+In the section **B - Implementation** you can start with the Notebook **1.b. Bias correction of weather forecasts.ipynb**
+
+🚨 Note in the section **B - Implementation** the Notebook **1.a. Downloading ensemble weather forecasts.ipynb** needs to be run locally after installing iRONS.
 
 ## Installing
 
 To install and run iRONS locally:
+
 ```sh
 pip install irons
 ```
+🚨 Note installation option does not include the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
+
+Or you can install directly from github.com via the repository.
+
+```
+git clone https://github.com/AndresPenuela/iRONS.git
+cd iRONS
+pip install -r requirements.txt --user
+```
+🚨 Note installation option includes the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
