@@ -3,7 +3,7 @@
 
 ![Travis](https://travis-ci.org/AndresPenuela/iRONS.svg?branch=master)
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AndresPenuela/iRONs-old.git/master)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AndresPenuela/iRONS.git/master)
 
 iRONS is a python package that enables the simulation, forecasting and optimisation of reservoir systems. The package includes a set of interactive notebooks that demonstrate key functionalities through practical examples, and that can be run in the Jupyter environment either locally or remotely via a web browser. 
 
@@ -44,4 +44,4 @@ To facilitate the visualization of model inputs and outputs and data uncertainty
 
 Click on the button below to open iRONs on MyBinder.org so you can run, modify and interact with the Notebooks online.
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AndresPenuela/iRONs-old.git/master)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AndresPenuela/iRONS.git/master)
