@@ -1,6 +1,8 @@
 # iRONS
 ![iRONS_logo](iRONS/util/images/iRONS_logo.png)
 
+https://travis-ci.org/AndresPenuela/iRONS.svg?branch=master
+
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AndresPenuela/iRONs-old.git/master)
 
 iRONS is a python package that enables the simulation, forecasting and optimisation of reservoir systems. The package includes a set of interactive notebooks that demonstrate key functionalities through practical examples, and that can be run in the Jupyter environment either locally or remotely via a web browser. 
