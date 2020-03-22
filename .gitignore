@@ -110,7 +110,7 @@ ENV/
 env.bak/
 venv.bak/
 *-env/
-"environment - Copy.yml"
+environment_Copy.yml
 
 # Spyder project settings
 .spyderproject
