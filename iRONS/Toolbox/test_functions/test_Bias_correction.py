@@ -11,9 +11,6 @@ if __name__ == '__main__':
     import sys
     sys.path.append("..") # Adds higher directory to python modules path.
 
-import os
-print("The Current Python Directory is"+os.getcwd())
-
 from Data_management.Read_data import read_csv_data
 
 ### Function to test ###
