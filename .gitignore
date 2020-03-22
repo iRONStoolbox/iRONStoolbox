@@ -109,7 +109,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-irons-env/*.*
+irons_env/
+environment_Copy.yml
 
 # Spyder project settings
 .spyderproject
