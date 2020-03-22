@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 # Powerpoint files
-Figures.pptx
+ppt_files/
 
 # Questionnaire
 

@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "iRONS"
+version = "0.1.1"
+description = ""
+authors = ["Andres Peñuela"]
+license = "MIT"
+exclude = ["irons/Notebooks/B - Implementation/Inputs/ECMWF forecasts csv/*.*","irons/Notebooks/B - Implementation/Inputs/ECMWF forecasts netcdf/*.*"]
+
+[tool.poetry.dependencies]
+python = "3.7.4"
+numpy = "1.16.5"
+matplotlib = "3.1.1"
+ipywidgets = "7.2.1"
+bqplot = "0.11.6"
+platypus-opt = "1.0.3"
+netcdf4 = "1.4.2"
+numba = "0.47.0"
+plotly = "4.4.1"
+pandas = "0.25.1"
+cdsapi = "0.2.5"
+
+[tool.poetry.dev-dependencies]
+pytest = "5.2.1"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
