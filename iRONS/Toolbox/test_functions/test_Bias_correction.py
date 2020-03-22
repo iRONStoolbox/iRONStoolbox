@@ -31,7 +31,7 @@ dates_obs,Rain_obs = read_csv_data(path_obs_data,name_obs_file,'Rain')
 ### Forecast data ###
 origin_centre = 'ECMWF' # forecast originating centre
 file_format = 'netcdf'
-path_fore_data = '../../Notebooks/B - Implementation/Inputs/'+origin_centre+' forecasts '+file_format
+path_fore_data = 'iRONS/Notebooks/B - Implementation/Inputs/'+origin_centre+' forecasts '+file_format
 name_fore_file_end = "_1d_7m_"+origin_centre+"_Temp_Evap_Rain.nc"
 
 dates_fore = pd.date_range(start = '2015-12-01', end = '2015-12-31', freq = 'D')
