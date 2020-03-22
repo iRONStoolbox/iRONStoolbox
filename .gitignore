@@ -110,8 +110,6 @@ ENV/
 env.bak/
 venv.bak/
 irons-env/*.*
-environment_Copy.yml
-aznbsetup.sh
 
 # Spyder project settings
 .spyderproject
