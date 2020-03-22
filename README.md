@@ -1,7 +1,7 @@
 # iRONS
 ![iRONS_logo](iRONS/util/images/iRONS_logo.png)
 
-[![Travis](https://travis-ci.org/AndresPenuela/iRONS.svg?branch=master)
+![Travis](https://travis-ci.org/AndresPenuela/iRONS.svg?branch=master)
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AndresPenuela/iRONs-old.git/master)
 
