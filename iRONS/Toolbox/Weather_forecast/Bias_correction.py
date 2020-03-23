@@ -138,7 +138,5 @@ def linear_scaling(folder_path,file_name_end,
             data_bias_corr_factor = data_obs_mean / data_ctrl_mean
             data_bias_corr = data_scen*data_bias_corr_factor
             data_fore_corr[ID_scen] = data_bias_corr
-        
-        print(data_bias_corr_factor)
             
     return data_fore_corr
