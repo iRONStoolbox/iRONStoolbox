@@ -1,4 +1,4 @@
-~~~
+---
 title: 'iRONS: interactive Reservoir Operation Notebooks and Software for water reservoir systems simulation and optimisation'
 tags:
   - Python
@@ -20,7 +20,7 @@ affiliations:
 date: 15 March 2020
 bibliography: paper.bib
 
-~~~
+---
 
 # Summary
 Computer-based models enable the simulation of water fluxes in water resource systems, such as reservoirs and diversions, in response to natural forcing inputs (e.g. streamflows) and human actions (e.g. abstractions/releases). As such they can be valuable tools to anticipate and compare the effects of different management decisions in the presence of potentially competing uses of water and uncertainty about future hydrological conditions [@Brown:2015]. Combined with an optimisation algorithm, simulation models can also be used to systematise the trial-and-error process and directly generate ‘optimal’ decisions, such as the optimal operating policy of a reservoir or the optimal release scheduling for the week/month ahead [@Dobson: 2019].
