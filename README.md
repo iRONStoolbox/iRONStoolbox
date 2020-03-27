@@ -38,7 +38,7 @@ To install and run iRONS locally:
 ```sh
 pip install irons
 ```
-🚨 Note installation option does not include the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
+🚨 Note this installation option does NOT include the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
 
 Or you can install directly from github.com via the repository.
 
@@ -47,4 +47,4 @@ git clone https://github.com/AndresPenuela/iRONS.git
 cd iRONS
 pip install -r requirements.txt --user
 ```
-🚨 Note installation option includes the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
+🚨 Note this installation option includes the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
