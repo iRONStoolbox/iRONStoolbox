@@ -1,8 +1,8 @@
-# iRONS
 <left> <img src="iRONS/util/images/iRONS_logo_4.png" width = "300px"><left>
   
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AndresPenuela/iRONS.git/master)
 [![Build status](https://travis-ci.org/AndresPenuela/iRONS.svg?branch=master)](https://travis-ci.org/pySRURGS/pyGOURGS)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 iRONS is a python package that enables the simulation, forecasting and optimisation of reservoir systems. The package includes a set of interactive notebooks that demonstrate key functionalities through practical examples, and that can be run in the Jupyter environment either locally or remotely via a web browser. 
 
@@ -38,7 +38,7 @@ To install and run iRONS locally:
 ```sh
 pip install irons
 ```
-🚨 Note installation option does not include the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
+🚨 Note this installation option does NOT include the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
 
 Or you can install directly from github.com via the repository.
 
@@ -47,4 +47,4 @@ git clone https://github.com/AndresPenuela/iRONS.git
 cd iRONS
 pip install -r requirements.txt --user
 ```
-🚨 Note installation option includes the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
+🚨 Note this installation option includes the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
