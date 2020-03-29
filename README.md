@@ -25,6 +25,8 @@ Click on the button below to open iRONs on MyBinder.org so you can run, modify a
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AndresPenuela/iRONS.git/master)
 
+You can also run the Notebooks online on MyBinder.org on a JupyterLab session by clicking [here]
+
 In the section **A - Knowledge transfer** you can start with the Notebook [**1.a. Simple example of how to use Jupyter Notebooks.ipynb**](https://mybinder.org/v2/gh/AndresPenuela/iRONS/master?urlpath=lab/tree/iRONS/Notebooks/A%20-%20Knowledge%20transfer/1.a.%20Simple%20example%20of%20how%20to%20use%20Jupyter%20Notebooks.ipynb)
 
 In the section **B - Implementation** you can start with the Notebook **1.b. Bias correction of weather forecasts.ipynb**
