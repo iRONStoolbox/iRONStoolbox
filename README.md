@@ -1,4 +1,4 @@
-<left> <img src="iRONS/util/images/iRONS_logo_4.png" width = "300px"><left>
+<left> <img src="iRONS/util/images/iRONS_logo_5.png" width = "300px"><left>
   
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AndresPenuela/iRONS.git/master)
 [![Build status](https://travis-ci.org/AndresPenuela/iRONS.svg?branch=master)](https://travis-ci.org/pySRURGS/pyGOURGS)
