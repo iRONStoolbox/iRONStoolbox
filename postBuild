@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Install JupyterLab extensions 
+jupyter labextension install @jupyterlab/geojson-extension jupyterlab-drawio
+jupyter labextension install @jupyter-widgets/jupyterlab-manager
+jupyter labextension install bqplot@0.4.6
+jupyter labextension install @jupyterlab/plotly-extension
