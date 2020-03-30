@@ -4,7 +4,7 @@
 [![Build status](https://travis-ci.org/AndresPenuela/iRONS.svg?branch=master)](https://travis-ci.org/pySRURGS/pyGOURGS)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-iRONS is a python package that enables the simulation, forecasting and optimisation of reservoir systems. The package includes a set of interactive notebooks that demonstrate key functionalities through practical examples, and that can be run in the Jupyter environment either locally or remotely via a web browser. 
+iRONS (interactive Reservoir Operation Notebooks and Software) is a python package that enables the simulation, forecasting and optimisation of reservoir systems. The package includes a set of interactive notebooks that demonstrate key functionalities through practical examples, and that can be run in the Jupyter environment either locally or remotely via a web browser. 
 
 **The core functions** *(you can find them in the Toolbox folder)*
 
@@ -48,3 +48,10 @@ cd iRONS
 pip install -r requirements.txt --user
 ```
 🚨 Note this installation option includes the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
+
+If you use JupyterLab instead of Jupyter Notebooks you will need to install the following extensions:
+```
+jupyter labextension install @jupyter-widgets/jupyterlab-manager # install the plotly extension
+jupyter labextension install bqplot@0.4.6 # install the bqplot extension
+jupyter labextension install @jupyterlab/plotly-extension # install the Jupyter widgets extension
+```
