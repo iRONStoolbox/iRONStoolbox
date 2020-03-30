@@ -45,7 +45,7 @@ Or you can install directly from github.com via the repository.
 ```
 git clone https://github.com/AndresPenuela/iRONS.git
 cd iRONS
-pip install -r requirements.txt --user
+pip install -r requirements.txt
 ```
 🚨 Note this installation option includes the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
 
