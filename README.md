@@ -29,7 +29,7 @@ In the section **A - Knowledge transfer** you can start with the Notebook **iRON
 
 In the section **B - Implementation** you can start with the Notebook **iRONS/Notebooks/B - Implementation/1.b. Bias correction of weather forecasts.ipynb**
 
-🚨 Note in the section **B - Implementation** the Notebook **iRONS/Notebooks/B - Implementation/1.a. Downloading ensemble weather forecasts.ipynb** needs to be run locally after installing iRONS.
+🚨 Note in the section **B - Implementation** the Notebook **iRONS/Notebooks/B - Implementation/1.a. Downloading ensemble weather forecasts.ipynb** can only be run locally after installing iRONS.
 
 ## Installing
 
