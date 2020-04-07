@@ -137,7 +137,14 @@ ppt_files/
 # Questionnaire
 iRONS_questionnaire.docx
 
-# Various
+# Poetry
 pyproject.toml
+poetry.lock
+
+# Travis
+.travis.yml
+
+# Various
+aznbsetup.sh
 
 
