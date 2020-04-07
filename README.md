@@ -36,22 +36,21 @@ In the section **B - Implementation** you can start with the Notebook **iRONS/No
 To install and run iRONS locally:
 
 ```
+git clone https://github.com/AndresPenuela/iRONS.git
+cd iRONS
+pip install -r requirements.txt
+```
+🚨 Note this installation option includes both the Toolbox and Notebooks as well the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
+
+Or you can install only the Toolbox:
+```
 pip install irons
 ```
 If you get an error message try with:
 ```
 pip install --ignore-installed irons
 ```
-🚨 Note this installation option does NOT include the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
-
-Or you can install directly from github.com via the repository.
-
-```
-git clone https://github.com/AndresPenuela/iRONS.git
-cd iRONS
-pip install -r requirements.txt
-```
-🚨 Note this installation option includes the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
+🚨 Note this installation option does NOT include the Notebooks.
 
 If you use JupyterLab instead of Jupyter Notebooks you will need to install the following extensions:
 ```
