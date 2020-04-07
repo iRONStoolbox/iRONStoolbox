@@ -35,8 +35,12 @@ In the section **B - Implementation** you can start with the Notebook **iRONS/No
 
 To install and run iRONS locally:
 
-```sh
+```
 pip install irons
+```
+If you get an error message try with:
+```
+pip install --ignore-installed irons
 ```
 🚨 Note this installation option does NOT include the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
 
