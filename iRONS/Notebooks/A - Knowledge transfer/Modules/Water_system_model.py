@@ -12,7 +12,7 @@ def Water_system_model(simtime,I,E,d,S0,Smax,env_min):
     E = np.array(E)
     d = np.array(d)
 
-    r = np.array(d)
+    Qreg = np.array(d)
     
     members_num = np.shape(I)[0]
     
@@ -20,7 +20,7 @@ def Water_system_model(simtime,I,E,d,S0,Smax,env_min):
 
     S = np.array(np.zeros([np.shape(I)[0],np.shape(I)[1]+1]))
 
-    w = np.array(np.zeros(np.shape(I)))
+    spill = np.array(np.zeros(np.shape(I)))
 
     env = np.array(np.zeros(np.shape(I)))+env_min
     
@@ -39,10 +39,10 @@ def Water_system_model(simtime,I,E,d,S0,Smax,env_min):
                 env[m,t] = max(0,S[m,t] + I[m,t] - E[m,t])
 
             if d[m,t] >= S[m,t] + I[m,t] - E[m,t] - env[m,t]:
-                r[m,t] = min(r[m,t],max(0,S[m,t] + I[m,t] - E[m,t] - env[m,t]))
+                Qreg[m,t] = min(Qreg[m,t],max(0,S[m,t] + I[m,t] - E[m,t] - env[m,t]))
 
-            w[m,t] = max(0,S[m,t] + I[m,t] - r[m,t] - env[m,t] - E[m,t] - Smax)
+            spill[m,t] = max(0,S[m,t] + I[m,t] - Qreg[m,t] - env[m,t] - E[m,t] - Smax)
 
-            S[m,t+1] = S[m,t] + I[m,t] - r[m,t] - env[m,t]- E[m,t] - w[m,t]
+            S[m,t+1] = S[m,t] + I[m,t] - Qreg[m,t] - env[m,t]- E[m,t] - spill[m,t]
               
-    return S,env,w,r
+    return S,env,spill,Qreg

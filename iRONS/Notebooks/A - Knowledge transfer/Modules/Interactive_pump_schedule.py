@@ -19,7 +19,7 @@ def Interactive_Pareto_front_det(N,I_sel,E,d_sel,S0,Smax,Smin,env_min,c,solution
     def update_operation_2(i):
         u            = solutions_optim_relea_2[i]
         S,env,w,r    = syst_sim(N,I_sel+u,E,d_sel,S0,Smax,env_min)
-        fig_2b.title = 'Supply deficit (max(0,d-r)) - Total = '+str((np.sum((np.maximum(d_sel-r,[0]*N)))).astype('int'))+' ML'
+        fig_2b.title = 'Supply deficit (max(0,d-Qreg_rel)) - Total = '+str((np.sum((np.maximum(d_sel-r,[0]*N)))).astype('int'))+' ML'
         fig_2d.title = 'Natural + pumped inflows - Total pumped vol = '+str((np.sum(np.array(u))).astype('int'))+' ML'
         return       S,u,r,i
     
@@ -121,7 +121,7 @@ def Interactive_Pareto_front_det(N,I_sel,E,d_sel,S0,Smax,Smin,env_min,c,solution
                                 fill = 'bottom',
                                 fill_opacities = [1],
                                 fill_colors = ['orange'],
-                                labels = ['pump (u)'], 
+                                labels = ['pump (Qreg_inf)'], 
                                 display_legend = True,
                                 scales={'x': x_sc_2d, 'y': y_sc_2d})
     tot_inflows_2  = plt.Lines(x=np.arange(1,N+1),
@@ -134,7 +134,7 @@ def Interactive_Pareto_front_det(N,I_sel,E,d_sel,S0,Smax,Smin,env_min,c,solution
                                 fill = 'bottom',
                                 fill_opacities = [0.5],
                                 fill_colors = ['blue'],
-                                labels = ['nat (I) + pump (u)'], 
+                                labels = ['nat (I) + pump (Qreg_inf)'], 
                                 display_legend = True,
                                 scales={'x': x_sc_2d, 'y': y_sc_2d})
     fig_2d     = plt.Figure(marks = [tot_inflows_2,pump_inflows_2],
@@ -143,7 +143,7 @@ def Interactive_Pareto_front_det(N,I_sel,E,d_sel,S0,Smax,Smin,env_min,c,solution
                             layout={'width': '480px', 'height': '250px'}, 
                             scales={'x': x_sc_2d, 'y': y_sc_2d}, 
                             animation_duration=1000,
-                            legend_location = 'right', 
+                            legend_location = 'top', 
                             legend_style = {'fill': 'white', 'opacity': 0.5})
     
 
@@ -175,7 +175,7 @@ def Interactive_Pareto_front_act(N,I_act,E_act,d_act,S0,Smax,Smin,env_min,c,solu
     def update_operation_act_4(i):
         u            = solutions_optim_relea_2[i]
         S,env,w,r    = syst_sim(N,I_act+u,E_act,d_act,S0,Smax,env_min)
-        fig_4b.title = 'Supply deficit (max(0,d-r)) - Total = '+str((np.sum((np.maximum(d_act-r,[0]*N)))).astype('int'))+' ML'
+        fig_4b.title = 'Supply deficit (max(0,d-Qreg_rel)) - Total = '+str((np.sum((np.maximum(d_act-r,[0]*N)))).astype('int'))+' ML'
         fig_4d.title = 'Natural + pumped inflows - Total pumped vol = '+str((np.sum(np.array(u))).astype('int'))+' ML'
         return       S,u,r,i
     
@@ -310,7 +310,7 @@ def Interactive_Pareto_front_act(N,I_act,E_act,d_act,S0,Smax,Smin,env_min,c,solu
                                 fill = 'bottom',
                                 fill_opacities = [1],
                                 fill_colors = ['orange'],
-                                labels = ['pump (u)'], 
+                                labels = ['pump (Qreg_inf)'], 
                                 display_legend = True,
                                 scales={'x': x_sc_2d, 'y': y_sc_2d})
     tot_inflows_4  = plt.Lines(x=np.arange(1,N+1),
@@ -323,7 +323,7 @@ def Interactive_Pareto_front_act(N,I_act,E_act,d_act,S0,Smax,Smin,env_min,c,solu
                                 fill = 'bottom',
                                 fill_opacities = [0.5],
                                 fill_colors = ['blue'],
-                                labels = ['nat (I) + pump (u)'], 
+                                labels = ['nat (I) + pump (Qreg_inf)'], 
                                 display_legend = True,
                                 scales={'x': x_sc_2d, 'y': y_sc_2d})
     
@@ -333,7 +333,7 @@ def Interactive_Pareto_front_act(N,I_act,E_act,d_act,S0,Smax,Smin,env_min,c,solu
                             layout={'width': '480px', 'height': '250px'},
                             scales={'x': x_sc_2d, 'y': y_sc_2d}, 
                             animation_duration=1000,
-                            legend_location = 'top-right', 
+                            legend_location = 'top', 
                             legend_style = {'fill': 'white', 'opacity': 0.5})
     
     deficit_4.y = np.maximum(d_act-update_operation_act_4(sel_policy)[2],[0]*N)
@@ -372,7 +372,7 @@ def Interactive_Pareto_front(N,I_for,E_for,d_for,S0,Smax,Smin,env_min,c,solution
     # Interactive Pareto front
     def update_operation(i):
         S,env,w,r    = syst_sim(N,I_for+solutions_optim_relea[i],E_for,d_for,S0,Smax,env_min)
-        fig_wd.title = 'Supply deficit (max(0,d-r)) - Average deficit = '+str((sd_mean[i]).astype('int'))+' ± '+str((sd_std[i]).astype('int'))+' ML'
+        fig_wd.title = 'Supply deficit (max(0,d-Qreg_rel)) - Average deficit = '+str((sd_mean[i]).astype('int'))+' ± '+str((sd_std[i]).astype('int'))+' ML'
         fig_in.title = 'Natural + pumped inflows - Total pumped vol = {:.0f} ML'.format(results2_optim_relea[i]/c)
         return       S,solutions_optim_relea[i],r,results1_optim_relea[i],results2_optim_relea[i],i
     
@@ -438,7 +438,7 @@ def Interactive_Pareto_front(N,I_for,E_for,d_for,S0,Smax,Smin,env_min,c,solution
                              stroke_width = 1,
                              marker = 'circle',
                              marker_size = 10,
-                             labels = ['pump (u)'], 
+                             labels = ['pump (Qreg_inf)'], 
                              fill = 'bottom',
                              fill_opacities = [1],
                              fill_colors = ['orange']*members_num*N)
@@ -450,7 +450,7 @@ def Interactive_Pareto_front(N,I_for,E_for,d_for,S0,Smax,Smin,env_min,c,solution
                             stroke_width = 0.5,
                             marker = 'circle',
                             marker_size = 10,
-                            labels = ['nat (I) + pump (u)'],
+                            labels = ['nat (I) + pump (Qreg_inf)'],
                             fill = 'bottom',
                             fill_opacities = [1/members_num]*members_num*N,
                             fill_colors = ['blue']*members_num*N)

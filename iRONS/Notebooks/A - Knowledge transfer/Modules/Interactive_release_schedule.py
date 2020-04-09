@@ -11,13 +11,13 @@ from bqplot import *
 from bqplot.traits import *
 
 def Interactive_release_single(simtime,I,E,d,S0,Smax,env_min, demand_plot):
-    def syst_sim(simtime,I,E,d,S0,Smax,env_min,u):
+    def syst_sim(simtime,I,E,d,S0,Smax,env_min,Qreg):
     
         # Declare output variables
     
         S = [0]*(simtime+1) # reservoir storage in ML
     
-        w = [0]*(simtime) # spillage in ML
+        spill = [0]*(simtime) # spillage in ML
     
         env = [env_min]*(simtime) # environmental compensation flow
         
@@ -36,20 +36,20 @@ def Interactive_release_single(simtime,I,E,d,S0,Smax,env_min, demand_plot):
             # If the demand is higher than the water resource available (S + I - E - env)
             # then the release for water supply is equal to the higher value between 0 and the resource available            
             if d[t] >= S[t] + I[t] - E[t] - env[t]:
-                u[t] = min(u[t],max(0,S[t] + I[t] - E[t] - env[t]))
+                Qreg[t] = min(Qreg[t],max(0,S[t] + I[t] - E[t] - env[t]))
             # The spillage is equal to the higher value between 0 and the resource available exceeding the reservoir capacity
-            w[t] = max(0,S[t] + I[t] - u[t] - env[t] - E[t] - Smax)
+            spill[t] = max(0,S[t] + I[t] - Qreg[t] - env[t] - E[t] - Smax)
             # The final storage (initial storage in the next step) is equal to the storage + inflow - outflows
-            S[t+1] = S[t] + I[t] - u[t] - env[t]- E[t] - w[t]
+            S[t+1] = S[t] + I[t] - Qreg[t] - env[t]- E[t] - spill[t]
             
-        return S,env,w,u
+        return S,env,spill,Qreg
     
     # Interactive operating rule definition
-    def update_operation_2(u):
-        S,env,w,u1 = syst_sim(simtime,I,E,d,S0,Smax,env_min,u)
-        sdpen = (np.sum((np.maximum(d-u1,[0]*simtime))**2)).astype('int')
+    def update_operation_2(Qreg):
+        S,env,spill,Qreg1 = syst_sim(simtime,I,E,d,S0,Smax,env_min,Qreg)
+        sdpen = (np.sum((np.maximum(d-Qreg1,[0]*simtime))**2)).astype('int')
         fig_2b.title = 'Supply vs Demand - Total squared deficit = '+str(sdpen)+' ML^2'
-        return S,u1
+        return S,Qreg1
     
     def policy_changed_2a(change):
         y_vals_2a = update_operation_2([release1.value,release2.value,release3.value,release4.value,
@@ -116,13 +116,13 @@ def Interactive_release_single(simtime,I,E,d,S0,Smax,env_min, demand_plot):
     return fig_2a,fig_2b,release1,release2,release3,release4,release5,release6,release7,release8
 
 def Interactive_release_double(simtime,I,E,d,S0,Smax,ms,env_min, demand_plot):
-    def syst_sim(simtime,I,E,d,S0,Smax,env_min,u):
+    def syst_sim(simtime,I,E,d,S0,Smax,env_min,Qreg):
     
         # Declare output variables
     
         S = [0]*(simtime+1) # reservoir storage in ML
     
-        w = [0]*(simtime) # spillage in ML
+        spill = [0]*(simtime) # spillage in ML
     
         env = [env_min]*(simtime) # environmental compensation flow
         
@@ -141,21 +141,21 @@ def Interactive_release_double(simtime,I,E,d,S0,Smax,ms,env_min, demand_plot):
             # If the demand is higher than the water resource available (S + I - E - env)
             # then the release for water supply is equal to the higher value between 0 and the resource available            
             if d[t] >= S[t] + I[t] - E[t] - env[t]:
-                u[t] = min(u[t],max(0,S[t] + I[t] - E[t] - env[t]))
+                Qreg[t] = min(Qreg[t],max(0,S[t] + I[t] - E[t] - env[t]))
             # The spillage is equal to the higher value between 0 and the resource available exceeding the reservoir capacity
-            w[t] = max(0,S[t] + I[t] - u[t] - env[t] - E[t] - Smax)
+            spill[t] = max(0,S[t] + I[t] - Qreg[t] - env[t] - E[t] - Smax)
             # The final storage (initial storage in the next step) is equal to the storage + inflow - outflows
-            S[t+1] = S[t] + I[t] - u[t] - env[t]- E[t] - w[t]
+            S[t+1] = S[t] + I[t] - Qreg[t] - env[t]- E[t] - spill[t]
             
-        return S,env,w,u
+        return S,env,spill,Qreg
     
-    def update_operation_3(u):
-        S,env,w,u1 = syst_sim(simtime,I,E,d,S0,Smax,env_min,u)
+    def update_operation_3(Qreg):
+        S,env,spill,Qreg1 = syst_sim(simtime,I,E,d,S0,Smax,env_min,Qreg)
         lspen = np.sum((np.maximum(ms-S,[0]*(simtime+1)))).astype('int')
         fig_3a.title = 'Reservoir storage - Minimum storage violation = '+str(lspen)+' ML'
-        sdpen = (np.sum((np.maximum(d-u1,[0]*simtime))**2)).astype('int')
+        sdpen = (np.sum((np.maximum(d-Qreg1,[0]*simtime))**2)).astype('int')
         fig_3b.title = 'Supply vs Demand - Total squared deficit = '+str(sdpen)+' ML^2'
-        return S,u1
+        return S,Qreg1
     
     def policy_changed_3a(change):
         y_vals_3a = update_operation_3([release1.value,release2.value,release3.value,release4.value,
@@ -226,13 +226,13 @@ def Interactive_release_double(simtime,I,E,d,S0,Smax,ms,env_min, demand_plot):
     return fig_3a,fig_3b,release1,release2,release3,release4,release5,release6,release7,release8
 
 def Interactive_Pareto_front(simtime,I,E,d,S0,Smax,ms,env_min, demand_plot,solutions_optim_relea,results1_optim_relea,results2_optim_relea):
-    def syst_sim(simtime,I,E,d,S0,Smax,env_min,u):
+    def syst_sim(simtime,I,E,d,S0,Smax,env_min,Qreg):
     
         # Declare output variables
     
         S = [0]*(simtime+1) # reservoir storage in ML
     
-        w = [0]*(simtime) # spillage in ML
+        spill = [0]*(simtime) # spillage in ML
     
         env = [env_min]*(simtime) # environmental compensation flow
         
@@ -251,22 +251,22 @@ def Interactive_Pareto_front(simtime,I,E,d,S0,Smax,ms,env_min, demand_plot,solut
             # If the demand is higher than the water resource available (S + I - E - env)
             # then the release for water supply is equal to the higher value between 0 and the resource available            
             if d[t] >= S[t] + I[t] - E[t] - env[t]:
-                u[t] = min(u[t],max(0,S[t] + I[t] - E[t] - env[t]))
+                Qreg[t] = min(Qreg[t],max(0,S[t] + I[t] - E[t] - env[t]))
             # The spillage is equal to the higher value between 0 and the resource available exceeding the reservoir capacity
-            w[t] = max(0,S[t] + I[t] - u[t] - env[t] - E[t] - Smax)
+            spill[t] = max(0,S[t] + I[t] - Qreg[t] - env[t] - E[t] - Smax)
             # The final storage (initial storage in the next step) is equal to the storage + inflow - outflows
-            S[t+1] = S[t] + I[t] - u[t] - env[t]- E[t] - w[t]
+            S[t+1] = S[t] + I[t] - Qreg[t] - env[t]- E[t] - spill[t]
             
-        return S,env,w,u
+        return S,env,spill,Qreg
     
     def update_operation_4(i):
-        u = solutions_optim_relea[i]
-        S,env,w,u1 = syst_sim(simtime,I,E,d,S0,Smax,env_min,u)
+        Qreg = solutions_optim_relea[i]
+        S,env,spill,Qreg1 = syst_sim(simtime,I,E,d,S0,Smax,env_min,Qreg)
         lspen = np.sum((np.maximum(ms-S,[0]*(simtime+1)))).astype('int')
         fig_4a.title = 'Reservoir storage - Minimum storage violation = '+str(lspen)+' ML'
-        sdpen = (np.sum((np.maximum(d-u1,[0]*simtime))**2)).astype('int')
+        sdpen = (np.sum((np.maximum(d-Qreg1,[0]*simtime))**2)).astype('int')
         fig_4b.title = 'Supply vs Demand - Total squared deficit = '+str(sdpen)+' ML^2'
-        return S,env,w,u1
+        return S,env,spill,Qreg1
     
     def solution_selected(change):
         if pareto_front.selected == None:
