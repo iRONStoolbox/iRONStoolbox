@@ -42,4 +42,7 @@ To facilitate the visualization of model inputs and outputs, `iRONS` uses integr
 # Outlook
 We plan to keep updating `iRONS` with new functions and Notebooks, and are open to contributions and improvements from others. We hope `iRONS` will prove a useful tool for water practitioners and researchers, as well as teachers and students in hydrology and water resource management. More broadly, we hope `iRONS` will inspire others to develop open-source software and literate programming environments, including interactive visualisations, and use them as possible mechanisms to accelerate the uptake of new methods and tools.
 
+# Acknowledgments 
+This work is funded by the Engineering and Physical Sciences Research Council (EPSRC), grant EP/R007330/1.
+
 # References
