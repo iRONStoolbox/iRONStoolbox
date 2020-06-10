@@ -57,9 +57,8 @@ If you use JupyterLab instead of Jupyter Notebooks you will need to install the 
 jupyter labextension install @jupyter-widgets/jupyterlab-manager # install the plotly extension
 jupyter labextension install bqplot@0.4.6 # install the bqplot extension
 jupyter labextension install @jupyterlab/plotly-extension # install the Jupyter widgets extension
-
-## Testing
 ```
+## Testing
 To run the test functions locally you first need to install `pytest`:
 ```
 pip install -U pytest
