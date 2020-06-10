@@ -42,7 +42,7 @@ pip install -r requirements.txt
 ```
 🚨 Note this installation option includes both the Toolbox and Notebooks as well the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
 
-To build the package so can use the iRONS functions without the need to modify the path in a Notebooks using sys:
+To build the package so you can use the iRONS functions without the need to modify the path in a Notebooks using sys:
 ```
 pip install irons
 ```
