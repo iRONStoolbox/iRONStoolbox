@@ -12,7 +12,7 @@ The iRONS package provides a set of Python functions implementing typical reserv
 
 **The notebooks** *(you can find them in the Notebooks folder)*
 
-iRONs is based on the use of interactive Jupyter Notebooks (http://jupyter.org/). Jupyter Notebooks is a literate programming environment that combines executable code, rich media, computational output and explanatory text in a single document. 
+iRONS is based on the use of interactive Jupyter Notebooks (http://jupyter.org/). Jupyter Notebooks is a literate programming environment that combines executable code, rich media, computational output and explanatory text in a single document. 
 The notebooks included in iRONS are divided in two sections:
 
 **A.	Knowledge transfer:** A set of simple examples to demonstrate the value of simulation and optimisation tools for water resources management – i.e. why one should use these tools in the first place. 
