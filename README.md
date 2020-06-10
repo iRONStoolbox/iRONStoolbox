@@ -63,7 +63,7 @@ To run the test functions locally you first need to install `pytest`:
 ```
 pip install -U pytest
 ```
-and then, from the iRONS folder, invoke `pytest` through the Python interpreter from the command line:
+and then, from the local iRONS folder, invoke `pytest` through the Python interpreter from the command line:
 ```
 python -m pytest
 ```
