@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jan  8 14:29:50 2020
-
 This is a function to transform daily data into weekly
 
-@author: Andres Peñuela
+This module is part of the iRONS toolbox by A. Peñuela and F. Pianosi and at 
+Bristol University (2020).
+
+Licence: MIT
 """
 import numpy as np
 import pandas as pd

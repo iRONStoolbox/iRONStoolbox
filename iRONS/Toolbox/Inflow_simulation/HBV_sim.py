@@ -2,9 +2,13 @@
 """
 Created on Tue Apr 24 15:56:06 2018
 
-@author: Andres Peñuela (University of Bristol)
-     This function is a Python version of the script included in the SAFE Toolbox 
-     by F. Pianosi, F. Sarrazin and T. Wagener at Bristol University (2015).
+This module is part of the iRONS toolbox by A. Peñuela and F. Pianosi and at 
+Bristol University (2020).
+
+This function is a Python version of the script included in the SAFE Toolbox 
+by F. Pianosi, F. Sarrazin and T. Wagener at Bristol University (2015).
+
+Licence: MIT
 """
 
 import numpy as np

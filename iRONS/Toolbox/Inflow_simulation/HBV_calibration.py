@@ -2,7 +2,10 @@
 """
 Created on Fri Aug  9 10:45:43 2019
 
-@author: ap18525
+This module is part of the iRONS toolbox by A. Peñuela and F. Pianosi and at 
+Bristol University (2020).
+
+Licence: MIT
 """
 import numpy as np
 from platypus import NSGAII, Problem, Real

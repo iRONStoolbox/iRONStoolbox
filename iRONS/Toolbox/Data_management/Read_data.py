@@ -1,14 +1,21 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Dec 17 12:59:29 2019
+These modules extract the data from either a CSV (comma separated variables) or 
+a NetCDF file.
 
-@author: ap18525
+This module is part of the iRONS toolbox by A. Peñuela and F. Pianosi and at 
+Bristol University (2020).
+
+Licence: MIT
 """
 import pandas as pd
 import numpy as np
 from netCDF4 import Dataset
 
 def read_csv_data(folder_path,file_name,column_name = None):
+    """
+    This module extracts the data from a CSV (comma separated variables) file
+    """
 
     data = pd.read_csv(folder_path+"/"+file_name)
     ### Dates ###
@@ -27,6 +34,11 @@ def read_csv_data(folder_path,file_name,column_name = None):
     return dates,outputs
 
 def read_netcdf_data(folder_path,file_name,variable_name):
+
+    """
+    This module extracts the data from a NetCDF file
+    """
+    
     data = Dataset(folder_path+"//"+file_name, "r")
     ### Dates ###
     # the next day at 00:00 we need to substract one day (-24h) 

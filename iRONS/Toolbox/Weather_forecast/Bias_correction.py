@@ -4,7 +4,10 @@ This module contains functions to bias correct forecast data
 The functions included are:
     linear_scaling
 
-@author: ap18525
+This module is part of the iRONS toolbox by A. Peñuela and F. Pianosi and at 
+Bristol University (2020).
+
+Licence: MIT
 """
 
 import numpy as np

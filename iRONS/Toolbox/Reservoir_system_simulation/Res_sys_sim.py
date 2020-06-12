@@ -6,7 +6,17 @@ This makes the regulated flow data readable by the mass balance function
 (Mass_bal_func). Then, Mass_bal_func links all the key variables that represent 
 the reservoir dynamics (inflow, storage and outflows).
 
-@author: Andres Peñuela
+To speed-up the computation this module applies the just-in-time compiler Numba 
+(http://numba.pydata.org/; (Lam & Seibert, 2015; Marowka, 2018).
+
+This module is part of the iRONS toolbox by A. Peñuela and F. Pianosi and at 
+Bristol University (2020).
+
+Licence: MIT
+
+References:
+Lam, P., Siu Kwan, & Seibert, S. (2015). Numba: A llvm-based python jit 
+compiler. doi:10.1145/2833157.2833162
 """
 import numpy as np
 from numba import njit
