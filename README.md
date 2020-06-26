@@ -6,7 +6,7 @@
 
 iRONS (interactive Reservoir Operation Notebooks and Software) is a python package that enables the simulation, forecasting and optimisation of reservoir systems. The package includes a set of interactive notebooks that demonstrate key functionalities through practical examples, and that can be run in the Jupyter environment either locally or remotely via a web browser. 
 
-**The core functions** *(you can find them in the Toolbox folder)*
+**The core functions** *(you can find them in the Functions folder)*
 
 The iRONS package provides a set of Python functions implementing typical reservoir modelling tasks, such as: estimating inflows to a reservoir, simulating operator decisions, closing the reservoir mass balance equation – in the context of both short-term forecasting and long-term predictions.
 
@@ -40,7 +40,7 @@ git clone https://github.com/AndresPenuela/iRONS.git
 cd iRONS
 pip install -r requirements.txt
 ```
-🚨 Note this installation option includes both the Toolbox and Notebooks as well the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
+🚨 Note this installation option includes both the Functions and Notebooks as well the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
 
 To build the package so you can use the iRONS functions without the need to modify the path in a Notebooks using sys:
 ```
