@@ -12,7 +12,7 @@ from bqplot.traits import *
 import sys
 
 # Submodules
-sys.path.append('../../Toolbox')
+sys.path.append('../../Functions')
 from Reservoir_operating_policy.Operating_policy_functions import four_points_policy
 from Reservoir_system_simulation.Res_sys_sim import Res_sys_sim
 
