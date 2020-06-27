@@ -4,13 +4,15 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - numpy=1.16.5
-  - matplotlib=3.1.1
-  - ipywidgets=7.2.1
-  - bqplot=0.11.6
-  - platypus-opt=1.0.3
-  - netcdf4=1.4.2
-  - numba=0.47.0
-  - plotly=4.4.1
-  - cdsapi
-  - pandas==0.25.1
+  - netcdf4=1.5
+  - pip
+  - pip:
+    - numpy=1.16.5
+    - matplotlib=3.1.1
+    - ipywidgets=7.2.1
+    - bqplot=0.11.6
+    - platypus-opt=1.0.3
+    - numba=0.47.0
+    - plotly=4.4.1
+    - cdsapi=0.2.6
+    - pandas==0.25.1
