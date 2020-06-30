@@ -27,7 +27,7 @@ Click on the button below to open iRONS on MyBinder.org so you can run, modify a
 
 In the section **A - Knowledge transfer** you can start with the Notebook **iRONS/Notebooks/A - Knowledge transfer/1.a. Simple example of how to use Jupyter Notebooks.ipynb**
 
-<img src="iRONS/util/images/Executing Simple Example.gif" width = "600px">
+<img src="iRONS/util/images/Executing Simple Example.gif" width = "800px">
 
 In the section **B - Implementation** you can start with the Notebook **iRONS/Notebooks/B - Implementation/1.b. Bias correction of weather forecasts.ipynb**
 
@@ -45,7 +45,7 @@ Open the Anaconda Prompt from the Windows menu (or a OS Terminal in Mac and Linu
 ```
 conda update conda
 ```
-<right> <img src="iRONS/util/images/Executing Anaconda Prompt and Conda.gif" width = "600px"><right>
+<right> <img src="iRONS/util/images/Executing Anaconda Prompt and Conda.gif" width = "800px"><right>
 ```
 To download iRONS on your computer run:
 ```
