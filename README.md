@@ -33,7 +33,7 @@ In the section **B - Implementation** you can start with the Notebook **iRONS/No
 
 🚨 Note in the section **B - Implementation** the Notebook **iRONS/Notebooks/B - Implementation/1.a. Downloading ensemble weather forecasts.ipynb** can only be run locally after installing iRONS.
 
-## Installing iRONS loacally
+## Installing iRONS locally
 
 Our recommendation is that you use the Anaconda distribution to install both Python and the Jupyter Notebook locally. 
 
@@ -46,12 +46,12 @@ Open the Anaconda Prompt from the Windows menu (or a OS Terminal in Mac and Linu
 conda update conda
 ```
 <right> <img src="iRONS/util/images/Executing Anaconda Prompt and Conda.gif" width = "800px"><right>
-```
-To download iRONS on your computer run:
+
+To download iRONS you can either click on Clone button that you will find in the iRONS Github repository or you can run this on the Anaconda Prompt:
 ```
 git clone https://github.com/AndresPenuela/iRONS.git
 ```
-Once the installation is finished, get into the folder where you have download iRONS, i.e. local iRONS folder:
+Once the download is finished, in the Anaconda Prompt get into the local iRONS folder:
 ```
 cd iRONS
 ```

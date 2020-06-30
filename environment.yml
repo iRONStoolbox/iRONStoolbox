@@ -4,6 +4,7 @@ channels:
   - conda-forge
   - defaults
 dependencies:  
+  - numba==0.47.0
   - pip
   - pip:
     - irons
