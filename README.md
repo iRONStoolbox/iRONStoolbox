@@ -27,43 +27,66 @@ Click on the button below to open iRONS on MyBinder.org so you can run, modify a
 
 In the section **A - Knowledge transfer** you can start with the Notebook **iRONS/Notebooks/A - Knowledge transfer/1.a. Simple example of how to use Jupyter Notebooks.ipynb**
 
+<img src="iRONS/util/images/Executing Simple Example.gif" width = "600px">
+
 In the section **B - Implementation** you can start with the Notebook **iRONS/Notebooks/B - Implementation/1.b. Bias correction of weather forecasts.ipynb**
 
 🚨 Note in the section **B - Implementation** the Notebook **iRONS/Notebooks/B - Implementation/1.a. Downloading ensemble weather forecasts.ipynb** can only be run locally after installing iRONS.
 
-## Installing
+## Installing iRONS loacally
 
-To install and run iRONS locally:
+Our recommendation is that you use the Anaconda distribution to install both Python and the Jupyter Notebook locally. 
 
+Use this link https://www.anaconda.com/download/ to install the Anaconda distribution. It includes a number of useful packages and is much easier than managing packages individually. Choose the Python 3.6 version or above depending on your operating system.
+
+### How to download iRONS and run it locally
+
+Open the Anaconda Prompt from the Windows menu (or a OS Terminal in Mac and Linux), and then run:
+```
+conda update conda
+```
+<right> <img src="iRONS/util/images/Executing Anaconda Prompt and Conda.gif" width = "600px"><right>
+```
+To download iRONS on your computer run:
 ```
 git clone https://github.com/AndresPenuela/iRONS.git
+```
+Once the installation is finished, get into the folder where you have download iRONS, i.e. local iRONS folder:
+```
 cd iRONS
-pip install -r requirements.txt
 ```
-🚨 Note this installation option includes both the Functions and Notebooks as well the example forecast data (ECMWF forecasts netcdf files) used by the Notebooks in the section **B - Implementation**.
-
-To build the package so you can use the iRONS functions without the need to modify the path in a Notebooks using sys:
+Now create an environment and install all dependencies (necessary libraries to run iRONS):
 ```
-pip install irons
+conda env create -f environment.yml --prefix irons_env
 ```
-If you get an error message try with:
+Then you need activate the environment:
 ```
-pip install --ignore-installed irons
+conda activate ./irons_env
 ```
-🚨 Note this installation option does NOT include the Notebooks.
-
-If you use JupyterLab instead of Jupyter Notebooks you will need to install the following extensions:
+Now you need to run Jupyter Notebooks to use iRONS locally:
+```
+jupyter notebook
+```
+If you need to remove the environment beacuse you are not going to use iRONS locally anymore, first you need to deactivate the environment:
+```
+conda deactivate ./irons_env
+```
+And then remove the environment:
+```
+conda remove --all --prefix "./irons_env"
+```
+🚨 If you use JupyterLab instead of Jupyter Notebook you will need to install the following extensions:
 ```
 jupyter labextension install @jupyter-widgets/jupyterlab-manager # install the plotly extension
 jupyter labextension install bqplot@0.4.6 # install the bqplot extension
 jupyter labextension install @jupyterlab/plotly-extension # install the Jupyter widgets extension
 ```
 ## Testing
-To run the test functions locally you first need to install `pytest`:
+To run the test functions locally you first need to install `pytest`. Open the Anaconda Prompt and then run:
 ```
 pip install -U pytest
 ```
-and then, from the local iRONS folder, invoke `pytest` through the Python interpreter from the command line:
+now, from the local iRONS folder, invoke `pytest` through the Python interpreter from the command line:
 ```
 python -m pytest
 ```

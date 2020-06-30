@@ -111,6 +111,8 @@ ENV/
 env.bak/
 venv.bak/
 irons_env/
+my_env*/
+my_venv*/
 
 
 # Spyder project settings

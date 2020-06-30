@@ -14,3 +14,6 @@ dependencies:
   - plotly==4.4.1
   - cdsapi
   - pandas==0.25.1
+  - pip
+  - pip:
+    - irons

@@ -12,9 +12,12 @@ from numpy.testing import assert_array_equal
 if __name__ == '__main__':
     import sys
     sys.path.append("..") # Adds higher directory to python modules path.
-
-### Function to test ###
-from Data_management.day2week2month import day2week
+    ### Function to test ###
+    from Data_management.day2week2month import day2week
+else:
+    ### Function to test ###
+    from irons.Functions.Data_management.day2week2month import day2week
+    
 # Test inputs
 N = 3 # 3 weeks
 dates = pd.date_range(start = '2020-06-09', end = '2020-07-09', freq = 'D')

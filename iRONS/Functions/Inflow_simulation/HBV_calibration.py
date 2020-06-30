@@ -15,7 +15,7 @@ if __name__ == '__main__': # If you are running this function (the source file) 
     sys.path.append('../../Functions') # Adds higher directory to python modules path.
 
 ## Tools from the iRONs toolbox
-from Inflow_simulation.HBV_sim import HBV_sim
+from irons.Functions.Inflow_simulation.HBV_sim import HBV_sim
 
 def HBV_calibration(P,E,Case,area, Q_obs, objective, iterations,population_size = 1):
 

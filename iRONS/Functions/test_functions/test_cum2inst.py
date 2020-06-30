@@ -11,9 +11,11 @@ from numpy.testing import assert_array_almost_equal
 if __name__ == '__main__':
     import sys
     sys.path.append("..") # Adds higher directory to python modules path.
+    from Data_management.cum2inst import cum2inst
+else:
+    ### Function to test ###
+    from irons.Functions.Data_management.cum2inst import cum2inst
 
-### Function to test ###
-from Data_management.cum2inst import cum2inst
 # Test inputs
 cum_rain = np.array([[10], [20], [20]]) # Cumulative rain
 # Run the function to test

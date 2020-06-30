@@ -9,12 +9,12 @@ import numpy as np
 from bqplot import pyplot as plt
 from bqplot import *
 from bqplot.traits import *
-import sys
+#import sys
 
 # Submodules
-sys.path.append('../../Functions')
-from Reservoir_operating_policy.Operating_policy_functions import four_points_policy
-from Reservoir_system_simulation.Res_sys_sim import Res_sys_sim
+#sys.path.append('../../Functions')
+from irons.Functions.Reservoir_operating_policy.Operating_policy_functions import four_points_policy
+from irons.Functions.Reservoir_system_simulation.Res_sys_sim import Res_sys_sim
 
 def Interactive_policy_manual(N, 
                               I_hist, e_hist, 

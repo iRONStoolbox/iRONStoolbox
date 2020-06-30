@@ -1,14 +1,14 @@
 [
-  "iRONS/Toolbox/test_functions/test_Bias_correction.py::test_Rain_fore_corr",
-  "iRONS/Toolbox/test_functions/test_Bias_correction.py::test_Temp_fore_corr",
-  "iRONS/Toolbox/test_functions/test_HBV_sim.py::test_Q",
-  "iRONS/Toolbox/test_functions/test_HBV_sim.py::test_STATES",
-  "iRONS/Toolbox/test_functions/test_HBV_sim.py::test_FLUXES",
-  "iRONS/Toolbox/test_functions/test_Res_sys_sim.py::test_Qreg_rel",
-  "iRONS/Toolbox/test_functions/test_Res_sys_sim.py::test_s",
-  "iRONS/Toolbox/test_functions/test_Res_sys_sim.py::test_spill",
-  "iRONS/Toolbox/test_functions/test_cum2inst.py::test_cum2inst",
-  "iRONS/Toolbox/test_functions/test_day2week2month.py::test_dates_week",
-  "iRONS/Toolbox/test_functions/test_day2week2month.py::test_data_week",
-  "iRONS/Toolbox/test_functions/test_day2week2month.py::test_data_cum_week"
+  "iRONS/Functions/test_functions/test_Bias_correction.py::test_Rain_fore_corr",
+  "iRONS/Functions/test_functions/test_Bias_correction.py::test_Temp_fore_corr",
+  "iRONS/Functions/test_functions/test_HBV_sim.py::test_Q",
+  "iRONS/Functions/test_functions/test_HBV_sim.py::test_STATES",
+  "iRONS/Functions/test_functions/test_HBV_sim.py::test_FLUXES",
+  "iRONS/Functions/test_functions/test_Res_sys_sim.py::test_Qreg_rel",
+  "iRONS/Functions/test_functions/test_Res_sys_sim.py::test_s",
+  "iRONS/Functions/test_functions/test_Res_sys_sim.py::test_spill",
+  "iRONS/Functions/test_functions/test_cum2inst.py::test_cum2inst",
+  "iRONS/Functions/test_functions/test_day2week2month.py::test_dates_week",
+  "iRONS/Functions/test_functions/test_day2week2month.py::test_data_week",
+  "iRONS/Functions/test_functions/test_day2week2month.py::test_data_cum_week"
 ]

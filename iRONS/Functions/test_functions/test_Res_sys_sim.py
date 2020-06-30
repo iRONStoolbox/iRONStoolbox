@@ -11,10 +11,12 @@ from numpy.testing import assert_array_equal
 if __name__ == '__main__':
     import sys
     sys.path.append("..") # Adds higher directory to python modules path.
-
-### Function to test ###
-from Reservoir_system_simulation.Res_sys_sim import Res_sys_sim
-
+    ### Function to test ###
+    from Reservoir_system_simulation.Res_sys_sim import Res_sys_sim
+else:
+    ### Function to test ###
+    from irons.Functions.Reservoir_system_simulation.Res_sys_sim import Res_sys_sim
+    
 ### Inputs ###
 N = 10
 I = np.ones(N)*10

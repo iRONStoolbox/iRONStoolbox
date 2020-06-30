@@ -11,11 +11,13 @@ from numpy.testing import assert_array_equal
 if __name__ == '__main__':
     import sys
     sys.path.append("..") # Adds higher directory to python modules path.
-
-from Data_management.Read_data import read_csv_data
-
-### Function to test ###
-from Weather_forecast.Bias_correction import linear_scaling
+    from Data_management.Read_data import read_csv_data
+    from .Weather_forecast.Bias_correction import linear_scaling
+    
+else:
+    from irons.Functions.Data_management.Read_data import read_csv_data
+    ### Function to test ###
+    from irons.Functions.Weather_forecast.Bias_correction import linear_scaling
 
 ### Observed data ###
 # File path

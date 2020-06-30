@@ -11,9 +11,12 @@ from numpy.testing import assert_array_almost_equal
 if __name__ == '__main__':
     import sys
     sys.path.append("..") # Adds higher directory to python modules path.
-
-### Function to test ###
-from Inflow_simulation.HBV_sim import HBV_sim
+    ### Function to test ###
+    from Inflow_simulation.HBV_sim import HBV_sim
+else:
+    ### Function to test ###
+    from irons.Functions.Inflow_simulation.HBV_sim import HBV_sim
+    
 # Test inptus
 P = np.array([10, 20, 15])
 ept = np.array([2, 5, 6])   
