@@ -144,9 +144,6 @@ iRONS_questionnaire_results.xlsx
 pyproject.toml
 poetry.lock
 
-# Travis
-.travis.yml
-
 # Various
 aznbsetup.sh
 
