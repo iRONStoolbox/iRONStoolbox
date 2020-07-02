@@ -4,7 +4,6 @@ python:
 # command to install dependencies
 install:
   - pip install irons
-  - pip install numba==0.49.1
 # command to run tests
 script:
   - pytest
