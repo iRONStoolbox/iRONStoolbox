@@ -3,7 +3,7 @@ python:
   - "3.6"      # current default Python on Travis CI
 # command to install dependencies
 install:
-  - conda install numba==0.47.0
+  - pip install numba==0.47.0
   - pip install irons
 # command to run tests
 script:
