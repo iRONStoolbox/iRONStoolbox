@@ -29,7 +29,7 @@ setup(
         "bqplot==0.11.6",
 		"platypus-opt==1.0.3",
 		"netcdf4==1.4.2",
-		"numba==0.47.0",
+		"numba==0.49.1",
 		"plotly==4.4.1",
 		"cdsapi",
 		"pandas==0.25.1"
