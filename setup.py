@@ -13,7 +13,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='iRONS',  # Required
-    version='0.2.3',  # Required
+    version='0.2.4',  # Required
     description='A Python package that enables the simulation, forecasting and optimisation of reservoir systems',  # Optional
     long_description=long_description,  # Optional
     long_description_content_type='text/markdown',  # Optional (see note above)
@@ -21,7 +21,7 @@ setup(
     author='Andres Peñuela, Francesca Pianosi',  # Optional
     author_email='andres.penuela-fernandez@bristol.ac.uk',  # Optional
     packages=find_packages(exclude=['workflows', 'data']),  # Required
-    python_requires='>=3.6',
+    python_requires='>=3.7',
     install_requires=[
         "numpy==1.16.5",
         "matplotlib==3.1.1",
