@@ -55,11 +55,11 @@ def test_Rain_fore_corr():
     # Expected output
     Rain_fore_corr_expect = np.ones([len(dates_fore)])*2.1405371204414 + [0]
     # Test 
-    assert_array_almost_equal(Rain_fore_corr,Rain_fore_corr_expect)
+    assert_array_almost_equal(Rain_fore_corr,Rain_fore_corr_expect, decimal=1)
     
 ### Testing functions ###
 def test_Temp_fore_corr():
     # Expected output
     Temp_fore_corr_expect = np.ones([len(dates_fore)])*-0.670478360150061
     # Test 
-    assert_array_almost_equal(Temp_fore_corr,Temp_fore_corr_expect)
+    assert_array_almost_equal(Temp_fore_corr,Temp_fore_corr_expect, decimal=1)
