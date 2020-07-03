@@ -6,7 +6,7 @@ Bristol University (2020).
 """
 import pandas as pd
 import numpy as np
-from numpy.testing import assert_allclose
+from numpy.testing import assert_allclose # Raises an error if two arrays are not equal up to desired tolerance.
 
 if __name__ == '__main__':
     import sys
@@ -55,11 +55,11 @@ def test_Rain_fore_corr():
     # Expected output
     Rain_fore_corr_expect = np.ones([len(dates_fore)])*2.1405371204414 + [0]
     # Test 
-    assert_allclose(Rain_fore_corr,Rain_fore_corr_expect, rtol=0.01)
+    assert_allclose(Rain_fore_corr,Rain_fore_corr_expect, rtol=0.01) # rtol=0.01 is a 1% of relative tolerance, i.e. 0.01 * Rain_fore_corr_expect
     
 ### Testing functions ###
 def test_Temp_fore_corr():
     # Expected output
     Temp_fore_corr_expect = np.ones([len(dates_fore)])*-0.670478360150061
     # Test 
-    assert_allclose(Temp_fore_corr,Temp_fore_corr_expect, rtol=0.01)
+    assert_allclose(Temp_fore_corr,Temp_fore_corr_expect, atol=0.1) # atol=0.1 is a 0.1 of absolute tolerance, i.e. 0.1 +/- Temp_fore_corr_expect
