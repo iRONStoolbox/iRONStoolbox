@@ -82,7 +82,11 @@ jupyter labextension install bqplot@0.4.6 # install the bqplot extension
 jupyter labextension install @jupyterlab/plotly-extension # install the Jupyter widgets extension
 ```
 ## Testing
-To run the test functions locally you first need to install `pytest`. Open the Anaconda Prompt and then run:
+
+The easiest way to test if the current version of iRONS is working is to check that the icon below shows "Build Passing"
+[![Build status](https://travis-ci.org/AndresPenuela/iRONS.svg?branch=master)](https://travis-ci.org/AndresPenuela/iRONS)
+
+If you have downloaded iRONS and you are using it locally you can run the test functions. First you need to install `pytest`. For that purpose open the Anaconda Prompt and then run:
 ```
 pip install -U pytest
 ```
