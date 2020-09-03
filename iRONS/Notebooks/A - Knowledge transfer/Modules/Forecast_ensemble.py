@@ -14,6 +14,14 @@ def Ensemble_member_sel(N,members_num,I_for,d_for):
     I_sel = np.array([[0]*N])
     d_sel = np.array([[0]*N])
     
+    min_inflow_id = np.where(np.sum(I_for,axis=1)==np.min(np.sum(I_for,axis=1)))[0][0]
+    max_demand_id = np.where(np.sum(d_for,axis=1)==np.max(np.sum(d_for,axis=1)))[0][0]
+    
+    for t in range(N):
+        I_sel[0,t] = I_for[min_inflow_id][t]
+    for t in range(N):
+        d_sel[0,t] = d_for[max_demand_id][t]
+    
     def on_element_click_event_1a(self, target):
         click_elem_id = list(target.values())[1]['index']
         line_opacities = [0.4]*members_num
@@ -61,19 +69,28 @@ def Ensemble_member_sel(N,members_num,I_for,d_for):
     y_ax_1 = Axis(label='ML/week', scale=y_sc_1, orientation='vertical',tick_style={'fill': 'black', 'font-size': 16})
     
     def_tt = Tooltip(fields=['index'], formats=['.0f'], labels=['Forecast member'])
-    inflow_forecast = plt.plot(x=np.arange(1,N+1),y=I_for,colors=['deepskyblue'],stroke_width = 4,opacities = [0.4]*members_num,
+
+    inflow_opacities = [0.4]*members_num
+    inflow_opacities[min_inflow_id] = 1
+    inflow_colors = ['deepskyblue']*members_num
+    inflow_colors[min_inflow_id] = 'darkblue'
+    inflow_forecast = plt.plot(x=np.arange(1,N+1),y=I_for,colors=inflow_colors,stroke_width = 4,opacities = inflow_opacities,
                                tooltip=def_tt, display_legend=False,scales={'x': x_sc_1, 'y': y_sc_1})
     inflow_forecast.on_element_click(on_element_click_event_1a)
     inflow_forecast.on_hover(on_hover_1a)
-    fig_1a = plt.Figure(marks = [inflow_forecast],title = 'Inflow forecast  - Choose a forecast member:',
+    fig_1a = plt.Figure(marks = [inflow_forecast],title = 'Inflow forecast - Chosen forecast member = '+str(min_inflow_id),
                         title_style={'fill': 'blue', 'font-size': '20px'},axes=[x_ax_1, y_ax_1],
                         layout={'min_width': '1000px', 'max_height': '300px'},scales={'x': x_sc_1, 'y': y_sc_1})
-    
-    demand_forecast = plt.plot(np.arange(1,N+1),d_for,colors=['lightgreen'],stroke_width = 4,opacities = [0.4]*members_num,
+
+    demand_opacities = [0.4]*members_num
+    demand_opacities[max_demand_id] = 1
+    demand_colors = ['lightgreen']*members_num
+    demand_colors[max_demand_id] = 'darkolivegreen'
+    demand_forecast = plt.plot(np.arange(1,N+1),d_for,colors=demand_colors, stroke_width = 4,opacities = demand_opacities,
                                tooltip=def_tt,scales={'x': x_sc_1, 'y': y_sc_1})
     demand_forecast.on_element_click(on_element_click_event_1b)
     demand_forecast.on_hover(on_hover_1b)
-    fig_1b = plt.Figure(marks = [demand_forecast],title = 'Demand forecast - Choose a forecast member:', 
+    fig_1b = plt.Figure(marks = [demand_forecast],title = 'Demand forecast - Chosen forecast member = '+str(max_demand_id), 
                         title_style={'fill': 'dimgray', 'font-size': '20px'},axes=[x_ax_1, y_ax_1],
                         layout={'min_width': '1000px', 'max_height': '300px'},scales={'x': x_sc_1, 'y': y_sc_1})
     

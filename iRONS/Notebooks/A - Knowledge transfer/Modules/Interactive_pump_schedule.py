@@ -19,7 +19,7 @@ def Interactive_Pareto_front_det(N,I_sel,E,d_sel,S0,Smax,Smin,env_min,c,solution
     def update_operation_2(i):
         u            = solutions_optim_relea_2[i]
         S,env,w,r    = syst_sim(N,I_sel+u,E,d_sel,S0,Smax,env_min)
-        fig_2b.title = 'Supply deficit (max(0,d-Qreg_rel)) - Total = '+str((np.sum((np.maximum(d_sel-r,[0]*N)))).astype('int'))+' ML'
+        fig_2b.title = 'Total supply deficit = '+str((np.sum((np.maximum(d_sel-r,[0]*N)))).astype('int'))+' ML'
         fig_2d.title = 'Natural + pumped inflows - Total pumped vol = '+str((np.sum(np.array(u))).astype('int'))+' ML'
         return       S,u,r,i
     
@@ -60,6 +60,7 @@ def Interactive_Pareto_front_det(N,I_sel,E,d_sel,S0,Smax,Smin,env_min,c,solution
                           stroke_width = 0.5, 
                           marker = 'circle',
                           marker_size = 15,
+                          labels = ['max(0,d-Qreg_rel)'],
                           fill = 'bottom',
                           fill_opacities = [0.5],
                           fill_colors = ['red'],
@@ -175,7 +176,7 @@ def Interactive_Pareto_front_act(N,I_act,E_act,d_act,S0,Smax,Smin,env_min,c,solu
     def update_operation_act_4(i):
         u            = solutions_optim_relea_2[i]
         S,env,w,r    = syst_sim(N,I_act+u,E_act,d_act,S0,Smax,env_min)
-        fig_4b.title = 'Supply deficit (max(0,d-Qreg_rel)) - Total = '+str((np.sum((np.maximum(d_act-r,[0]*N)))).astype('int'))+' ML'
+        fig_4b.title = 'Total supply deficit = '+str((np.sum((np.maximum(d_act-r,[0]*N)))).astype('int'))+' ML'
         fig_4d.title = 'Natural + pumped inflows - Total pumped vol = '+str((np.sum(np.array(u))).astype('int'))+' ML'
         return       S,u,r,i
     
@@ -246,6 +247,7 @@ def Interactive_Pareto_front_act(N,I_act,E_act,d_act,S0,Smax,Smin,env_min,c,solu
                             stroke_width = 0.5, 
                             marker = 'circle',
                             marker_size = 15,
+                            labels = ['max(0,d-Qreg_rel)'],
                             fill = 'bottom',
                             fill_opacities = [0.5],
                             fill_colors = ['red'],
@@ -372,7 +374,7 @@ def Interactive_Pareto_front(N,I_for,E_for,d_for,S0,Smax,Smin,env_min,c,solution
     # Interactive Pareto front
     def update_operation(i):
         S,env,w,r    = syst_sim(N,I_for+solutions_optim_relea[i],E_for,d_for,S0,Smax,env_min)
-        fig_wd.title = 'Supply deficit (max(0,d-Qreg_rel)) - Average deficit = '+str((sd_mean[i]).astype('int'))+' ± '+str((sd_std[i]).astype('int'))+' ML'
+        fig_wd.title = 'Total supply deficit = '+str((sd_mean[i]).astype('int'))+' ± '+str((sd_std[i]).astype('int'))+' ML'
         fig_in.title = 'Natural + pumped inflows - Total pumped vol = {:.0f} ML'.format(results2_optim_relea[i]/c)
         return       S,solutions_optim_relea[i],r,results1_optim_relea[i],results2_optim_relea[i],i
     
@@ -483,6 +485,7 @@ def Interactive_Pareto_front(N,I_for,E_for,d_for,S0,Smax,Smin,env_min,c,solution
                         opacities = [1]*members_num,
                         marker = 'circle',
                         marker_size = 10,
+                        labels = ['max(0,d-Qreg_rel)'],
                         fill = 'bottom',
                         fill_opacities = [1/members_num]*members_num,
                         fill_colors = ['red']*members_num)

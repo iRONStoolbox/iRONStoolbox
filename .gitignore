@@ -136,9 +136,9 @@ dmypy.json
 # Powerpoint files
 ppt_files/
 
-# Questionnaire
-iRONS_questionnaire.docx
-iRONS_questionnaire_results.xlsx
+# Word and Excel files
+*.docx
+*.xlsx
 
 # Poetry
 pyproject.toml
