@@ -4,7 +4,7 @@ This is a function to test the Bias_correction function
 This module is part of the iRONS toolbox by A. Peñuela and F. Pianosi and at 
 Bristol University (2020).
 """
-
+import pandas as pd
 import numpy as np
 from numpy.testing import assert_array_equal
 
@@ -19,6 +19,7 @@ else:
     
 ### Inputs ###
 N = 10
+dates = pd.date_range('2018-01-01', periods=N, freq='W')
 I = np.ones(N)*10
 e = np.ones(N)*1
 s_0 = 20
@@ -31,7 +32,7 @@ Qreg = {'releases' : [],
         'inflows'  : [],
         'rel_inf'  : []}
     
-env, spill, Qreg_rel, Qreg_inf, s, E = Res_sys_sim(I, e, s_0, s_min, s_max, env_min, d, Qreg)
+env, spill, Qreg_rel, Qreg_inf, s, E = Res_sys_sim(dates, I, e, s_0, s_min, s_max, env_min, d, Qreg)
 
 
 ### Testing functions ###
@@ -52,7 +53,7 @@ def test_s():
 # Spillage   
 def test_spill():
     I = np.ones(N)*50
-    env, spill, Qreg_rel, Qreg_inf, s, E = Res_sys_sim(I, e, s_0, s_min, s_max, env_min, d, Qreg)
+    env, spill, Qreg_rel, Qreg_inf, s, E = Res_sys_sim(dates, I, e, s_0, s_min, s_max, env_min, d, Qreg)
     # Expected output
     spill_expect = np.array([0.,0.,34.,38.,38.,38.,38.,38.,38.,38.]).transpose()
     # Test 

@@ -25,10 +25,10 @@ from numba import njit
 @njit(parallel = False) # Numba decorator to speed-up the function below
 def Mass_bal_func(I, e, 
                   s_0, s_min, s_max, 
-                  env_min, 
+                  env_min, d,
                   Qreg_inf, Qreg_rel, 
-                  s_frac, 
-                  Policy_inf, Policy_rel):
+                  s_frac,
+                  policy_inf, policy_rel):
     """
     The mathematical model (Mass_bal_func) of the reservoir essentially consists 
     of a water balance equation, where the storage (s) at a future time step 
@@ -72,7 +72,7 @@ def Mass_bal_func(I, e,
                   [t,t+1], in Vol/time (for example: ML/week). This is a completely 
                   free variable that the reservoir operator will need to specify
                   
-    Policy related inputs: s_frac, Policy_inf, Policy_rel
+    Policy related inputs: s_frac, policy_inf, policy_rel, rules
     """
     
     T = I.shape[0]
@@ -94,11 +94,23 @@ def Mass_bal_func(I, e,
     
     for t in range(T): # Loop for each time-step
         
-        if not np.isnan(Policy_inf[0]):
-            Qreg_inf[t] = np.interp(s[t]/s_max, s_frac, Policy_inf)
+#        if np.ndim(policy_inf) > 1:
+#            ### Rule curve ###
+#            if not np.isnan(policy_inf[0]):
+#                Qreg_inf[t] = np.interp(s[t]/s_max, s_frac, policy_inf[date[t].dayofyear])
+#        else:
+        ### Policy function ###
+        if not np.isnan(policy_inf[0]):
+            Qreg_inf[t] = np.interp(s[t]/s_max, s_frac, policy_inf)
         
-        if not np.isnan(Policy_rel[0]):
-            Qreg_rel[t] = np.interp(s[t]/s_max, s_frac, Policy_rel) 
+#        if np.ndim(policy_rel) > 1:
+#            ### Rule curve ###
+#            if not np.isnan(policy_rel[0]):
+#                Qreg_rel[t] = np.interp(s[t]/s_max, s_frac, policy_rel[date[t].dayofyear])       
+#        else:
+        ### Policy function ###
+        if not np.isnan(policy_rel[0]):
+            Qreg_rel[t] = np.interp(s[t]/s_max, s_frac, policy_rel)*d[t]
         
         ### Evaporation volume ### 
         # (E) = evaporation depth * water surface area (A)
@@ -132,7 +144,7 @@ def Mass_bal_func(I, e,
     return env, spill, Qreg_rel, Qreg_inf, s, E
 
 
-def Res_sys_sim(I, e, s_0, s_min, s_max, env_min, d, Qreg):
+def Res_sys_sim(date, I, e, s_0, s_min, s_max, env_min, d, Qreg):
     """ 
     The function extracts both regulated inflows (Qreg_inf) and regulated 
     releases (Qreg_rel) from Qreg. Both, Qreg_inf and Qreg_rel are processed 
@@ -154,58 +166,83 @@ def Res_sys_sim(I, e, s_0, s_min, s_max, env_min, d, Qreg):
     env_min = env_min + np.zeros(T)
     # Required demand
     d = d + np.zeros(T)
-
-    # Regulated releases + inflows
-    if Qreg['rel_inf'] == []:
-        Qreg_rel = np.zeros(T)
-        Qreg_inf = np.zeros(T)
-    elif isinstance(Qreg['rel_inf'],(dict)):
-        exec('from irons.Functions.'+Qreg['rel_inf']['file_name']+' import '+Qreg['rel_inf']['function'])
-        Qreg_rel = np.zeros(T)
-        Qreg_inf = np.zeros(T)
+    # Regulated flows
+    Qreg_rel = np.zeros(T) # we will define it through the mass balance simulation
+    Qreg_inf = np.zeros(T) # we will define it through the mass balance simulation
+    # Policy functions
+    s_step = 0.01
+    s_frac = np.arange(0,1+s_step,s_step) # storage fraction
+    policy_rel = [np.nan] # Regulated release policy
+    policy_inf = [np.nan] # Regulated inflow policy
         
-    # Regulated water release
-    if Qreg['releases'] == []: 
+    # Regulated releases
+    if Qreg['releases'] == []:
         Qreg_rel = d # releases = demand
-    elif isinstance(Qreg['releases'],(np.ndarray)): # a release scheduling is provided as an input
-        Qreg_rel = Qreg['releases'] + np.zeros(T)
-    elif isinstance(Qreg['releases'],(dict)):
-        exec('from irons.Functions.'+Qreg['releases']['file_name']+' import '+Qreg['releases']['function'])
+    elif Qreg['releases']['type'] == 'scheduling': # a regulated inflows scheduling is provided as an input
+        Qreg_rel = Qreg['releases']['input'] + np.zeros(T) 
+    elif Qreg['releases']['type'] == 'operating policy': 
+        ### Operating policy ###
+        rel_func = Qreg['releases']['input']
+        param    = Qreg['releases']['param']
+        # Policy function
+        policy_rel = np.zeros(len(s_frac)) + np.nan # Regulated release policy
+        policy_inf = np.zeros(len(s_frac)) + np.nan # Regulated inflow policy
+        for i in np.arange(len(s_frac)):
+            policy_rel[i] = rel_func(param,s_frac[i])        
+    elif Qreg['releases']['type'] == 'rule curve': 
+        ### Rule curve ###
+        rel_func = Qreg['releases']['input']
+        param    = Qreg['releases']['param']
+        rule_curve_dim = np.ndim(param)[2]
+        policy_rel = np.zeros([rule_curve_dim,T]) + np.nan # Regulated releases rule curve
+        policy_inf = np.zeros([rule_curve_dim,T]) + np.nan # Regulated inflows rule curve
         
     # Regulated inflows 
     if Qreg['inflows'] == []: 
-        Qreg_inf = np.zeros(T)  # No regulated inflows
-    elif isinstance(Qreg['inflows'],(np.ndarray)): # a regulated inflows scheduling is provided as an input
-        Qreg_inf = Qreg['inflows'] + np.zeros(T)
-    elif isinstance(Qreg['releases'],(dict)):
-        exec('from irons.Functions.'+Qreg['inflows']['file_name']+' import '+Qreg['inflows']['function'])
-        
-    ### Operating policy ###
-    s_step = 0.01
-    s_frac = np.arange(0,1+s_step,s_step) # storage fraction
-    Policy_rel = np.zeros(len(s_frac)) + np.nan # Regulated release policy
-    Policy_inf = np.zeros(len(s_frac)) + np.nan # Regulated inflow policy
-    
-    for i in np.arange(len(s_frac)):
-    
-        if isinstance(Qreg['rel_inf'],(dict)): # a dictionary with: the name of the function,  
-            # file name where it is contained and the parameters of the function
-            exec('Policy_rel[i], Policy_inf[i] = '+Qreg['rel_inf']['function']+'('+str(Qreg['rel_inf']['param'])+','+str(s_frac[i])+')')
+        Qreg_inf = np.zeros(T)  # no regulated inflows
+    elif Qreg['inflows']['type'] == 'scheduling': # a regulated inflows scheduling is provided as an input
+        Qreg_inf = Qreg['inflows']['input'] + np.zeros(T) 
+    elif Qreg['inflows']['type'] == 'operating policy': 
+        ### Operating policy ###
+        inf_func = Qreg['inflows']['input']
+        param    = Qreg['inflows']['param']
+        # Policy function
+        policy_rel = np.zeros(len(s_frac)) + np.nan # Regulated release policy
+        policy_inf = np.zeros(len(s_frac)) + np.nan # Regulated inflow policy
+        for i in np.arange(len(s_frac)):
+            policy_inf[i] = inf_func(param,s_frac[i])        
+    elif Qreg['inflows']['type'] == 'rule curve': 
+        ### Rule curve ###
+        inf_func = Qreg['inflows']['input']
+        param    = Qreg['inflows']['param']
+        rule_curve_dim = np.ndim(param)[2]
+        policy_rel = np.zeros([rule_curve_dim,T]) + np.nan # Regulated releases rule curve
+        policy_inf = np.zeros([rule_curve_dim,T]) + np.nan # Regulated inflows rule curve
+
+#    # Regulated releases + inflows
+#    if Qreg['rel_inf'] == []:
+#        Qreg_rel = np.zeros(T) # here is a problem because it makes it 0 even if it was defined above
+#        Qreg_inf = np.zeros(T)
+#    elif isinstance(Qreg['rel_inf'],(dict)):
+#        rel_inf_func = Qreg['rel_inf']['function']
+#        param        = Qreg['rel_inf']['param']
+#        if Qreg['rel_inf']['file_name'] == 'Reservoir_operating_policy.Operating_policy':
+#            ### Operating policy ###
+#            # Regulated flows
+#            Qreg_rel = np.zeros(T) # we will define it through the mass balance simulation
+#            Qreg_inf = np.zeros(T) # we will define it through the mass balance simulation
+#            # Policy function
+#            policy_rel = np.zeros(len(s_frac)) + np.nan # Regulated release policy
+#            policy_inf = np.zeros(len(s_frac)) + np.nan # Regulated inflow policy
+#            for i in np.arange(len(s_frac)):
+#                policy_rel[i], policy_inf[i] = rel_inf_func(param,s_frac[i])
             
-        if isinstance(Qreg['releases'],(dict)): # a dictionary with: the name of the function,  
-            # file name where it is contained and the parameters of the function
-            exec('Policy_rel[i] = '+Qreg['releases']['function']+'('+str(Qreg['releases']['param'])+','+str(s_frac[i])+')')
-            
-        if isinstance(Qreg['inflows'],(dict)): # a dictionary with: the name of the function,  
-            # file name where it is contained and the parameters of the function
-            exec('Policy_inf[i] = '+Qreg['inflows']['function']+'('+str(Qreg['inflows']['param'])+','+str(s_frac[i])+')')
-    
     ### Run mass balance function ### 
     env, spill, Qreg_rel, Qreg_inf, s, E = Mass_bal_func(I, e, 
                                                          s_0, s_min, s_max, 
-                                                         env_min, 
+                                                         env_min, d,
                                                          Qreg_inf, Qreg_rel, 
                                                          s_frac,
-                                                         Policy_inf,Policy_rel)
-                
+                                                         policy_inf,policy_rel)
+
     return env, spill, Qreg_rel, Qreg_inf, s, E
