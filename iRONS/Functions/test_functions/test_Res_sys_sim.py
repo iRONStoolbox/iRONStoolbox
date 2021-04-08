@@ -20,41 +20,45 @@ else:
 ### Inputs ###
 N = 10
 dates = pd.date_range('2018-01-01', periods=N, freq='W')
-I = np.ones([N,1])*10
-e = np.ones([N,1])*1
-s_0 = 20
+I = 10 + np.zeros((N,1))
+e = 1 + np.zeros((N,1))
+s_ini = 20
 s_min = 5
 s_max = 100
 env_min = 2
-d = np.ones([N,1])*9
+d =  9 + np.zeros((N,1))
 
 Qreg = {'releases' : [],
         'inflows'  : [],
         'rel_inf'  : []}
     
-env, spill, Qreg_rel, Qreg_inf, s, E = Res_sys_sim(dates, I, e, s_0, s_min, s_max, env_min, d, Qreg)
+Qenv, Qspill, Qreg_rel, Qreg_inf, s, E = Res_sys_sim(dates, 
+                                                     I, e, 
+                                                     s_ini, s_min, s_max, 
+                                                     env_min, d, 
+                                                     Qreg)
 
 
 ### Testing functions ###
 # Regulated releases
 def test_Qreg_rel():
     # Expected output
-    Qreg_rel_expect = np.array([9.,9.,9.,9.,9.,9.,9.,8.,7.,7.]).transpose()
+    Qreg_rel_expect = np.array([9.,9.,9.,9.,9.,9.,9.,8.,7.,7.]).reshape(10,1)
     # Test 
     assert_array_equal(Qreg_rel,Qreg_rel_expect)
     
 # Storage
 def test_s():
     # Expected output
-    s_expect = np.array([20.,18.,16.,14.,12.,10.,8.,6.,5.,5.,5.]).transpose()
+    s_expect = np.array([20.,18.,16.,14.,12.,10.,8.,6.,5.,5.,5.]).reshape(11,1)
     # Test 
     assert_array_equal(s,s_expect)
 
 # Spillage   
-def test_spill():
+def test_Qspill():
     I = np.ones([N,1])*50
-    env, spill, Qreg_rel, Qreg_inf, s, E = Res_sys_sim(dates, I, e, s_0, s_min, s_max, env_min, d, Qreg)
+    Qenv, Qspill, Qreg_rel, Qreg_inf, s, E = Res_sys_sim(dates, I, e, s_ini, s_min, s_max, env_min, d, Qreg)
     # Expected output
-    spill_expect = np.array([0.,0.,34.,38.,38.,38.,38.,38.,38.,38.]).transpose()
+    Qspill_expect = np.array([0.,0.,34.,38.,38.,38.,38.,38.,38.,38.]).reshape(10,1)
     # Test 
-    assert_array_equal(spill,spill_expect)
+    assert_array_equal(Qspill,Qspill_expect)

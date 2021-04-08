@@ -3,7 +3,7 @@ python:
   - "3.7"      # current default Python on Travis CI
 # command to install dependencies
 install:
-  - pip install irons==0.5
+  - pip install irons==0.5.1
 # command to run tests
 script:
   - pytest

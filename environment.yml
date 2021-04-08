@@ -8,4 +8,4 @@ dependencies:
   - numba==0.49.1
   - pip
   - pip:
-    - irons==0.4
+    - irons==0.5.1
