@@ -128,9 +128,10 @@ def Interactive_rule_curve(policy_function, rule_curve,
     fig_1a             = plt.Figure(marks = [rule_curve_1,rule_curve_2],
                                    title = 'Rule curves',
                                    axes=[x_ax_1a, y_ax_1a],
-                                   layout={'width': '500px', 'height': '375px'},
+                                   layout={'width': '500px', 'height': '250px'},
                                    background_style = {'fill': 'darkblue'},
                                    animation_duration=1000,
+                                   fig_margin={'top':0, 'bottom':40, 'left':60, 'right':0},
                                    scales={'x': x_sc_1a, 'y': y_sc_1a})
     
     rule_curve_1.observe(update_figure, ['x', 'y'])
@@ -149,7 +150,7 @@ def Interactive_rule_curve(policy_function, rule_curve,
     s_frac = np.arange(0,1+s_step,s_step)
     x_sc_2 = LinearScale(min=0,max=1); y_sc_2 = LinearScale(min=0,max=Qreg_rel_max);
     x_ax_2 = Axis(label='Storage fraction', scale=x_sc_2); 
-    y_ax_2 = Axis(label='Release fraction', scale=y_sc_2, orientation='vertical')
+    y_ax_2 = Axis(label='Release (ML/week)', scale=y_sc_2, orientation='vertical')
     
     pol_func_a          = Lines(x      = s_frac,
                                 y      = u_frac_a,
@@ -159,8 +160,9 @@ def Interactive_rule_curve(policy_function, rule_curve,
     fig_2a             = plt.Figure(marks = [pol_func_a],
                                    title = 'Policy function '+curve_dates[0],
                                    axes = [x_ax_2, y_ax_2],
-                                   layout = {'width': '400px', 'height': '375px'}, 
+                                   layout = {'width': '400px', 'height': '300px'}, 
                                    animation_duration = 1000,
+                                   fig_margin={'top':0, 'bottom':40, 'left':60, 'right':0},
                                    scales = {'x': x_sc_2, 'y': y_sc_2})
     
     pol_func_a.observe(update_figure, ['x', 'y'])
@@ -181,8 +183,9 @@ def Interactive_rule_curve(policy_function, rule_curve,
     fig_2b             = plt.Figure(marks = [pol_func_b],
                                    title = 'Policy function '+curve_dates[1],
                                    axes = [x_ax_2, y_ax_2],
-                                   layout = {'width': '400px', 'height': '375px'}, 
+                                   layout = {'width': '400px', 'height': '300px'}, 
                                    animation_duration = 1000,
+                                   fig_margin={'top':0, 'bottom':40, 'left':60, 'right':0},
                                    scales = {'x': x_sc_2, 'y': y_sc_2})
     
     pol_func_b.observe(update_figure, ['x', 'y'])
@@ -203,8 +206,9 @@ def Interactive_rule_curve(policy_function, rule_curve,
     fig_2c             = plt.Figure(marks = [pol_func_c],
                                    title = 'Policy function '+curve_dates[2],
                                    axes = [x_ax_2, y_ax_2],
-                                   layout = {'width': '400px', 'height': '375px'}, 
+                                   layout = {'width': '400px', 'height': '300px'}, 
                                    animation_duration = 1000,
+                                   fig_margin={'top':0, 'bottom':40, 'left':60, 'right':0},
                                    scales = {'x': x_sc_2, 'y': y_sc_2})
     
     pol_func_c.observe(update_figure, ['x', 'y'])
@@ -215,10 +219,10 @@ def Interactive_rule_curve_manual(Res_sys_sim, policy_function, rule_curve,
                                   date, 
                                   I, e, 
                                   s_ini, s_min, s_max, 
-                                  u_mean,u_min, u_max, 
+                                  Qreg_rel_mean,Qreg_rel_min,Qreg_rel_max,
                                   cs, d):
     
-    N = date.size - 1 # weeks
+    N = date.size # weeks
     #Function to update the rule curve when changing the parameters with the sliders
     def update_rule_curve(s_1_0,s_1_1,s_1_2,s_1_3): 
 
@@ -232,28 +236,53 @@ def Interactive_rule_curve_manual(Res_sys_sim, policy_function, rule_curve,
                            'release'   : [u_0,u_1,u_2,u_3]}} # max release
         s_yday,r_yday = rule_curve(param)
         
+        x0 = [s_min/s_max,   Qreg_rel_min]
+        x1 = [s_1_0,         Qreg_rel_mean]
+        x2 = [s_1_0+s_2_inc, Qreg_rel_mean]
+        x3 = [s_max/s_max,   Qreg_rel_max]
+        param_a = x0, x1, x2, x3
+        u_frac_a = policy_function(param_a)
+
+        x0 = [s_min/s_max,   Qreg_rel_min]
+        x1 = [s_1_1,         Qreg_rel_mean]
+        x2 = [s_1_1+s_2_inc, Qreg_rel_mean]
+        x3 = [s_max/s_max,   Qreg_rel_max]
+        param_b = x0, x1, x2, x3
+        u_frac_b = policy_function(param_b)
+        
+        x0 = [s_min/s_max,   Qreg_rel_min]
+        x1 = [s_1_2,         Qreg_rel_mean]
+        x2 = [s_1_2+s_2_inc, Qreg_rel_mean]
+        x3 = [s_max/s_max,   Qreg_rel_max]
+        param_c = x0, x1, x2, x3
+#        print(param_c)
+        u_frac_c = policy_function(param_c) 
+        
         Qreg = {'releases' : {'type'  : 'rule curve',
                               'input' : [policy_function, rule_curve],
                               'param' : param},
                 'inflows' : [],
                 'rel_inf' : []}
         
-        Qenv, Qspill, u, I_reg, s, E = Res_sys_sim(date, I, e, s_ini, s_min, s_max, u_min, d, Qreg)
+        Qenv, Qspill, u, I_reg, s, E = Res_sys_sim(date, I, e, s_ini, s_min, s_max, Qreg_rel_min, d, Qreg)
         
-        TSD = (np.sum((np.maximum(d-u,[0]*N))**2)).astype('int')
+        TSD = (np.sum((np.maximum(d-u,np.zeros((N,1))))**2)).astype('int')
         fig_1b.title = 'Supply vs Demand - TSD = '+str(TSD)+' ML^2'
         
-        CSV = (np.sum((np.maximum(cs-s,[0]*(N+1))))).astype('int')
+        CSV = (np.sum((np.maximum(cs-s,np.zeros((N+1,1)))))).astype('int')
         fig_1c.title = 'Reservoir storage volume - MSV = '+str(CSV)+' ML'
     
-        return s_yday[1],s_yday[2], Qenv, Qspill, u, I_reg, s
+        return s_yday[1],s_yday[2], u_frac_a, u_frac_b, u_frac_c, Qenv, Qspill, u, I_reg, s
     
     # Function to update the figures when changing the parameters with the sliders
     def update_figure(change):
         rule_curve_1.y = update_rule_curve(s_1_0.value,s_1_1.value,s_1_2.value,s_1_0.value)[0]
         rule_curve_2.y = update_rule_curve(s_1_0.value,s_1_1.value,s_1_2.value,s_1_0.value)[1]
-        releases.y = update_rule_curve(s_1_0.value,s_1_1.value,s_1_2.value,s_1_0.value)[4]
-        storage.y = update_rule_curve(s_1_0.value,s_1_1.value,s_1_2.value,s_1_0.value)[6]
+        pol_func_a.y   = update_rule_curve(s_1_0.value,s_1_1.value,s_1_2.value,s_1_0.value)[2]
+        pol_func_b.y   = update_rule_curve(s_1_0.value,s_1_1.value,s_1_2.value,s_1_0.value)[3]
+        pol_func_c.y   = update_rule_curve(s_1_0.value,s_1_1.value,s_1_2.value,s_1_0.value)[4]
+        releases.y = update_rule_curve(s_1_0.value,s_1_1.value,s_1_2.value,s_1_0.value)[7][:,0]
+        storage.y = update_rule_curve(s_1_0.value,s_1_1.value,s_1_2.value,s_1_0.value)[9][:,0]
     
     # Definition of the sliders (Points defining the curves) 
     curve_dates = ['1 Apr',    '1 Aug',    '1 Dec',    '31 Mar']
@@ -288,10 +317,10 @@ def Interactive_rule_curve_manual(Res_sys_sim, policy_function, rule_curve,
     s_3         = [s_max/s_max,s_max/s_max,s_max/s_max,s_max/s_max]
     # Points defining the operating policy across the year 
     rule_dates  = ['21 Mar',     '21 Jun',     '21 Sep',     '21 Dec']
-    u_0         = [u_min, u_min, u_min, u_min]
-    u_1         = [u_mean,u_mean,u_mean,u_mean]
-    u_2         = [u_mean,u_mean,u_mean,u_mean]
-    u_3         = [u_max, u_max, u_max, u_max]
+    u_0         = [Qreg_rel_min, Qreg_rel_min, Qreg_rel_min, Qreg_rel_min]
+    u_1         = [Qreg_rel_mean,Qreg_rel_mean,Qreg_rel_mean,Qreg_rel_mean]
+    u_2         = [Qreg_rel_mean,Qreg_rel_mean,Qreg_rel_mean,Qreg_rel_mean]
+    u_3         = [Qreg_rel_max, Qreg_rel_max, Qreg_rel_max, Qreg_rel_max]
     
     param = {'curves':{'year_date'    : curve_dates,
                        'storage_frac' : [s_0,s_1,s_2,s_3]},
@@ -310,7 +339,7 @@ def Interactive_rule_curve_manual(Res_sys_sim, policy_function, rule_curve,
     Qenv, Qspill, u, I_reg, s, E = Res_sys_sim(date, 
                                                I, e, 
                                                s_ini, s_min, s_max, 
-                                               u_min, d, 
+                                               Qreg_rel_min, d, 
                                                Qreg)
     
     ### Figures ###
@@ -330,37 +359,39 @@ def Interactive_rule_curve_manual(Res_sys_sim, policy_function, rule_curve,
                          fill   = 'top',fill_opacities = [1],fill_colors = ['lightblue'])
     
     fig_1a             = plt.Figure(marks = [rule_curve_1,rule_curve_2],
-                                   title = 'Rule curves',
+                                   title = 'Rule curve',
                                    axes=[x_ax_1a, y_ax_1a],
-                                   layout={'width': '500px', 'height': '375px'},
+                                   layout={'width': '500px', 'height': '250px'},
                                    background_style = {'fill': 'darkblue'},
                                    animation_duration=1000,
+                                   fig_margin={'top':0, 'bottom':40, 'left':60, 'right':0},
                                    scales={'x': x_sc_1a, 'y': y_sc_1a})
     
     rule_curve_1.observe(update_figure, ['x', 'y'])
     rule_curve_2.observe(update_figure, ['x', 'y'])
     
     # Fig 1b: Releases vs Demand
-    x_sc_1b = DateScale();         y_sc_1b = LinearScale(min=0,max=u_max);
+    x_sc_1b = DateScale();         y_sc_1b = LinearScale(min=0,max=Qreg_rel_max);
     x_ax_1b = Axis(scale=x_sc_1b); y_ax_1b = Axis(label='ML/week', scale=y_sc_1b, orientation='vertical')
     
     demand             = Bars(x      = date,
-                              y      = d,
+                              y      = d[:,0],
                               colors = ['gray'],
                               scales = {'x': x_sc_1b, 'y': y_sc_1b})
     
     releases           = Bars(x      = date,
-                              y      = u,
+                              y      = u[:,0],
                               colors = ['green'],
                               scales = {'x': x_sc_1b, 'y': y_sc_1b})
     
-    TSD = (np.sum((np.maximum(d-u,[0]*N))**2)).astype('int')
+    TSD = (np.sum((np.maximum(d-u,np.zeros((N,1))))**2)).astype('int')
     
     fig_1b             = plt.Figure(marks = [demand, releases],
                                    title = 'Supply vs Demand - TSD = '+str(TSD)+' ML^2',
                                    axes=[x_ax_1b, y_ax_1b],
-                                   layout={'width': '950px', 'height': '250px'}, 
+                                   layout={'width': '950px', 'height': '150px'}, 
                                    animation_duration=1000,
+                                   fig_margin={'top':0, 'bottom':40, 'left':60, 'right':0},
                                    scales={'x': x_sc_1b, 'y': y_sc_1b})
     
     releases.observe(update_figure, ['x', 'y'])
@@ -370,7 +401,7 @@ def Interactive_rule_curve_manual(Res_sys_sim, policy_function, rule_curve,
     x_ax_1c = Axis(scale=x_sc_1c); y_ax_1c = Axis(label='ML', scale=y_sc_1c, orientation='vertical')
     
     storage           = Lines(x      = date,
-                              y      = s ,
+                              y      = s[:,0] ,
                               colors = ['blue'],
                               scales = {'x': x_sc_1c, 'y': y_sc_1c},
                               fill   = 'bottom',fill_opacities = [0.8],fill_colors = ['blue'])
@@ -395,19 +426,96 @@ def Interactive_rule_curve_manual(Res_sys_sim, policy_function, rule_curve,
 #                                    y=[cs[0]-10],
 #                                    colors=['red'])
     
-    CSV = (np.sum((np.maximum(cs-s,[0]*(N+1))))).astype('int')
+    CSV = (np.sum((np.maximum(cs-s,np.zeros((N+1,1)))))).astype('int')
     
     fig_1c             = plt.Figure(marks = [storage,max_storage,#max_storage_label,
                                             cri_storage],#,cri_storage_label],
                                    title = 'Reservoir storage volume - CSV = '+str(CSV)+' ML',
                                    axes=[x_ax_1c, y_ax_1c],
-                                   layout={'width': '950px', 'height': '250px'}, 
+                                   layout={'width': '950px', 'height': '150px'}, 
                                    animation_duration=1000,
+                                   fig_margin={'top':0, 'bottom':40, 'left':60, 'right':0},
                                    scales={'x': x_sc_1c, 'y': y_sc_1c})
     
     storage.observe(update_figure, ['x', 'y'])
     
-    return fig_1a,fig_1b,fig_1c,s_1_0,s_1_1,s_1_2
+    ### Fig 2: Policy functions
+    # Fig 2a: Policy function 1 Apr (year day = 91)
+    x0 = [s_min/s_max,         Qreg_rel_min]
+    x1 = [s_1_0.value,         Qreg_rel_mean]
+    x2 = [s_1_0.value+s_2_inc, Qreg_rel_mean]
+    x3 = [s_max/s_max,         Qreg_rel_max]
+    param_a = x0, x1, x2, x3
+    u_frac_a = policy_function(param_a)
+
+    s_step = 0.01
+    s_frac = np.arange(0,1+s_step,s_step)
+    x_sc_2 = LinearScale(min=0,max=1); y_sc_2 = LinearScale(min=0,max=Qreg_rel_max);
+    x_ax_2 = Axis(label='Storage fraction', scale=x_sc_2); 
+    y_ax_2 = Axis(label='Release (ML/week)', scale=y_sc_2, orientation='vertical')
+    
+    pol_func_a          = Lines(x      = s_frac,
+                                y      = u_frac_a,
+                                colors = ['blue'],
+                                scales = {'x': x_sc_2, 'y': y_sc_2})
+    
+    fig_2a             = plt.Figure(marks = [pol_func_a],
+                                   title = 'Policy function '+curve_dates[0],
+                                   axes = [x_ax_2, y_ax_2],
+                                   layout = {'width': '300px', 'height': '200px'}, 
+                                   animation_duration = 1000,
+                                   fig_margin={'top':0, 'bottom':40, 'left':60, 'right':0},
+                                   scales = {'x': x_sc_2, 'y': y_sc_2})
+    
+    pol_func_a.observe(update_figure, ['x', 'y'])
+
+    # Fig 2b: Policy function 1 Aug (year day = 213)
+    x0 = [s_min/s_max,         Qreg_rel_min]
+    x1 = [s_1_1.value,         Qreg_rel_mean]
+    x2 = [s_1_1.value+s_2_inc, Qreg_rel_mean]
+    x3 = [s_max/s_max,         Qreg_rel_max]
+    param_b = x0, x1, x2, x3
+    u_frac_b = policy_function(param_b)
+    
+    pol_func_b          = Lines(x      = s_frac,
+                                y      = u_frac_b,
+                                colors = ['blue'],
+                                scales = {'x': x_sc_2, 'y': y_sc_2})
+    
+    fig_2b             = plt.Figure(marks = [pol_func_b],
+                                   title = 'Policy function '+curve_dates[1],
+                                   axes = [x_ax_2, y_ax_2],
+                                   layout = {'width': '300px', 'height': '200px'}, 
+                                   animation_duration = 1000,
+                                   fig_margin={'top':0, 'bottom':40, 'left':60, 'right':0},
+                                   scales = {'x': x_sc_2, 'y': y_sc_2})
+    
+    pol_func_b.observe(update_figure, ['x', 'y'])
+
+    # Fig 2c: Policy function 1 Dec (year day = 335)
+    x0 = [s_min/s_max,         Qreg_rel_min]
+    x1 = [s_1_2.value,         Qreg_rel_mean]
+    x2 = [s_1_2.value+s_2_inc, Qreg_rel_mean]
+    x3 = [s_max/s_max,         Qreg_rel_max]
+    param_c = x0, x1, x2, x3
+    u_frac_c = policy_function(param_c)
+    
+    pol_func_c          = Lines(x      = s_frac,
+                                y      = u_frac_c,
+                                colors = ['blue'],
+                                scales = {'x': x_sc_2, 'y': y_sc_2})
+    
+    fig_2c             = plt.Figure(marks = [pol_func_c],
+                                   title = 'Policy function '+curve_dates[2],
+                                   axes = [x_ax_2, y_ax_2],
+                                   layout = {'width': '300px', 'height': '200px'}, 
+                                   animation_duration = 1000,
+                                   fig_margin={'top':0, 'bottom':40, 'left':60, 'right':0},
+                                   scales = {'x': x_sc_2, 'y': y_sc_2})
+    
+    pol_func_c.observe(update_figure, ['x', 'y'])
+    
+    return fig_1a,fig_1b,fig_1c,fig_2a,fig_2b,fig_2c,s_1_0,s_1_1,s_1_2
 
 def Interactive_rule_curve_auto(Res_sys_sim,policy_function,rule_curve,
                                 date,
@@ -417,7 +525,7 @@ def Interactive_rule_curve_auto(Res_sys_sim,policy_function,rule_curve,
                                 cs, d,
                                 results1_optim,results2_optim,sol_optim):
     
-    N = date.size - 1 # weeks
+    N = date.size # weeks
     # Function to update the rule curve when clicking on the points of the Pareto front
     def update_rule_curve(i):
         
@@ -441,10 +549,10 @@ def Interactive_rule_curve_auto(Res_sys_sim,policy_function,rule_curve,
         
         Qenv, Qspill, u, I_reg, s, E = Res_sys_sim(date, I, e, s_ini, s_min, s_max, u_min, d, Qreg)
         
-        TSD = (np.sum((np.maximum(d-u,[0]*N))**2)).astype('int')
+        TSD = (np.sum((np.maximum(d-u,np.zeros((N,1))))**2)).astype('int')
         fig_2b.title = 'Supply vs Demand - TSD = '+str(TSD)+' ML^2'
         
-        CSV = (np.sum((np.maximum(cs-s,[0]*(N+1))))).astype('int')
+        CSV = (np.sum((np.maximum(cs-s,np.zeros((N+1,1)))))).astype('int')
         fig_2c.title = 'Reservoir storage volume - MSV = '+str(CSV)+' ML'
         
         return s_yday[1],s_yday[2], Qenv, Qspill, u, I_reg, s
@@ -455,8 +563,8 @@ def Interactive_rule_curve_auto(Res_sys_sim,policy_function,rule_curve,
             pareto_front.selected = [0]        
         rule_curve_1.y = update_rule_curve(pareto_front.selected[0])[0]
         rule_curve_2.y = update_rule_curve(pareto_front.selected[0])[1]
-        releases.y = update_rule_curve(pareto_front.selected[0])[4]
-        storage.y = update_rule_curve(pareto_front.selected[0])[6]
+        releases.y = update_rule_curve(pareto_front.selected[0])[4][:,0]
+        storage.y = update_rule_curve(pareto_front.selected[0])[6][:,0]
     
     # Fig_pf: Pareto front  
     x_sc_pf = LinearScale();y_sc_pf = LinearScale()
@@ -475,9 +583,11 @@ def Interactive_rule_curve_auto(Res_sys_sim,policy_function,rule_curve,
                      formats=['.d','.1f', '.1f'])
     pareto_front.tooltip=def_tt
     
-    fig_pf = plt.Figure(marks = [pareto_front],title = 'Interactive Pareto front', 
+    fig_pf = plt.Figure(marks = [pareto_front],title = 'Pareto front', 
                         axes=[x_ax_pf, y_ax_pf],
-                        layout={'width': '400px', 'height': '400px'}, animation_duration=1000)
+                        layout={'width': '350px', 'height': '300px'}, 
+                        animation_duration=1000,
+                        fig_margin={'top':0, 'bottom':40, 'left':60, 'right':0})
     
     if pareto_front.selected == []:
         pareto_front.selected = [0]
@@ -538,78 +648,80 @@ def Interactive_rule_curve_auto(Res_sys_sim,policy_function,rule_curve,
     fig_2a             = plt.Figure(marks = [rule_curve_1,rule_curve_2],
                                    title = 'Rule curves',
                                    axes=[x_ax_2a, y_ax_2a],
-                                   layout={'width': '500px', 'height': '375px'},
+                                   layout={'width': '500px', 'height': '300px'},
                                    background_style = {'fill': 'darkblue'},
                                    animation_duration=1000,
+                                   fig_margin={'top':0, 'bottom':40, 'left':60, 'right':0},
                                    scales={'x': x_sc_2a, 'y': y_sc_2a})
     
     rule_curve_1.observe(update_figure, ['x', 'y'])
     rule_curve_2.observe(update_figure, ['x', 'y'])
     
     # Fig 2b: Releases vs Demand
-    x_sc_2b = LinearScale(min=0,max=N);         y_sc_2b = LinearScale(min=0,max=u_max);
-    x_ax_2b = Axis(label='week', scale=x_sc_2b); y_ax_2b = Axis(label='ML/week', scale=y_sc_2b, orientation='vertical')
+    x_sc_2b = DateScale();         y_sc_2b = LinearScale(min=0,max=u_max);
+    x_ax_2b = Axis(scale=x_sc_2b); y_ax_2b = Axis(label='ML/week', scale=y_sc_2b, orientation='vertical')
     
-    demand             = Bars(x   = np.arange(1,N+1),
-                              y      = d,
+    demand             = Bars(x      = date,
+                              y      = d[:,0],
                               colors = ['gray'],
                               scales = {'x': x_sc_2b, 'y': y_sc_2b})
     
-    releases           = Bars(x   = np.arange(1,N+1),
-                              y      = u,
+    releases           = Bars(x      = date,
+                              y      = u[:,0],
                               colors = ['green'],
                               scales = {'x': x_sc_2b, 'y': y_sc_2b})
     
-    TSD = (np.sum((np.maximum(d-u,[0]*N))**2)).astype('int')
+    TSD = (np.sum((np.maximum(d-u,np.zeros((N,1))))**2)).astype('int')
     
-    fig_2b             = plt.Figure(marks = [demand, releases],
-                                   title = 'Supply vs Demand - TSD = '+str(TSD)+' ML^2',
-                                   axes=[x_ax_2b, y_ax_2b],
-                                   layout={'width': '950px', 'height': '250px'}, 
-                                   animation_duration=1000,
-                                   scales={'x': x_sc_2b, 'y': y_sc_2b})
+    fig_2b = plt.Figure(marks = [demand, releases],
+                        title = 'Supply vs Demand - TSD = '+str(TSD)+' ML^2',
+                        axes = [x_ax_2b, y_ax_2b],
+                        layout = {'width': '950px', 'height': '150px'}, 
+                        animation_duration = 1000,
+                        fig_margin = {'top':0, 'bottom':40, 'left':60, 'right':0},
+                        scales = {'x': x_sc_2b, 'y': y_sc_2b})
     
     releases.observe(update_figure, ['x', 'y'])
     
     # Fig 2c: Storage
-    x_sc_2c = LinearScale();                    y_sc_2c = LinearScale(min=0,max=200);
-    x_ax_2c = Axis(label='week', scale=x_sc_2c); y_ax_2c = Axis(label='ML', scale=y_sc_2c, orientation='vertical')
+    x_sc_2c = DateScale();                    y_sc_2c = LinearScale(min=0,max=200);
+    x_ax_2c = Axis(scale=x_sc_2c); y_ax_2c = Axis(label='ML', scale=y_sc_2c, orientation='vertical')
     
-    storage           = Lines(x      = np.arange(0,N+1),
-                              y      = s ,
+    storage           = Lines(x      = date,
+                              y      = s[:,0],
                               colors = ['blue'],
                               scales = {'x': x_sc_2c, 'y': y_sc_2c},
                               fill   = 'bottom',fill_opacities = [0.8],fill_colors = ['blue'])
     
-    max_storage       = plt.plot(x=np.arange(0,N+1),
-                                 y=[s_max]*(N+1),
-                                 colors=['red'],
-                                 scales={'x': x_sc_2c, 'y': y_sc_2c})
+    max_storage       = plt.plot(x      = date,
+                                 y      = [s_max]*(N+1),
+                                 colors = ['red'],
+                                 scales = {'x': x_sc_2c, 'y': y_sc_2c})
     
-    max_storage_label = plt.label(text = ['Max storage'], 
-                                  x=[0],
-                                  y=[s_max+15],
-                                  colors=['red'])
+    # max_storage_label = plt.label(text = ['Max storage'], 
+    #                               x=[0],
+    #                               y=[s_max+15],
+    #                               colors=['red'])
     
-    min_storage = plt.plot(np.arange(0,N+1),cs,
-                             scales={'x': x_sc_2c, 'y': y_sc_2c},
-                             colors=['red'],opacities = [1],
-                             line_style = 'dashed',
-                             fill = 'bottom',fill_opacities = [0.4],fill_colors = ['red'], stroke_width = 1)
-    min_storage_label = plt.label(text = ['Min storage'], 
-                                    x=[0],
-                                    y=[cs[0]-10],
-                                    colors=['red'])
+    cri_storage = plt.plot(date,cs,
+                           scales={'x': x_sc_2c, 'y': y_sc_2c},
+                           colors=['red'],opacities = [1],
+                           line_style = 'dashed',
+                           fill = 'bottom',fill_opacities = [0.4],fill_colors = ['red'], stroke_width = 1)
+    # cri_storage_label = plt.label(text = ['Min storage'], 
+    #                                 x=[0],
+    #                                 y=[cs[0]-10],
+    #                                 colors=['red'])
     
-    CSV = (np.sum((np.maximum(cs-s,[0]*(N+1))))).astype('int')
+    CSV = (np.sum((np.maximum(cs-s,np.zeros((N+1,1)))))).astype('int')
     
-    fig_2c             = plt.Figure(marks = [storage,max_storage,max_storage_label,
-                                            min_storage,min_storage_label],
-                                   title = 'Reservoir storage volume - MSV = '+str(CSV)+' ML',
-                                   axes=[x_ax_2c, y_ax_2c],
-                                   layout={'width': '950px', 'height': '250px'}, 
-                                   animation_duration=1000,
-                                   scales={'x': x_sc_2c, 'y': y_sc_2c})
+    fig_2c = plt.Figure(marks = [storage,max_storage,cri_storage],
+                        title = 'Reservoir storage volume - CSV = '+str(CSV)+' ML',
+                        axes = [x_ax_2c, y_ax_2c],
+                        layout = {'width': '950px', 'height': '150px'}, 
+                        animation_duration = 1000,
+                        fig_margin = {'top':0, 'bottom':40, 'left':60, 'right':0},
+                        scales = {'x': x_sc_2c, 'y': y_sc_2c})
     
     storage.observe(update_figure, ['x', 'y'])
     

@@ -20,13 +20,13 @@ else:
 ### Inputs ###
 N = 10
 dates = pd.date_range('2018-01-01', periods=N, freq='W')
-I = np.ones(N)*10
-e = np.ones(N)*1
+I = np.ones([N,1])*10
+e = np.ones([N,1])*1
 s_0 = 20
 s_min = 5
 s_max = 100
 env_min = 2
-d = np.ones(N)*9
+d = np.ones([N,1])*9
 
 Qreg = {'releases' : [],
         'inflows'  : [],
@@ -52,7 +52,7 @@ def test_s():
 
 # Spillage   
 def test_spill():
-    I = np.ones(N)*50
+    I = np.ones([N,1])*50
     env, spill, Qreg_rel, Qreg_inf, s, E = Res_sys_sim(dates, I, e, s_0, s_min, s_max, env_min, d, Qreg)
     # Expected output
     spill_expect = np.array([0.,0.,34.,38.,38.,38.,38.,38.,38.,38.]).transpose()

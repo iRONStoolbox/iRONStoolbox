@@ -22,7 +22,7 @@ def read_csv_data(folder_path,file_name,column_name = None):
     # the next day at 00:00 we need to substract one day (-24h) 
     # to reflect that the first data member corresponds to the first 
     # day and not to the next day at 00:00
-    dates = pd.to_datetime(np.array(data['Date']),
+    date = pd.to_datetime(np.array(data['Date']),
                            format = '%d/%m/%Y')
 
     # Each element of args is the name of weather variable
@@ -31,7 +31,7 @@ def read_csv_data(folder_path,file_name,column_name = None):
     else:
         outputs = np.array(data[data.columns[1:]])
         
-    return dates,outputs
+    return date,outputs
 
 def read_netcdf_data(folder_path,file_name,variable_name):
 
@@ -44,11 +44,11 @@ def read_netcdf_data(folder_path,file_name,variable_name):
     # the next day at 00:00 we need to substract one day (-24h) 
     # to reflect that the first data member corresponds to the first 
     # day and not to the next day at 00:00
-    dates = pd.to_datetime(data['time'][:]-24, 
+    date = pd.to_datetime(data['time'][:]-24, 
                             unit='h', # hourly
                             origin = pd.Timestamp('01-01-1900'))
 
     # Each element of args is the name of weather variable
     outputs = np.array(data.variables[variable_name][:])
         
-    return dates,outputs
+    return date,outputs

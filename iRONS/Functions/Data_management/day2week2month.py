@@ -11,26 +11,35 @@ import numpy as np
 import pandas as pd
 from datetime import timedelta
 
-def day2week(N,dates,data):
+def day2week(dates,data,date_ini=None,date_end=None):
     
     if data.ndim == 1:
         data = data.reshape([data.shape[0],1])
     
     delta = 7 # days of a week
     # Initial day
-    date0 = dates[0]
-    # Day of the week of the initial day (Monday = 0,..., Sunday = 6)
-    wday0 = date0.weekday()
-    # We define the inital date according to the day of the week we would like to start with, in this case Monday
-    if wday0 != 0:
-        date_ini = date0 + timedelta(days = 7-wday0)
+    if date_ini==None:
+        date_ini = dates[0]
     else:
-        date_ini = date0
-    # Given the initial date and the forecast horizon we now get the final date
-    date_end = date_ini + timedelta(days = N*7) # day_ini + horizon weeks * 7 days/week
-    if (date_end-dates[-1]).days > 0:
-        print('Error: The defined horizon is too long, please try with a lower number of weeks')
+        if (dates[0]-date_ini).days > 0:
+            raise Exception('Error: The defined initial date is not within the data period, please try with a date equal or later than '+str(dates[-1]))
     
+#    # Day of the week of the initial day (Monday = 0,..., Sunday = 6)
+#    wday0 = date_ini.weekday()
+#    # We define the inital date according to the day of the week we would like to start with, in this case Monday
+#    if wday0 != 0:
+#        date_ini = date_ini + timedelta(days = 7-wday0)
+
+#    # Now we get the final date
+    if date_end==None:
+        date_end = dates[-1]
+    else:
+        if (date_end-dates[-1]).days > 0:
+            raise Exception('Error: The defined end date is not within the data period, please try with a date equal or earlier than '+str(dates[-1]))
+        
+    N = (date_end - date_ini).days//7 # number of entire weeks
+    date_end = date_ini + timedelta(days = N*7) # day_ini + horizon weeks * 7 days/week
+
     index_ini = np.where(dates==date_ini)[0][0]
     dates_week = dates[index_ini]
     data_week = [np.zeros(np.shape(data)[1])]

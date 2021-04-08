@@ -20,7 +20,7 @@ def Interactive_Pareto_front_det(N,I_sel,E,d_sel,S0,Smax,Smin,env_min,c,solution
         u            = solutions_optim_relea_2[i]
         S,env,w,r    = syst_sim(N,I_sel+u,E,d_sel,S0,Smax,env_min)
         fig_2b.title = 'Total supply deficit = '+str((np.sum((np.maximum(d_sel-r,[0]*N)))).astype('int'))+' ML'
-        fig_2d.title = 'Natural + pumped inflows - Total pumped vol = '+str((np.sum(np.array(u))).astype('int'))+' ML'
+        fig_2d.title = 'Natural + pumped inflows - Pumped vol = '+str((np.sum(np.array(u))).astype('int'))+' ML'
         return       S,u,r,i
     
     def solution_selected_2(change):
@@ -42,7 +42,8 @@ def Interactive_Pareto_front_det(N,I_sel,E,d_sel,S0,Smax,Smin,env_min,c,solution
                                             formats=['.1f', '.1f', '.0f'])
     pareto_front_2.tooltip          = def_tt
     fig_2pf                         = plt.Figure(marks = [pareto_front_2],title = 'Pareto front', axes=[x_ax_2pf, y_ax_2pf],
-                                               layout={'width': '500px', 'height': '500px'}, animation_duration=1000)
+                                               layout={'width': '450px', 'height': '450px'}, animation_duration=1000,
+                                               fig_margin = {'top':60, 'bottom':40, 'left':60, 'right':0})
     if pareto_front_2.selected      == []:
         pareto_front_2.selected     = [0]
     pareto_front_2.observe(solution_selected_2,'selected')    
@@ -68,10 +69,11 @@ def Interactive_Pareto_front_det(N,I_sel,E,d_sel,S0,Smax,Smin,env_min,c,solution
                           scales={'x': x_sc_2b, 'y': y_sc_2b})    
     fig_2b     = plt.Figure(marks = [deficit_2],
                             axes=[x_ax_2b, y_ax_2b],
-                            layout={'width': '480px', 'height': '250px'},
+                            layout={'width': '480px', 'height': '200px'},
                             scales={'x': x_sc_2b, 'y': y_sc_2b}, 
                             animation_duration=1000,
                             legend_location = 'bottom-right', 
+                            fig_margin = {'top':0, 'bottom':40, 'left':60, 'right':0},
                             legend_style = {'fill': 'white', 'opacity': 0.5})
     
     x_sc_2c             = LinearScale(min=0,max=N)
@@ -98,8 +100,9 @@ def Interactive_Pareto_front_det(N,I_sel,E,d_sel,S0,Smax,Smin,env_min,c,solution
     fig_2c              = plt.Figure(marks = [storage_2,max_storage_2,max_storage_label_2],
                                      title = 'Reservoir storage (s)',
                                      axes=[x_ax_2c, y_ax_2c],
-                                     layout={'width': '1000px', 'height': '350px'}, 
+                                     layout={'width': '1000px', 'height': '200px'}, 
                                      animation_duration=1000,
+                                     fig_margin = {'top':60, 'bottom':40, 'left':60, 'right':0},
                                      scales={'x': x_sc_2c, 'y': y_sc_2c})
     
     x_sc_2d    = OrdinalScale(min=1,
@@ -144,6 +147,7 @@ def Interactive_Pareto_front_det(N,I_sel,E,d_sel,S0,Smax,Smin,env_min,c,solution
                             layout={'width': '480px', 'height': '250px'}, 
                             scales={'x': x_sc_2d, 'y': y_sc_2d}, 
                             animation_duration=1000,
+                            fig_margin = {'top':60, 'bottom':40, 'left':60, 'right':0},
                             legend_location = 'top', 
                             legend_style = {'fill': 'white', 'opacity': 0.5})
     
@@ -177,7 +181,7 @@ def Interactive_Pareto_front_act(N,I_act,E_act,d_act,S0,Smax,Smin,env_min,c,solu
         u            = solutions_optim_relea_2[i]
         S,env,w,r    = syst_sim(N,I_act+u,E_act,d_act,S0,Smax,env_min)
         fig_4b.title = 'Total supply deficit = '+str((np.sum((np.maximum(d_act-r,[0]*N)))).astype('int'))+' ML'
-        fig_4d.title = 'Natural + pumped inflows - Total pumped vol = '+str((np.sum(np.array(u))).astype('int'))+' ML'
+        fig_4d.title = 'Natural + pumped inflows - Pumped vol = '+str((np.sum(np.array(u))).astype('int'))+' ML'
         return       S,u,r,i
     
     def solution_selected_act_4(change):
@@ -222,7 +226,8 @@ def Interactive_Pareto_front_act(N,I_act,E_act,d_act,S0,Smax,Smin,env_min,c,solu
     pareto_front_act_4.tooltip          = None
 
     fig_4pf                         = plt.Figure(marks = [pareto_front_4,pareto_front_act_4 ],title = 'Pareto front', axes=[x_ax_2pf, y_ax_2pf],
-                                               layout={'width': '500px', 'height': '500px'}, animation_duration=1000)
+                                               layout={'width': '450px', 'height': '450px'}, animation_duration=1000,
+                                               fig_margin = {'top':60, 'bottom':40, 'left':60, 'right':0})
     
     if pareto_front_act_4.selected      == []:
         pareto_front_4.selected     = [sel_policy]
@@ -256,10 +261,11 @@ def Interactive_Pareto_front_act(N,I_act,E_act,d_act,S0,Smax,Smin,env_min,c,solu
 
     fig_4b      = plt.Figure(marks = [deficit_4],
                              axes=[x_ax_2b, y_ax_2b],
-                             layout={'width': '480px', 'height': '250px'},
+                             layout={'width': '480px', 'height': '200px'},
                              scales={'x': x_sc_2b, 'y': y_sc_2b}, 
                              animation_duration=1000,
-                             legend_location = 'bottom-right', 
+                             legend_location = 'bottom-right',
+                             fig_margin = {'top':0, 'bottom':40, 'left':60, 'right':0},
                              legend_style = {'fill': 'white', 'opacity': 0.5})
     
     x_sc_2c             = LinearScale(min=0,
@@ -288,8 +294,9 @@ def Interactive_Pareto_front_act(N,I_act,E_act,d_act,S0,Smax,Smin,env_min,c,solu
     fig_4c              = plt.Figure(marks = [storage_4,max_storage_2,max_storage_label_2],
                                      title = 'Reservoir storage (s)',
                                      axes=[x_ax_2c, y_ax_2c],
-                                     layout={'width': '1000px', 'height': '350px'}, 
+                                     layout={'width': '1000px', 'height': '200px'}, 
                                      animation_duration=1000,
+                                     fig_margin = {'top':60, 'bottom':40, 'left':60, 'right':0},
                                      scales={'x': x_sc_2c, 'y': y_sc_2c})
 
     x_sc_2d = OrdinalScale(min=1,
@@ -336,6 +343,7 @@ def Interactive_Pareto_front_act(N,I_act,E_act,d_act,S0,Smax,Smin,env_min,c,solu
                             scales={'x': x_sc_2d, 'y': y_sc_2d}, 
                             animation_duration=1000,
                             legend_location = 'top', 
+                            fig_margin = {'top':60, 'bottom':40, 'left':60, 'right':0},
                             legend_style = {'fill': 'white', 'opacity': 0.5})
     
     deficit_4.y = np.maximum(d_act-update_operation_act_4(sel_policy)[2],[0]*N)
@@ -375,7 +383,7 @@ def Interactive_Pareto_front(N,I_for,E_for,d_for,S0,Smax,Smin,env_min,c,solution
     def update_operation(i):
         S,env,w,r    = syst_sim(N,I_for+solutions_optim_relea[i],E_for,d_for,S0,Smax,env_min)
         fig_wd.title = 'Total supply deficit = '+str((sd_mean[i]).astype('int'))+' ± '+str((sd_std[i]).astype('int'))+' ML'
-        fig_in.title = 'Natural + pumped inflows - Total pumped vol = {:.0f} ML'.format(results2_optim_relea[i]/c)
+        fig_in.title = 'Natural + pumped inflows - Pumped vol = {:.0f} ML'.format(results2_optim_relea[i]/c)
         return       S,solutions_optim_relea[i],r,results1_optim_relea[i],results2_optim_relea[i],i
     
     def solution_selected(change):
@@ -412,8 +420,9 @@ def Interactive_Pareto_front(N,I_for,E_for,d_for,S0,Smax,Smin,env_min,c,solution
     pareto_front_ensemble.selected_style={'opacity': 0.1}
     pareto_front_ensemble.opacity = [0.1]*members_num
         
-    fig_pf = plt.Figure(marks=[pareto_front,pareto_front_ensemble],title = 'Pareto front', axes=[x_ax_pf, y_ax_pf],layout={'width': '500px', 'height': '500px'}, 
-                        animation_duration=500)
+    fig_pf = plt.Figure(marks=[pareto_front,pareto_front_ensemble],title = 'Pareto front', axes=[x_ax_pf, y_ax_pf],
+                        layout={'width': '450px', 'height': '450px'}, 
+                        animation_duration=500,fig_margin = {'top':60, 'bottom':40, 'left':60, 'right':0})
     
     pareto_front.observe(solution_selected,'selected')    
     
@@ -457,7 +466,8 @@ def Interactive_Pareto_front(N,I_for,E_for,d_for,S0,Smax,Smin,env_min,c,solution
                             fill_opacities = [1/members_num]*members_num*N,
                             fill_colors = ['blue']*members_num*N)
     fig_in   = plt.Figure(marks = [tot_inflows,pump_inflows],axes=[x_ax_in, y_ax_in],layout={'max_width': '480px', 'max_height': '250px'},
-                        scales={'x': x_sc_in, 'y': y_sc_in}, animation_duration=1000,legend_location = 'bottom-right')
+                        scales={'x': x_sc_in, 'y': y_sc_in}, animation_duration=1000,
+                        fig_margin = {'top':60, 'bottom':40, 'left':60, 'right':0},legend_location = 'bottom-right')
     
     storage           = plt.plot(x=np.arange(0,N+1),y=S,scales={'x': x_sc_st, 'y': y_sc_st},
                                   colors=['blue'], stroke_width = 0.1,
@@ -473,8 +483,9 @@ def Interactive_Pareto_front(N,I_for,E_for,d_for,S0,Smax,Smin,env_min,c,solution
     fig_st            = plt.Figure(marks = [storage,max_storage,max_storage_label], 
                                    title = 'Reservoir storage volume', 
                                    axes=[x_ax_st, y_ax_st],
-                                   layout={'width': '1000px', 'height': '350px'}, 
+                                   layout={'width': '1000px', 'height': '250px'}, 
                                    animation_duration=1000,
+                                   fig_margin = {'top':60, 'bottom':40, 'left':60, 'right':0},
                                    scales={'x': x_sc_st, 'y': y_sc_st})
 
     deficit = plt.Lines(x = np.arange(1,N+1), 
@@ -491,8 +502,9 @@ def Interactive_Pareto_front(N,I_for,E_for,d_for,S0,Smax,Smin,env_min,c,solution
                         fill_colors = ['red']*members_num)
 
     fig_wd = plt.Figure(marks = [deficit],axes=[x_ax_wd, y_ax_wd],
-                        layout={'max_width': '480px', 'max_height': '250px'},
+                        layout={'max_width': '480px', 'max_height': '200px'},
                         animation_duration=1000,
+                        fig_margin = {'top':0, 'bottom':40, 'left':60, 'right':0},
                         legend_location = 'bottom-right')
     
     storage.y  = update_operation(pareto_front.selected[0])[0]

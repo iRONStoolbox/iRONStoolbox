@@ -148,4 +148,7 @@ poetry.lock
 # Various
 aznbsetup.sh
 
+# SAFE
+SAFEpython*/
+
 
