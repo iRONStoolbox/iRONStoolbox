@@ -6,4 +6,4 @@ channels:
 dependencies:
   - pip
   - pip:
-    - irons==0.5.1
+    - irons==0.6
