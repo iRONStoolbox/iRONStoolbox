@@ -6,6 +6,7 @@ Created on Fri Aug 16 18:26:41 2019
 """
 import ipywidgets as widgets
 import numpy as np
+from scipy.interpolate import interp1d
 from bqplot import pyplot as plt
 from bqplot import *
 from bqplot.traits import *
