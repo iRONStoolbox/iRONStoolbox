@@ -26,9 +26,7 @@ Click on the button below to open iRONS on MyBinder.org so you can run, modify a
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AndresPenuela/iRONS.git/master)
 
-In the section **A - Knowledge transfer** you can start with the Notebook **iRONS/Notebooks/A - Knowledge transfer/1.a. Simple example of how to use Jupyter Notebooks.ipynb**. You can also go directly to this Notebook by clicking on this [link](https://mybinder.org/v2/gh/AndresPenuela/MHA-Workshop/HEAD?filepath=Notebooks%2FA%20-%20Knowledge%20transfer%2F1.%20Simple%20example%20of%20how%20to%20use%20Jupyter%20Notebooks.ipynb)
-![image](https://user-images.githubusercontent.com/42277428/115989876-6ad76a80-a5b8-11eb-90d5-6cfe6f4a5b84.png)
-
+In the section **A - Knowledge transfer** you can start with the Notebook **iRONS/Notebooks/A - Knowledge transfer/1.a. Simple example of how to use Jupyter Notebooks.ipynb**. You can also go directly to this Notebook by clicking on this [link](https://mybinder.org/v2/gh/AndresPenuela/iRONS/HEAD?filepath=Notebooks%2FA%20-%20Knowledge%20transfer%2F1.%20Simple%20example%20of%20how%20to%20use%20Jupyter%20Notebooks.ipynb)
 
 <img src="iRONS/util/images/Executing Simple Example.gif" width = "800px">
 
