@@ -26,13 +26,11 @@ Click on the button below to open iRONS on MyBinder.org so you can run, modify a
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AndresPenuela/iRONS.git/master)
 
-In the section **A - Knowledge transfer** you can start with the Notebook **iRONS/Notebooks/A - Knowledge transfer/1.a. Simple example of how to use Jupyter Notebooks.ipynb**
+In the section **A - Knowledge transfer** you can start with the Notebook **iRONS/Notebooks/A - Knowledge transfer/1.a. Simple example of how to use Jupyter Notebooks.ipynb**. 
 
 <img src="iRONS/util/images/Executing Simple Example.gif" width = "800px">
 
-In the section **B - Implementation** you can start with the Notebook **iRONS/Notebooks/B - Implementation/1.b. Bias correction of weather forecasts.ipynb**
-
-🚨 Note in the section **B - Implementation** the Notebook **iRONS/Notebooks/B - Implementation/1.a. Downloading ensemble weather forecasts.ipynb** can only be run locally after installing iRONS.
+In the section **B - Implementation** you can start with the Notebook **iRONS/Notebooks/B - Implementation/1.a. Downloading ensemble weather forecasts.ipynb**. 
 
 ## Installing iRONS locally
 
