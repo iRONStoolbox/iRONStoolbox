@@ -1,4 +1,3 @@
-"""A Python implementation of SAFE"""
 
 # Always prefer setuptools over distutils
 from setuptools import setup, find_packages
@@ -13,7 +12,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='iRONS',  # Required
-    version='0.2.5',  # Required
+    version='0.8',  # Required
     description='A Python package that enables the simulation, forecasting and optimisation of reservoir systems',  # Optional
     long_description=long_description,  # Optional
     long_description_content_type='text/markdown',  # Optional (see note above)
@@ -31,7 +30,8 @@ setup(
 		"netcdf4==1.4.2",
 		"numba==0.49.1",
 		"plotly==4.4.1",
-		"cdsapi",
-		"pandas==0.25.1"
+		"cdsapi==0.2.5",
+		"pandas==0.25.1",
+        "scipy==1.6.1"
     ],
 )

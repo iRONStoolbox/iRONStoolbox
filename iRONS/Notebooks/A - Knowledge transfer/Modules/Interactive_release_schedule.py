@@ -98,14 +98,16 @@ def Interactive_release_single(simtime,I,E,d,S0,Smax,env_min, demand_plot):
     max_storage_2       = plt.plot(x=np.arange(0,simtime+1),y=[Smax]*(simtime+1),colors=['red'],scales={'x': x_sc_2a, 'y': y_sc_2a})
     max_storage_label_2 = plt.label(text = ['Max storage'], x=[0],y=[Smax+15],colors=['red'])
     fig_2a              = plt.Figure(marks = [storage_2,max_storage_2,max_storage_label_2],title = 'Reservoir storage volume',
-                                     axes=[x_ax_2a, y_ax_2a],layout={'width': '950px', 'height': '300px'}, 
-                                       animation_duration=1000,scales={'x': x_sc_2a, 'y': y_sc_2a})
+                                     axes=[x_ax_2a, y_ax_2a],layout={'width': '950px', 'height': '225px'}, 
+                                     animation_duration=1000,scales={'x': x_sc_2a, 'y': y_sc_2a},
+                                     fig_margin = {'top':0, 'bottom':40, 'left':60, 'right':0})
     
     releases_2 = plt.bar(np.arange(1,simtime+1),u1,colors=['green'],opacities = [0.7]*simtime,
                         labels = ['release'], display_legend = True, stroke_width = 1,scales={'x': x_sc_1, 'y': y_sc_1})
     fig_2b   = plt.Figure(marks = [demand_plot,releases_2],axes=[x_ax_1, y_ax_1],
-                        layout={'min_width': '950px', 'max_height': '300px'}, 
-                        animation_duration=0,legend_location = 'top-left',legend_style = {'fill': 'white', 'opacity': 0.5})
+                        layout={'min_width': '950px', 'max_height': '225px'}, 
+                        animation_duration=0,legend_location = 'top-left',legend_style = {'fill': 'white', 'opacity': 0.5},
+                        fig_margin = {'top':0, 'bottom':40, 'left':60, 'right':0})
     
     storage_2.y  = update_operation_2(u)[0]
     releases_2.y = update_operation_2(u)[1]
@@ -208,14 +210,16 @@ def Interactive_release_double(simtime,I,E,d,S0,Smax,ms,env_min, demand_plot):
     min_storage_label_3 = plt.label(text = ['Min storage'], x=[0],y=[ms[0]-10],colors=['red'])
     fig_3a              = plt.Figure(marks = [min_storage_3,storage_3,max_storage_2,max_storage_label_2,min_storage_label_3],
                                      title = 'Reservoir storage volume',axes=[x_ax_2a, y_ax_2a],
-                                     layout={'width': '950px', 'height': '300px'}, animation_duration=1000,scales={'x': x_sc_2a, 'y': y_sc_2a})
+                                     layout={'width': '950px', 'height': '225px'}, animation_duration=1000,
+                                     scales={'x': x_sc_2a, 'y': y_sc_2a},fig_margin = {'top':0, 'bottom':40, 'left':60, 'right':0})
     
     releases_3 = plt.bar(np.arange(1,simtime+1),u1,colors=['green'],opacities = [0.7]*simtime,labels = ['release'], 
                         display_legend = True, stroke_width = 1,scales={'x': x_sc_1, 'y': y_sc_1})
     releases_3.observe(policy_changed_3b, ['x', 'y'])
     fig_3b = plt.Figure(marks = [demand_plot,releases_3],axes=[x_ax_1, y_ax_1],
-                        layout={'min_width': '950px', 'max_height': '300px'},animation_duration=0,
-                        legend_location = 'top-left', legend_style = {'fill': 'white', 'opacity': 0.5})
+                        layout={'min_width': '950px', 'max_height': '225px'},animation_duration=0,
+                        legend_location = 'top-left', legend_style = {'fill': 'white', 'opacity': 0.5},
+                        fig_margin = {'top':0, 'bottom':40, 'left':60, 'right':0})
     
     storage_3.y  = update_operation_3(u)[0]
     releases_3.y = update_operation_3(u)[1]

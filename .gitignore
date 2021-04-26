@@ -111,6 +111,7 @@ ENV/
 env.bak/
 venv.bak/
 irons_env/
+irons_env*/
 my_env*/
 my_venv*/
 
@@ -146,5 +147,8 @@ poetry.lock
 
 # Various
 aznbsetup.sh
+
+# SAFE
+SAFEpython*/
 
 
