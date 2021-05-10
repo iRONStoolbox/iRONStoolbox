@@ -19,16 +19,18 @@ compiler. doi:10.1145/2833157.2833162
 import numpy as np
 import numba
 
-@numba.jit(nopython=True) # to speed-up the function
+@numba.njit # to speed-up the function
 def cum2inst(cum_data):
     """
     This modules uses two for loops to transform element by element of the 
     cumulative data contained in the cum_data array into instantaneous. For 
     every time-step and every ensemble member
     """
-    inst_data = np.zeros(cum_data.shape)
-    for j in np.arange(len(cum_data[0,:])): # j = column number (ensemble member)
-        for i in np.arange(len(cum_data[:,0])-1): # i = row number (time-step)
+    num_rows,num_cols = np.shape(cum_data) # number of rows and colums
+    inst_data = np.zeros((num_rows,num_cols)) # declaration of variable
+    
+    for j in np.arange(num_cols):
+        for i in np.arange(num_rows-1):
             inst_data[i+1,j] = np.maximum(cum_data[i+1,j]-cum_data[i,j],0)
     inst_data[0,:] = cum_data[0,:]
 
