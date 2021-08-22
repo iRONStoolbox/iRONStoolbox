@@ -38,6 +38,12 @@ Our recommendation is that you use the Anaconda distribution to install both Pyt
 
 Use this link https://www.anaconda.com/download/ to install the Anaconda distribution. It includes a number of useful packages and is much easier than managing packages individually. Choose the Python 3.6 version or above depending on your operating system.
 
+Alternatively, if you already have Python you will only need to download Jupyter Notebook by running:
+
+```
+pip install notebook
+```
+
 ### How to download iRONS and run it locally
 
 Open the Anaconda Prompt from the Windows menu (or a OS Terminal in Mac and Linux), and then run:
