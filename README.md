@@ -3,7 +3,7 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AndresPenuela/iRONS.git/master)
 [![Build status](https://travis-ci.com/AndresPenuela/iRONS.svg?branch=master)](https://travis-ci.com/AndresPenuela/iRONS)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![DOI](https://img.shields.io/badge/DOI:10.1016/j.envsoft.2021.105188-purple.svg)](https://doi.org/10.1016/j.envsoft.2021.105188)
+[![DOI](https://img.shields.io/badge/doi.org/10.1016/j.envsoft.2021.105188-purple.svg)](https://doi.org/10.1016/j.envsoft.2021.105188)
 
 iRONS (interactive Reservoir Operation Notebooks and Software) is a python package that enables the simulation, forecasting and optimisation of reservoir systems. The package includes a set of interactive notebooks that demonstrate key functionalities through practical examples, and that can be run in the Jupyter environment either locally or remotely via a web browser. 
 
