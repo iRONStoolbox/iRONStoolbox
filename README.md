@@ -19,6 +19,8 @@ The notebooks included in iRONS are divided in two sections:
 **A.	Knowledge transfer:** A set of simple examples to demonstrate the value of simulation and optimisation tools for water resources management – i.e. why one should use these tools in the first place. 
 
 **B.	Implementation:** A set of workflow examples showing how to apply the iRONS functions to more complex problems such as: generating inflow forecasts through a rainfall-runoff model (including bias correcting weather forecasts); optimising release scheduling against an inflow scenario or a forecast ensemble; optimising an operating policy against time series of historical or synthetic inflows.
+  
+For a longer explanation and assessment of iRONS architecture and underpinning ideas, see: https://doi.org/10.1016/j.envsoft.2021.105188 Please cite this paper when publishing materials obtained using iRONS functions
 
 ## Quick start
 
