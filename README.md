@@ -17,7 +17,10 @@ iRONS is based on the use of interactive Jupyter Notebooks (http://jupyter.org/)
 The notebooks included in iRONS are divided in two sections:
 
 **A.	Knowledge transfer:** A set of simple examples to demonstrate the value of simulation and optimisation tools for water resources management – i.e. why one should use these tools in the first place. These two links are two examples, just click on them so you can play with them online:
-[Calibration and evaluation of a rainfall runoff model](https://mybinder.org/v2/gh/AndresPenuela/iRONS/HEAD?urlpath=notebooks/iRONS/Notebooks/A%20-%20Knowledge%20transfer/2.a.%20Calibration%20and%20evaluation%20of%20a%20rainfall-runoff%20model.ipynb)
+
+  [Calibration and evaluation of a rainfall runoff model](https://mybinder.org/v2/gh/AndresPenuela/iRONS/HEAD?urlpath=notebooks/iRONS/Notebooks/A%20-%20Knowledge%20transfer/2.a.%20Calibration%20and%20evaluation%20of%20a%20rainfall-runoff%20model.ipynb)
+  
+  [Recursive decisions and multiobjective optimisation](https://mybinder.org/v2/gh/AndresPenuela/iRONS/HEAD?urlpath=notebooks/iRONS/Notebooks/A%20-%20Knowledge%20transfer/3.a.%20Recursive%20decisions%20and%20multi-objective%20optimisation.ipynb)
 
 **B.	Implementation:** A set of workflow examples showing how to apply the iRONS functions to more complex problems such as: generating inflow forecasts through a rainfall-runoff model (including bias correcting weather forecasts); optimising release scheduling against an inflow scenario or a forecast ensemble; optimising an operating policy against time series of historical or synthetic inflows.
   
