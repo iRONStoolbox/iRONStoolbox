@@ -20,7 +20,7 @@ setup(
     author='Andres Peñuela, Francesca Pianosi',  # Optional
     author_email='andres.penuela-fernandez@bristol.ac.uk',  # Optional
     packages=find_packages(exclude=['workflows', 'data']),  # Required
-    python_requires='=3.7',
+    python_requires='==3.7.4',
     install_requires=[
         "numpy==1.16.5",
         "matplotlib==3.1.1",
