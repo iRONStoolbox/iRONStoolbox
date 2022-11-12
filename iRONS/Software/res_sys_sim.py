@@ -117,6 +117,10 @@ def mass_bal_func(I, e,
     # Evaporation
     E = np.zeros((T,M))
     
+    # Regulated flows
+    Qreg_inf = Qreg_inf + np.zeros((T,M))
+    Qreg_rel = Qreg_rel + np.zeros((T,M))
+    
     ### Initial conditions ###
     s[0,:] = s_ini # initial storage
     
