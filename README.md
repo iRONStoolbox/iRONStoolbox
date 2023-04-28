@@ -1,7 +1,6 @@
 <left> <img src="iRONS/util/images/iRONS_logo_6.png" width = "300px"><left>
   
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/iRONStoolbox/iRONStoolbox/HEAD?urlpath=%2Fnotebooks%2FiRONS)
-[![Build status](https://travis-ci.com/AndresPenuela/iRONS.svg?branch=master)](https://travis-ci.com/AndresPenuela/iRONS)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![DOI](https://img.shields.io/badge/doi.org/10.1016/j.envsoft.2021.105188-purple.svg)](https://doi.org/10.1016/j.envsoft.2021.105188)
 
