@@ -1,10 +1,10 @@
-name: environment
 channels:
-  - anaconda
   - conda-forge
   - defaults
 dependencies:
   - python=3.9
+  - hdf5
+  - netcdf4
   - pip
   - pip:
-    - irons==1.0
+      - irons==1.0
