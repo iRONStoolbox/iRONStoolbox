@@ -1,3 +1,4 @@
+name: notebook
 channels:
   - conda-forge
   - defaults
@@ -5,6 +6,10 @@ dependencies:
   - python=3.9
   - hdf5
   - netcdf4
+  - numpy
+  - pandas
+  - numba
+  - matplotlib
   - pip
   - pip:
       - irons==1.0
