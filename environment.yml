@@ -6,11 +6,11 @@ dependencies:
   - python=3.9
   - hdf5
   - netcdf4
-  - numpy=1.23  # Pinning to an older but compatible version
+  - numpy=1.23
   - pandas<2.0
-  - matplotlib=3.1.1 # Match what irons wants, but let Conda build it
-  - numba=0.53       # A slightly newer but compatible version
+  - matplotlib=3.1.1
+  - numba=0.53
   - pip
   - pip:
-      - --only-binary :all:
-      - irons==1.0
+    - "--only-binary :all:"
+    - irons==1.0
