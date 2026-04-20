@@ -5,3 +5,5 @@
 #jupyter labextension install @jupyter-widgets/jupyterlab-manager
 #jupyter labextension install bqplot@0.4.6
 #jupyter labextension install @jupyterlab/plotly-extension
+
+pip install irons==1.0 --no-deps
