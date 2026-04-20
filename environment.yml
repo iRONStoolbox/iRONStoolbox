@@ -12,5 +12,4 @@ dependencies:
   - numba>=0.53
   - pip
   - pip:
-    - --no-deps
-    - irons==1.0
+    - "irons==1.0 --no-deps"
