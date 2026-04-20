@@ -9,7 +9,7 @@ dependencies:
   - numpy<2.0
   - pandas<2.0
   - matplotlib<3.5
-  - numba=0.53
+  - numba>=0.53
   - pip
   - pip:
     - "--only-binary :all:"
