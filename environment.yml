@@ -11,5 +11,3 @@ dependencies:
   - matplotlib<3.5
   - numba>=0.53
   - pip
-  - pip:
-    - "irons==1.0 --no-deps"
