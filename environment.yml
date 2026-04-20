@@ -10,4 +10,5 @@ dependencies:
   - pandas<2.0
   - matplotlib<3.5
   - numba>=0.53
+  - bqplot
   - pip
