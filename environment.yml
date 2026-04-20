@@ -12,5 +12,5 @@ dependencies:
   - numba>=0.53
   - pip
   - pip:
-    - "--only-binary :all:"
+    - "--no-deps"
     - irons==1.0
