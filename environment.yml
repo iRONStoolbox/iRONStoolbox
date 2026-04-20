@@ -11,4 +11,5 @@ dependencies:
   - matplotlib<3.5
   - numba>=0.53
   - bqplot
+  - platypus-opt
   - pip
