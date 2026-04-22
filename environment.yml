@@ -12,4 +12,5 @@ dependencies:
   - numba>=0.53
   - bqplot
   - platypus-opt
+  - cdsapi
   - pip
